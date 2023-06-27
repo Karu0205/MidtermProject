@@ -1,0 +1,45 @@
+ion-card{
+    align-items: center;
+    justify-content: center;
+    width: 40% !important;
+    left: 30% !important;
+    right: 30% !important;
+    top: 10% !important;
+  }
+
+  ion-card-header{
+    justify-content: center;
+    align-items: center;
+    font-style:  helvetica;
+  }
+
+  ion-card-content{
+    justify-content: center;
+    align-items: center;
+    font-style: helvetica;
+  }
+
+  ion-button {
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    --background: #d40606;
+    --background-hover: #18a9e2;
+    --background-activated: #ecd81e;
+    --background-focused: #88f4be;
+  
+    --color: rgb(249, 253, 25);
+  
+    --border-radius: 0;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+  
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+  
+    --ripple-color: deeppink;
+  
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    padding-left: 42%;
+  }
