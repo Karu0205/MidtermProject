@@ -1,7 +1,6 @@
 # Kalatas-Document-Management-System-with-Request-and-Tracking
 
 <h2>Project Overview</h2>
-<h2> Project Overview</h2>
 <h5>The Internet and modern technologies present a wide range of opportunities to
 strengthen and enhance the learning environment. Technology has offered more
 opportunities for innovation and is being widely utilized to make complex tasks
