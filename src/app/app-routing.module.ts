@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'admindocu',
     loadChildren: () => import('./admindocu/admindocu.module').then( m => m.AdmindocuPageModule)
   },
+  {
+    path: 'form',
+    loadChildren: () => import('./form/form.module').then( m => m.FormPageModule)
+  },
 ];
 
 @NgModule({

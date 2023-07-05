@@ -19,11 +19,11 @@
   <div class="class">
     <ion-card>
 
-      <ion-searchbar id="searchbar" (ionInput) = "handleInput($event)" (ionBlur) ="handleBlur()"></ion-searchbar>
+      <ion-searchbar [debounce]="1000" color="danger" (ionInput)="handleInput($event)"></ion-searchbar>
+
       <ion-list>
-        <ion-list *ngIf="showResults"></ion-list>
         <ion-item *ngFor="let result of results">
-        <ion-label>{{ result }}</ion-label>
+          <ion-label>{{ result }}</ion-label>
         </ion-item>
       </ion-list>
     
@@ -34,9 +34,9 @@
   </div>
 
   <ion-footer>
-    <ion-toolbar>
-      <ion-title>Footer</ion-title>
-    </ion-toolbar>
+      <ion-icon name="person-circle-outline" ></ion-icon>
+      <ion-icon name="documents-outline" ></ion-icon>
+      <ion-icon name="power-outline" id="power"></ion-icon>
   </ion-footer>
   </ion-content>
   

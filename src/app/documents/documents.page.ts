@@ -7,26 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentsPage{
 
-  results: string[] = [];
-  showResults = false;
   public data = [
     'Form 137',
     'Form 138',
+    'Certificate of Completion',
     'Certificate of Good Moral',
     'Enrollment Form',
-    'Certificate of Completion',
-
+    'Transcript of Records',
   ];
+  public results = [...this.data];
 
   handleInput(event: any) {
-    const query = event.target.value.toLowerCase(); // Convert the input value to lowercase for case-insensitive comparison
-    this.results = this.data.filter((item: string) => item.toLowerCase().includes(query));
-    this.showResults = true; // Show the results
+    const query = event.target.value.toLowerCase();
+    this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
   }
+  
 
-  handleBlur(){
-      this.showResults = false; 
-}
+  
 
 }
 

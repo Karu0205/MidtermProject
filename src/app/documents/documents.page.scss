@@ -5,6 +5,16 @@ ion-img{
     float: right !important;
   }
 
+
+  ion-toolbar {
+    --background: url('/assets/stonino.jpg') no-repeat;
+    
+  }
+  
+ion-content{
+  background-color:blue !important;
+}
+
 ion-list{
     text-align: center;
     align-items: center;
@@ -13,6 +23,18 @@ ion-list{
 ion-footer{
     position:fixed;
     bottom: 0;
+    text-align: center;
+}
+
+ion-label{
+    align-items: center;
+    justify-items: center;
     
 }
+ion-icon {
+    font-size: 32px;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
 
