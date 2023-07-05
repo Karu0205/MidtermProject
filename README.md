@@ -42,6 +42,12 @@ a faster delivery of requested documents to meet the satisfaction of every user.
 <h2>How to run the project</h2>
 <h5>When in comes on running the system, first we need to set up the development environment and software to develop and run the application. Next, The administrator or the registrar have to take over the system by logging in to their personal accounts as well as the students. Moreover, the registrar can access their own profile in the system as well as approve requests from students throught the system. They also have the authority to edit, delete, add, create documents according to the request. In the other hand, the students also has the ability to access their personal profile, choose their desired documents that they need for their request, recieve notifications from the registrar regarding for the tracking of their request.</h5>
 
+<h2>Why it's noteworthy</h2>
+<h5>In general, providing a document management system for the Sto. Nino Formation and Science School will allow students to request various kinds of documents in a most convenient way. It will also enhance user experience, and will reduce errors and inaccuracies associated with manual request processes being done at this stage.</h5>
+
+<h2>Who mantains the project</h2>
+<h5>The system will be maintained by the school. For instance, the IT department within the schoool may be responsible for maintaining the compuster systems, networks, and servers.</h5>
+
 <h2>Team Members</h2>
 <h5>Ongkiko, Nikko E.
   <br>
