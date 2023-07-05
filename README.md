@@ -36,6 +36,9 @@ a significant investment for the school of Sto. Niño Formation and Science Scho
 that enables filing a request and will improve processing speed, which can lead to
 a faster delivery of requested documents to meet the satisfaction of every user.</h5>
 
+<h2>What the project does</h2>
+<h5>A Document Management with Request and Tracking System helps organizations streamline document-related processes, improve collaboration, enhance security, and ensure efficient document lifecycle management. It saves time, reduces paperwork, and provides better control over document access.</h5>
+
 <h2>Team Members</h2>
 <h5>Ongkiko, Nikko E.
   <br>
