@@ -24,18 +24,6 @@ available to the students of Sto. Niño Formation and Science School.</h5>
 <h2>Sustainable Development Goal</h2>
 <h5>Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation is the focus of SDG 9</h5>
 
-<h2>Significance of the Project</h2>
-<h5>The study will create a document management system with document
-request and tracking for Sto. Niño Formation and Science School that aims to
-provide a significant impact on achieving wellness when it comes to several
-factors including efficiency, accuracy, security, and user friendly. The system will
-ensure a positive user experience and This can alleviate the difficulties faced by
-the students, as well as the registrars of Sto. Niño Formation and Science School as a result of the development of technology and the rising number of mobile
-users, particularly those with internet access. The developmental expansion can be
-a significant investment for the school of Sto. Niño Formation and Science School
-that enables filing a request and will improve processing speed, which can lead to
-a faster delivery of requested documents to meet the satisfaction of every user.</h5>
-
 <h2>What the project does</h2>
 <h5>A Document Management with Request and Tracking System helps organizations streamline document-related processes, improve collaboration, enhance security, and ensure efficient document lifecycle management. It saves time, reduces paperwork, and provides better control over document access.</h5>
 
