@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-documents',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documents.page.scss'],
 })
 export class DocumentsPage{
+
+  constructor(private router: Router){}
 
   public data = [
     'Form 137',
@@ -20,6 +23,14 @@ export class DocumentsPage{
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
     this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
+  }
+
+  logOut(){
+    this.router.navigate(['/login'])
+  }
+
+  openForm(){
+    this.router.navigate(['/form'])
   }
   
 

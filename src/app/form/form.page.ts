@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router){ }
 
   ngOnInit() {
+  }
+
+  logOut(){
+    this.router.navigate(['/login'])
+  }
+
+  toDocuments(){
+    this.router.navigate(['/documents'])
   }
 
 }

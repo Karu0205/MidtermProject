@@ -1,12 +1,8 @@
 
 <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-img
-      src=".\assets\logo.png" style="width:20%"
-     ></ion-img>
-
-    </ion-toolbar>
-  </ion-header>
+      <h1>Christian Leaders <br> Shining Forward to Fullness</h1>
+      <ion-img src=".\assets\logo.png" style="width: 12%"></ion-img>
+</ion-header>
 
 
   <ion-content [fullscreen]="true">
@@ -23,7 +19,7 @@
 
       <ion-list>
         <ion-item *ngFor="let result of results">
-          <ion-label>{{ result }}</ion-label>
+          <ion-label (click)="openForm()">{{ result }}</ion-label>
         </ion-item>
       </ion-list>
     
@@ -34,9 +30,11 @@
   </div>
 
   <ion-footer>
-      <ion-icon name="person-circle-outline" ></ion-icon>
-      <ion-icon name="documents-outline" ></ion-icon>
-      <ion-icon name="power-outline" id="power"></ion-icon>
+    <ion-toolbar>
+      <ion-button (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+      <ion-button (click)="logOut()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
+      <ion-button (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+    </ion-toolbar>
   </ion-footer>
   </ion-content>
   

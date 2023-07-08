@@ -1,18 +1,33 @@
 ion-img{
     position: static;
-    margin-left: 1150px;
-    width: 10% !important;
+    margin-top: 30px;
     float: right !important;
   }
 
+ion-header{
+  background-color: #60d394;
+}
 
-  ion-toolbar {
-    --background: url('/assets/stonino.jpg') no-repeat;
+h1{
+  float: left;
+  font-family: baskerville;
+  font-size: 30px;
+  color: red;
+  text-align: left;
+  margin-top: 35px;
+  padding-left: 20px;
+}
+
+
+  /*ion-toolbar {
+    --background: url('/assets/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 200px;
     
-  }
+  } */
   
-ion-content{
-  background-color:blue !important;
+ion-label{
+ text-align: center;
 }
 
 ion-list{
@@ -33,8 +48,13 @@ ion-label{
 }
 ion-icon {
     font-size: 32px;
-    margin-left: 10%;
-    margin-right: 10%;
   }
 
+ion-button{
+    margin-left: 8%;
+    margin-right: 8%;
+}
 
+  ion-content {
+    --background: #C32F27;
+  }
