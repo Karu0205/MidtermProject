@@ -1,21 +1,26 @@
 ion-img{
     position: static;
-    margin-top: 30px;
     float: right !important;
+
+    max-width: 13%;
+    max-height: auto;
+    padding-right: 15px;
+    margin-top: 11px;
+    margin-bottom: 11px;
   }
 
 ion-header{
-  background-color: #60d394;
+  background-color: #9b2226;
 }
 
-h1{
+p{
   float: left;
   font-family: baskerville;
-  font-size: 30px;
-  color: red;
+  font-size: 250%;
+  color: white;
   text-align: left;
-  margin-top: 35px;
-  padding-left: 20px;
+  margin-top: 45px;
+  padding-left:30px;
 }
 
 
@@ -53,8 +58,19 @@ ion-icon {
 ion-button{
     margin-left: 8%;
     margin-right: 8%;
+    background-color: #4f000b;
+    width: 70px;
 }
 
   ion-content {
-    --background: #C32F27;
+    --background: #ffe5ec;
   }
+
+ion-toolbar{
+  --background: #9b2226;
+}
+
+ion-searchbar{
+  background-color: #4f000b;
+  
+}

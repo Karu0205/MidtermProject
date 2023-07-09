@@ -1,7 +1,7 @@
 
 <ion-header [translucent]="true">
-      <h1>Christian Leaders <br> Shining Forward to Fullness</h1>
-      <ion-img src=".\assets\logo.png" style="width: 12%"></ion-img>
+      <p> Leaders Shining <br> Forward to Fullness </p>
+      <ion-img src=".\assets\whitelogo.png"></ion-img>
 </ion-header>
 
 
@@ -15,7 +15,7 @@
   <div class="class">
     <ion-card>
 
-      <ion-searchbar [debounce]="1000" color="danger" (ionInput)="handleInput($event)"></ion-searchbar>
+      <ion-searchbar [debounce]="1000" color="light" (ionInput)="handleInput($event)"></ion-searchbar>
 
       <ion-list>
         <ion-item *ngFor="let result of results">
@@ -31,9 +31,9 @@
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-      <ion-button (click)="logOut()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
-      <ion-button (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e [disabled]="true" (click)="logOut()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
     </ion-toolbar>
   </ion-footer>
   </ion-content>
