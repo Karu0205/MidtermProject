@@ -1,7 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>admindocu</ion-title>
-  </ion-toolbar>
+  <p> Leaders Shining <br> Forward to Fullness </p>
+  <ion-img src=".\assets\whitelogo.png"></ion-img>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -16,6 +15,8 @@
       <ion-label>{{ account.student_id }}</ion-label>
       <ion-label>{{ account.student_username }}</ion-label>
       <ion-label>{{ account.student_password }}</ion-label>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-item>
   </ion-list>
 
@@ -24,5 +25,13 @@
     <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="openDocu()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+    </ion-toolbar>
+  </ion-footer>
 
 </ion-content>

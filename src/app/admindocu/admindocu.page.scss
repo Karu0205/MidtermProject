@@ -1,0 +1,46 @@
+ion-footer{
+    position:fixed;
+    bottom: 0;
+    text-align: center;
+}
+
+ion-icon {
+    font-size: 32px;
+  }
+
+ion-button{
+    margin-left: 8%;
+    margin-right: 8%;
+    background-color: #4f000b;
+    width: 70px;
+}
+
+
+ion-toolbar{
+    --background: #9b2226;
+  }
+
+ion-img{
+    position: static;
+    float: right !important;
+
+    max-width: 13%;
+    max-height: auto;
+    padding-right: 15px;
+    margin-top: 11px;
+    margin-bottom: 11px;
+  }
+
+ion-header{
+  background-color: #9b2226;
+}
+
+p{
+  float: left;
+  font-family: baskerville;
+  font-size: 250%;
+  color: white;
+  text-align: left;
+  margin-top: 45px;
+  padding-left:30px;
+}

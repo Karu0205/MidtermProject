@@ -40,17 +40,18 @@ ion-list{
     align-items: center;
 }
 
+ion-label{
+  align-items: center;
+  justify-items: center;
+  
+}
+
 ion-footer{
     position:fixed;
     bottom: 0;
     text-align: center;
 }
 
-ion-label{
-    align-items: center;
-    justify-items: center;
-    
-}
 ion-icon {
     font-size: 32px;
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collectionData } from '@angular/fire/firestore';
-import { collection } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 export interface Account{
@@ -20,6 +20,11 @@ export class FirebaseService {
   getAccounts(): Observable<Account[]> {
     const notesRef = collection(this.firestore, 'accounts');
     return collectionData(notesRef, {idField: 'myAccountID'}) as Observable<Account[]>;
+  }
+
+  addAccount(account: Account) {
+    const notesRef = collection(this.firestore, 'accounts');
+    return addDoc(notesRef, account);
   }
 
 }
