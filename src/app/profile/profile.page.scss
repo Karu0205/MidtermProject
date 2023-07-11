@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    background-image: url('/assets/panlikod.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ion-content{
+    background: #ff574a;
+    text-align: center;
+    padding: 40px 90px;
+    color: #fff;
+    position: relative;
+    border-radius: 20px;
+
+}
+.social-icons a{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6e3e3;
+    margin: 20px 10px;
+    border-radius: 50px;
+}
+.social-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icons a:hover{
+    background-color: #000000;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
+    transition: all ease 0.5s;
+}
+.menu-icon{
+    width: 25px;
+    position: absolute;
+    right: 40px; 
+    top: 40px;
+}
+.profile-pic{
+    width: 150px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 6px;  
+}
+
+
+ion-img{
+    position: static;
+    float: right !important;
+
+    max-width: 13%;
+    max-height: auto;
+    padding-right: 15px;
+    margin-top: 11px;
+    margin-bottom: 11px;
+  }
+
+ion-header{
+  background-color: #9b2226;
+}
+
+p{
+  float: left;
+  font-family: baskerville;
+  font-size: 250%;
+  color: white;
+  text-align: left;
+  margin-top: 45px;
+  padding-left:30px;
+}
+
+ion-footer{
+    position:fixed;
+    bottom: 0;
+    text-align: center;
+}
+
+ion-icon {
+    font-size: 32px;
+  }
+
+ion-button{
+    margin-left: 8%;
+    margin-right: 8%;
+    background-color: #4f000b;
+    width: 70px;
+}
+
+
+ion-toolbar{
+    --background: #9b2226;
+  }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logOut(){
+    this.router.navigate(['/login'])
+  }
+
+  openForm(){
+    this.router.navigate(['/form'])
+  }
+
+  toProfile(){
+    this.router.navigate(['/profile'])
   }
 
 }

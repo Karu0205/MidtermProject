@@ -1,13 +1,27 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
+  <p> Leaders Shining <br> Forward to Fullness </p>
+  <ion-img src=".\assets\whitelogo.png"></ion-img>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+       
+        <img src="'/assets/menu.png'" class="menu-icon">
+        <img src="/assets/profilepic.png" class="profile-pic">
+        <h3>Cocomelon D. Malamas</h3>
+        <p>Student of Sto. Nino Formation and Science School</p>
+
+        <div class="social-icons">
+            <a href="https://www.facebook.com/bartearvie1124/"><i class="fab fa-facebook"></i></a>
+            <a href="https://https://www.instagram.com/arvie_barte/"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/Arvieeetot"><i class="fab fa-twitter"></i></a>
+        </div>
+<ion-footer>
+  <ion-toolbar>
+  <ion-button color=#5e070e [disabled]="true" (click)="toProfile()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+  <ion-button color=#5e070e (click)="logOut()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
+  <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+
 </ion-content>
