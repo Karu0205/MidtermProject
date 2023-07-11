@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../service/firebase.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { ModalPage } from '../modal/modal.page';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -39,17 +38,6 @@ export class AdmindocuPage implements OnInit {
 
   requestList(){
 
-  }
-
-
-  async openAccount(account: any){
-    const modal = await this.modalCtrl.create({
-      component: ModalPage,
-      componentProps: { student_id: account.student_id },
-      breakpoints: [0, 0.5, 0.8],
-      initialBreakpoint: 0.5
-    });
-    modal.present();
   }
 
   async addRequest(){
