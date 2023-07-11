@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../service/firebase.service';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,8 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./form.page.scss'],
 })
 export class FormPage implements OnInit {
+  requests = [] as any; 
 
-  constructor(private router: Router){ }
+  constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
+    private router: Router, private modalCtrl: ModalController ) {
+
+    this.dataService.getRequests().subscribe(req => {
+      console.log(req);
+      this.requests=req;
+    })
+
+   }
 
   ngOnInit() {
   }
@@ -19,6 +30,45 @@ export class FormPage implements OnInit {
 
   toDocuments(){
     this.router.navigate(['/documents'])
+  }
+
+  async addRequest(){
+    const alert = await this.alertCtrl.create({
+      header: 'Add Request',
+      inputs: [
+        {
+          name: 'student_name',
+          placeholder: 'Enter Name',
+          type: 'text'
+        },
+
+        {
+          name:'document_type',
+          value: 'Form 137',
+          type: 'text',
+          disabled: true
+        },
+        {
+          name: 'status',
+          value: 'Ongoing',
+          type: 'text',
+          disabled: true
+        }
+      ],
+      buttons:[
+        {
+          text: 'Cancel',
+          role : 'cancel',
+        },
+        {
+          text: 'Add',
+          handler: (req) => {
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+          }
+        }
+      ]
+    });
+    await alert.present(); 
   }
 
 }

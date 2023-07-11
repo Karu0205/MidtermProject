@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../service/firebase.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ModalPage } from '../modal/modal.page';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-admindocu',
@@ -10,13 +12,22 @@ import { Router } from '@angular/router';
 })
 export class AdmindocuPage implements OnInit {
   accounts = [] as any;
+  requests = [] as any; 
+
+  results = [this.requests];
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
-    private router: Router ) {
+    private router: Router, private modalCtrl: ModalController ) {
     this.dataService.getAccounts().subscribe(res => {
       console.log(res);
       this.accounts=res;
     })
+
+    this.dataService.getRequests().subscribe(req => {
+      console.log(req);
+      this.requests=req;
+    })
+
    }
 
   ngOnInit() {
@@ -26,24 +37,39 @@ export class AdmindocuPage implements OnInit {
 
   }
 
-  async addAccount(){
+  requestList(){
+
+  }
+
+
+  async openAccount(account: any){
+    const modal = await this.modalCtrl.create({
+      component: ModalPage,
+      componentProps: { student_id: account.student_id },
+      breakpoints: [0, 0.5, 0.8],
+      initialBreakpoint: 0.5
+    });
+    modal.present();
+  }
+
+  async addRequest(){
     const alert = await this.alertCtrl.create({
-      header: 'Add Account',
+      header: 'Add Request',
       inputs: [
         {
-          name: 'student_id',
-          placeholder: 'Enter Id',
+          name: 'student_name',
+          placeholder: 'Enter Name',
           type: 'text'
         },
 
         {
-          name:'student_username',
-          placeholder: 'Enter Name Of student',
+          name:'document_type',
+          placeholder: 'Enter Document Type',
           type: 'text'
         },
         {
-          name: 'student_password',
-          placeholder: 'Enter student password',
+          name: 'status',
+          placeholder: 'enter status',
           type: 'text'
         }
       ],
@@ -54,8 +80,8 @@ export class AdmindocuPage implements OnInit {
         },
         {
           text: 'Add',
-          handler: (res) => {
-            this.dataService.addAccount({student_id: res.student_id, student_username: res.student_username, student_password: res.student_password})
+          handler: (req) => {
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
           }
         }
       ]
@@ -64,7 +90,7 @@ export class AdmindocuPage implements OnInit {
   }
 
   logOut(){
-    this.router.navigate(['/login'])
+    this.router.navigate(['/adminlogin'])
   }
 
   openDocu(){

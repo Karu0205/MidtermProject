@@ -11,17 +11,17 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor = "let account of accounts" (click) = "accountList(accounts)">
-      <ion-label>{{ account.student_id }}</ion-label>
-      <ion-label>{{ account.student_username }}</ion-label>
-      <ion-label>{{ account.student_password }}</ion-label>
+    <ion-item *ngFor = "let request of requests" (click) = "requestList(requests)">
+      <ion-label>{{ request.student_name }}</ion-label>
+      <ion-label>{{ request.document_type }}</ion-label>
+      <ion-label>{{ request.status }}</ion-label>
       <ion-button color=#5e070e (click)="logOut()"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
       <ion-button color=#5e070e (click)="logOut()"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-item>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click) = "addAccount()">
+    <ion-fab-button (click) = "addRequest()">
     <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

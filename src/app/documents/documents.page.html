@@ -18,8 +18,23 @@
       <ion-searchbar [debounce]="1000" color="light" (ionInput)="handleInput($event)"></ion-searchbar>
 
       <ion-list>
-        <ion-item *ngFor="let result of results">
-          <ion-label (click)="openForm()">{{ result }}</ion-label>
+        <ion-item>
+          <ion-label (click)="add137()">Form 137</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="add138()">Form 138</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="addGoodMoral()">Certificate of Good Moral</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="addCompletion()">Certificate of Completion</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="addEnrollment()">Enrollment Form</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="addTranscript()">Transcript of Records</ion-label>
         </ion-item>
       </ion-list>
     
@@ -31,7 +46,7 @@
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="toProfile()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
       <ion-button color=#5e070e [disabled]="true" (click)="logOut()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
       <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
     </ion-toolbar>

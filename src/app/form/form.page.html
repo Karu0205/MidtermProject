@@ -1,28 +1,31 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>form</ion-title>
-  </ion-toolbar>
+  <p> Leaders Shining <br> Forward to Fullness </p>
+  <ion-img src=".\assets\whitelogo.png"></ion-img>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">form</ion-title>
+      <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-item>
-    <ion-input label="Student Name: " placeholder="Enter full name"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-textarea label="Enter Request Details: " placeholder="Enter Important Information"></ion-textarea>
-  </ion-item>
+<!--image-->
+<div class="image"></div>
+
+  <!--button-->
+  <div class="ion-text-center">
+    <ion-button (click)="addRequest()">Make Request</ion-button>
+  </div>
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-      <ion-button (click)="toDocuments()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
-      <ion-button (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="toDocuments()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
     </ion-toolbar>
   </ion-footer>
+
+
 </ion-content>
+  
