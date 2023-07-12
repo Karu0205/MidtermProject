@@ -10,6 +10,13 @@ import { Router } from '@angular/router';
 })
 export class DocumentsPage{
 
+  isAlertOpen = false;
+  public alertButtons = ['OK'];
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
+
   requests = [] as any; 
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
@@ -67,7 +74,7 @@ export class DocumentsPage{
         },
         {
           name: 'status',
-          value: 'Ongoing',
+          value: 'Pending',
           type: 'text',
           disabled: true
         }
@@ -81,6 +88,7 @@ export class DocumentsPage{
           text: 'Add',
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.setOpen(true);
           }
         }
       ]
@@ -106,7 +114,7 @@ export class DocumentsPage{
         },
         {
           name: 'status',
-          value: 'Ongoing',
+          value: 'Pending',
           type: 'text',
           disabled: true
         }
@@ -145,7 +153,7 @@ export class DocumentsPage{
         },
         {
           name: 'status',
-          value: 'Ongoing',
+          value: 'Pending',
           type: 'text',
           disabled: true
         }
@@ -184,7 +192,7 @@ export class DocumentsPage{
         },
         {
           name: 'status',
-          value: 'Ongoing',
+          value: 'Pending',
           type: 'text',
           disabled: true
         }
@@ -223,7 +231,7 @@ export class DocumentsPage{
         },
         {
           name: 'status',
-          value: 'Ongoing',
+          value: 'Pending',
           type: 'text',
           disabled: true
         }
@@ -262,7 +270,7 @@ export class DocumentsPage{
         },
         {
           name: 'status',
-          value: 'Ongoing',
+          value: 'Pending',
           type: 'text',
           disabled: true
         }

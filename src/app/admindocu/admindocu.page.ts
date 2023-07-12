@@ -3,6 +3,8 @@ import { FirebaseService } from '../service/firebase.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-admindocu',
@@ -10,6 +12,22 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./admindocu.page.scss'],
 })
 export class AdmindocuPage implements OnInit {
+
+
+  private generateItems() {
+    const count = this.requests.length + 1;
+    for (let i = 0; i < 50; i++) {
+      this.requests.push(`Item ${count + i}`);
+    }
+  }
+
+  onIonInfinite(ev: any) {
+    this.generateItems();
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
+  }
+
   accounts = [] as any;
   requests = [] as any; 
 

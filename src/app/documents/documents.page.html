@@ -38,6 +38,15 @@
 
       </ion-list>
     
+      <ion-alert
+
+    [isOpen]="isAlertOpen"
+    header="Success!"
+    subHeader="Request has been sent."
+    message="Kindly wait for further updates to be shown in your profile"
+    [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)"
+></ion-alert>
       
     </ion-card>
 

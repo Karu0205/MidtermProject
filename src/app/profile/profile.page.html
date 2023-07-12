@@ -7,7 +7,7 @@
        
         <img src="'/assets/menu.png'" class="menu-icon">
         <img src="/assets/profilepic.png" class="profile-pic">
-        <h3>Cocomelon D. Malamas</h3>
+        <h3>Nikko Ongkiko Pogi</h3>
         <p>Student of Sto. Nino Formation and Science School</p>
 
         <div class="social-icons">
@@ -17,9 +17,11 @@
         </div>
 <ion-footer>
   <ion-toolbar>
-  <ion-button color=#5e070e [disabled]="true" (click)="toProfile()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-  <ion-button color=#5e070e (click)="logOut()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
-  <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+    <ion-toolbar>
+      <ion-button color=#5e070e [disabled]="true" (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e [disabled]="true" (click)="logIn()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+    </ion-toolbar>
   </ion-toolbar>
 </ion-footer>
 

@@ -17,6 +17,10 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/login'])
   }
 
+  logIn(){
+    this.router.navigate(['/documents'])
+  }
+
   openForm(){
     this.router.navigate(['/form'])
   }

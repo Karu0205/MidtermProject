@@ -11,7 +11,14 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor = "let request of requests" (click) = "requestList(requests)">
+    <ion-item class="header">
+      <ion-label>Student Name</ion-label>
+      <ion-label>Document Type</ion-label>
+      <ion-label>Status</ion-label>
+      <ion-label>Confirm</ion-label>
+      <ion-label>Decline</ion-label>
+    </ion-item>
+    <ion-item class="table" *ngFor = "let request of requests" (click) = "requestList(requests)">
       <ion-label>{{ request.student_name }}</ion-label>
       <ion-label>{{ request.document_type }}</ion-label>
       <ion-label>{{ request.status }}</ion-label>
@@ -20,16 +27,15 @@
     </ion-item>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click) = "addRequest()">
-    <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e (click)="openDocu()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e [disabled]="true" (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
+      <ion-button color=#5e070e [disabled]="true" (click)="openDocu()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
       <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
     </ion-toolbar>
   </ion-footer>
