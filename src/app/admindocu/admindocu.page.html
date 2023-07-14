@@ -9,34 +9,55 @@
       <ion-title size="large">admindocu</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  <ion-header>
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Student Name</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>Document Type</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>Status</ion-label>
+          </ion-col>
 
-  <ion-list>
-    <ion-item class="header">
-      <ion-label>Student Name</ion-label>
-      <ion-label>Document Type</ion-label>
-      <ion-label>Status</ion-label>
-      <ion-label>Confirm</ion-label>
-      <ion-label>Decline</ion-label>
-    </ion-item>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list class="scrollable-list">
     <ion-item class="table" *ngFor = "let request of requests" (click) = "requestList(requests)">
-      <ion-label>{{ request.student_name }}</ion-label>
+      <ion-label (click)="openRequest(request)">{{ request.student_name }}</ion-label>
       <ion-label>{{ request.document_type }}</ion-label>
       <ion-label>{{ request.status }}</ion-label>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-item>
   </ion-list>
-
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button color=#5e070e [disabled]="true" (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e [disabled]="true" (click)="openDocu()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="tab1" [disabled]="true">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button tab="tab2" [disabled]="true">
+            <ion-icon name="documents-outline"></ion-icon>
+            <ion-label>Documents</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button tab="tab3" (click)="logOut()">
+            <ion-icon name="power-outline"></ion-icon>
+            <ion-label>Log Out</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
     </ion-toolbar>
   </ion-footer>
 

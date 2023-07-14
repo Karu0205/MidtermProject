@@ -12,10 +12,10 @@
     </ion-header>
   
   <div class="class">
+
     <ion-card>
-
-      <ion-searchbar [debounce]="1000" color="light" (ionInput)="handleInput($event)"></ion-searchbar>
-
+        <ion-title>Student Request</ion-title>
+    
       <ion-list>
         <ion-item>
           <ion-label (click)="add137()">Form 137</ion-label>
@@ -53,11 +53,27 @@
     
   </div>
 
+
   <ion-footer>
     <ion-toolbar>
-      <ion-button color=#5e070e (click)="toProfile()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e [disabled]="true" (click)="logOut()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="tab1" (click)="toProfile()">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button tab="tab2" [disabled]="true">
+            <ion-icon name="documents-outline"></ion-icon>
+            <ion-label>Documents</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button tab="tab3" (click)="logOut()">
+            <ion-icon name="power-outline"></ion-icon>
+            <ion-label>Log Out</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
     </ion-toolbar>
   </ion-footer>
   </ion-content>

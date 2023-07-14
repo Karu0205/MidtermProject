@@ -7,23 +7,35 @@
        
         <img src="'/assets/menu.png'" class="menu-icon">
         <img src="/assets/profilepic.png" class="profile-pic">
-        <h3>Nikko Ongkiko Pogi</h3>
+        <ion-item *ngFor="let account of accounts" (click)="openAccount(account)">
+          <ion-label>
+            {{ account.student_username }}
+          </ion-label>
+        </ion-item>
         <p>Student of Sto. Nino Formation and Science School</p>
 
-        <div class="social-icons">
-            <a href="https://www.facebook.com/bartearvie1124/"><i class="fab fa-facebook"></i></a>
-            <a href="https://https://www.instagram.com/arvie_barte/"><i class="fab fa-instagram"></i></a>
-            <a href="https://twitter.com/Arvieeetot"><i class="fab fa-twitter"></i></a>
-        </div>
-<ion-footer>
-  <ion-toolbar>
-    <ion-toolbar>
-      <ion-button color=#5e070e [disabled]="true" (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e [disabled]="true" (click)="logIn()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
-    </ion-toolbar>
-  </ion-toolbar>
-</ion-footer>
+        <ion-footer>
+          <ion-toolbar>
+            <ion-tabs>
+              <ion-tab-bar slot="bottom">
+                <ion-tab-button tab="tab1" [disabled]="true">
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                  <ion-label>Profile</ion-label>
+                </ion-tab-button>
+            
+                <ion-tab-button tab="tab2" (click)="logIn()">
+                  <ion-icon name="documents-outline"></ion-icon>
+                  <ion-label>Documents</ion-label>
+                </ion-tab-button>
+            
+                <ion-tab-button tab="tab3" (click)="logOut()">
+                  <ion-icon name="power-outline"></ion-icon>
+                  <ion-label>Log Out</ion-label>
+                </ion-tab-button>
+              </ion-tab-bar>
+            </ion-tabs>
+          </ion-toolbar>
+        </ion-footer>
 
 
 </ion-content>

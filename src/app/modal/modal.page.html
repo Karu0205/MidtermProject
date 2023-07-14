@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Update Status</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="request">
+    <ion-item>
+      <ion-label position="stacked">student_name</ion-label>
+      <ion-input [disabled]="true" [(ngModel)]="request.student_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">student_name</ion-label>
+      <ion-input [disabled]="true" [(ngModel)]="request.document_type"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Status Update</ion-label>
+      <ion-select [(ngModel)]="request.status">
+        <ion-select-option value="Accepted">Accepted</ion-select-option>
+        <ion-select-option value="In Progress">In Progress</ion-select-option>
+        <ion-select-option value="Ready for Pickup">Ready for Pickup</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <ion-button expand="block" color="success" (click)="updateRequest()">
+    <ion-icon name="save" slot="start"></ion-icon>
+    Update
+  </ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteRequest()">
+    <ion-icon name="trash" slot="start"></ion-icon>
+    Delete
+  </ion-button>
+  
+
+</ion-content>

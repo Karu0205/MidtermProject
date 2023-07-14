@@ -26,17 +26,22 @@ export class FirebaseService {
 
   getAccounts(): Observable<Account[]> {
     const notesRef = collection(this.firestore, 'accounts');
-    return collectionData(notesRef, {idField: 'myAccountID'}) as Observable<Account[]>;
+    return collectionData(notesRef, {idField: 'id'}) as Observable<Account[]>;
   }
 
   getRequests(): Observable<Request[]> {
     const notesRef = collection(this.firestore, 'requests');
-    return collectionData(notesRef, {idField: 'Request'}) as Observable<Request[]>;
+    return collectionData(notesRef, {idField: 'id'}) as Observable<Request[]>;
   }
 
   getAccountById(id: any): Observable<Account> {
-    const noteDocRef = doc(this.firestore, 'notes/${id}');
+    const noteDocRef = doc(this.firestore,`notes/${id}`);
     return docData(noteDocRef, {idField: 'id'}) as Observable<Account>
+  }
+
+  getRequestById(id): Observable<Request> {
+    const noteDocRef = doc(this.firestore, `requests/${id}`);
+    return docData(noteDocRef, {idField: 'id'}) as Observable<Request>
   }
 
   addRequest(request: Request) {
@@ -49,14 +54,14 @@ export class FirebaseService {
     return addDoc(notesRef, account);
   }
 
-  deleteAccount(account: Account) {
-    const noteDocRef = doc(this.firestore, 'accounts/${account.id}');
+  deleteRequest(request: Request) {
+    const noteDocRef = doc(this.firestore, `requests/${request.id}`);
     return deleteDoc(noteDocRef);
   }
 
-  updateAccount(account: Account){
-    const noteDocRef = doc(this.firestore, 'accounts/${account.id}');
-    return updateDoc(noteDocRef, {student_username: account.student_username,  student_password: account.student_password});
+  updateRequest(request: Request){
+    const noteDocRef = doc(this.firestore, `requests/${request.id}`);
+    return updateDoc(noteDocRef, {student_name: request.student_name, document_type: request.document_type, status: request.status});
   }
 
 }

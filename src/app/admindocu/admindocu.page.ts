@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../service/firebase.service';
+import { FirebaseService, Request } from '../service/firebase.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
 
 
 @Component({
@@ -13,25 +14,8 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 })
 export class AdmindocuPage implements OnInit {
 
-
-  private generateItems() {
-    const count = this.requests.length + 1;
-    for (let i = 0; i < 50; i++) {
-      this.requests.push(`Item ${count + i}`);
-    }
-  }
-
-  onIonInfinite(ev: any) {
-    this.generateItems();
-    setTimeout(() => {
-      (ev as InfiniteScrollCustomEvent).target.complete();
-    }, 500);
-  }
-
   accounts = [] as any;
-  requests = [] as any; 
-
-  results = [this.requests];
+  requests: Request[] = []; 
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController ) {
@@ -58,41 +42,14 @@ export class AdmindocuPage implements OnInit {
 
   }
 
-  async addRequest(){
-    const alert = await this.alertCtrl.create({
-      header: 'Add Request',
-      inputs: [
-        {
-          name: 'student_name',
-          placeholder: 'Enter Name',
-          type: 'text'
-        },
-
-        {
-          name:'document_type',
-          placeholder: 'Enter Document Type',
-          type: 'text'
-        },
-        {
-          name: 'status',
-          placeholder: 'enter status',
-          type: 'text'
-        }
-      ],
-      buttons:[
-        {
-          text: 'Cancel',
-          role : 'cancel',
-        },
-        {
-          text: 'Add',
-          handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
-          }
-        }
-      ]
+  async openRequest(request: Request){
+    const modal = await this.modalCtrl.create({
+      component: ModalPage,
+      componentProps: { id: request.id },
+      breakpoints: [0, 0.5, 0.8],
+      initialBreakpoint: 0.5
     });
-    await alert.present(); 
+    modal.present();
   }
 
   logOut(){
@@ -102,5 +59,7 @@ export class AdmindocuPage implements OnInit {
   openDocu(){
     this.router.navigate(['/documents'])
   }
+
+
 
 }

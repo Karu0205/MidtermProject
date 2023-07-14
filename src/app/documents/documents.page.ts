@@ -128,6 +128,7 @@ export class DocumentsPage{
           text: 'Add',
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.setOpen(true);
           }
         }
       ]
@@ -167,6 +168,7 @@ export class DocumentsPage{
           text: 'Add',
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.setOpen(true);
           }
         }
       ]
@@ -206,6 +208,7 @@ export class DocumentsPage{
           text: 'Add',
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.setOpen(true);
           }
         }
       ]
@@ -245,6 +248,7 @@ export class DocumentsPage{
           text: 'Add',
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.setOpen(true);
           }
         }
       ]
