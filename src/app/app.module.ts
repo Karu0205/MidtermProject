@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { environment } from '../environments/environment';
 
+import { AngularFireModule } from '@angular/fire/compat';
+
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
@@ -16,6 +18,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
 
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore())

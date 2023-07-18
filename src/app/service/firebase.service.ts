@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Firestore, collectionData, deleteDoc, doc, docData } from '@angular/fire/firestore';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+
 
 export interface Account{
   id?: string;
-  student_id: string;
-  student_username: string;
-  student_password: string;
+  name: string;
+  password: string;
 }
 
 export interface Request{
@@ -22,10 +24,26 @@ export interface Request{
 })
 export class FirebaseService {
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, public fireStore: AngularFirestore,
+    public auth: AngularFireAuth) { }
+
+  loginWithEmail(data) {
+    return this.auth.signInWithEmailAndPassword(data.email, data.password);
+  }
+
+  signup(data) {
+    return this.auth.createUserWithEmailAndPassword(data.email, data.password);
+  }
+
+  saveDetails(data) {
+    return this.fireStore.collection("users").doc(data.uid).set(data);
+  }
+  getDetails(data) {
+    return this.fireStore.collection("users").doc(data.uid).valueChanges();
+  }
 
   getAccounts(): Observable<Account[]> {
-    const notesRef = collection(this.firestore, 'accounts');
+    const notesRef = collection(this.firestore, 'users');
     return collectionData(notesRef, {idField: 'id'}) as Observable<Account[]>;
   }
 
@@ -50,7 +68,7 @@ export class FirebaseService {
   }
 
   addAccount(account: Account) {
-    const notesRef = collection(this.firestore, 'accounts');
+    const notesRef = collection(this.firestore, 'users');
     return addDoc(notesRef, account);
   }
 

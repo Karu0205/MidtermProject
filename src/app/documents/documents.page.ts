@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../service/firebase.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-documents',
@@ -9,6 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./documents.page.scss'],
 })
 export class DocumentsPage{
+  userId: any;
+  isLoggedIn: boolean;
+  userName: any;
+  userEmail: any;
 
   isAlertOpen = false;
   public alertButtons = ['OK'];
@@ -20,7 +25,8 @@ export class DocumentsPage{
   requests = [] as any; 
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
-    private router: Router, private modalCtrl: ModalController ) {
+    private router: Router, private modalCtrl: ModalController, private route: ActivatedRoute,
+    private afAuth: AngularFireAuth ) {
       
     this.dataService.getRequests().subscribe(req => {
       console.log(req);
@@ -42,6 +48,27 @@ export class DocumentsPage{
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
     this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
+  }
+
+  ngOnInit(){
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        // User is logged in
+        this.isLoggedIn = true;
+        this.userId = user.uid; // Retrieve the user ID
+        this.userEmail = user.email;
+        this.userName = user.displayName// Retrieve the user name
+        console.log('User ID:', this.userId);
+        console.log('User Email:', this.userEmail);
+        console.log('User Name:', this.userName);
+      } else {
+        // User is not logged in
+        this.isLoggedIn = false;
+        this.userId = null;
+        this.userName = null;
+
+      }
+    });
   }
 
   logOut(){

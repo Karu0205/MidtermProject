@@ -7,12 +7,21 @@
        
         <img src="'/assets/menu.png'" class="menu-icon">
         <img src="/assets/profilepic.png" class="profile-pic">
-        <ion-item *ngFor="let account of accounts" (click)="openAccount(account)">
-          <ion-label>
-            {{ account.student_username }}
-          </ion-label>
+        <ion-item>
+          <ion-label>      
+            <div *ngIf="userEmail"> {{ userEmail }}</div>
+          </ion-label>   
         </ion-item>
-        <p>Student of Sto. Nino Formation and Science School</p>
+
+        <ion-searchbar value={{userEmail}} (ionChange)="filterList($event)"></ion-searchbar>
+
+        <ion-list class="scrollable-list">
+          <ion-item class="table" *ngFor = "let request of requests" (click) = "requestList(requests)">
+            <ion-label (click)="openRequest(request)">{{ request.student_name }}</ion-label>
+            <ion-label>{{ request.document_type }}</ion-label>
+            <ion-label>{{ request.status }}</ion-label>
+          </ion-item>
+        </ion-list>
 
         <ion-footer>
           <ion-toolbar>

@@ -28,6 +28,7 @@
       </ion-grid>
     </ion-toolbar>
   </ion-header>
+  <ion-searchbar (ionInput)="filterList($event)"></ion-searchbar>
 
   <ion-list class="scrollable-list">
     <ion-item class="table" *ngFor = "let request of requests" (click) = "requestList(requests)">

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['documents']);
+//const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+//const redirectLoggedInToHome = () => redirectLoggedInTo(['documents']);
 
 const routes: Routes = [
   {
@@ -52,7 +52,11 @@ const routes: Routes = [
   {
     path: 'adminmenu',
     loadChildren: () => import('./adminmenu/adminmenu.module').then( m => m.AdminmenuPageModule)
+  },  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
+
 ];
 
 @NgModule({

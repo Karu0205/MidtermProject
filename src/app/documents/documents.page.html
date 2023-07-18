@@ -14,8 +14,9 @@
   <div class="class">
 
     <ion-card>
-        <ion-title>Student Request</ion-title>
-    
+        <ion-title>      
+        <div *ngIf="userEmail">Welcome: {{ userEmail }}</div>
+        </ion-title>        
       <ion-list>
         <ion-item>
           <ion-label (click)="add137()">Form 137</ion-label>
