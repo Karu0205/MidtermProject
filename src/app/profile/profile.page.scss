@@ -26,6 +26,12 @@ ion-label{
   text-align: center;
 }
 
+ion-searchbar{
+  --background: #9b2226;
+  background-size: cover;
+  color:white;
+}
+
 }
 .social-icons a{
     width: 40px;
@@ -123,4 +129,3 @@ ion-footer{
   ion-tab-button.ion-selected {
     color: #333;
   }
-  

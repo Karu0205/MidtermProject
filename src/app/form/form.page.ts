@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class FormPage implements OnInit {
   requests = [] as any; 
+  userData: any;
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController ) {
@@ -53,7 +54,14 @@ export class FormPage implements OnInit {
           value: 'Ongoing',
           type: 'text',
           disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
         }
+
       ],
       buttons:[
         {
@@ -63,7 +71,7 @@ export class FormPage implements OnInit {
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
           }
         }
       ]

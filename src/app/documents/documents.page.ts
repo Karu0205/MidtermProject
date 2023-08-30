@@ -3,6 +3,7 @@ import { FirebaseService } from '../service/firebase.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-documents',
@@ -23,10 +24,11 @@ export class DocumentsPage{
   }
 
   requests = [] as any; 
+  userData: any;
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController, private route: ActivatedRoute,
-    private afAuth: AngularFireAuth ) {
+    private afAuth: AngularFireAuth, private firestore: AngularFirestore ) {
       
     this.dataService.getRequests().subscribe(req => {
       console.log(req);
@@ -53,6 +55,13 @@ export class DocumentsPage{
   ngOnInit(){
     this.afAuth.authState.subscribe(user => {
       if (user) {
+        this.firestore
+        .collection('users')
+        .doc(user.uid)
+        .valueChanges()
+        .subscribe((data) => {
+          this.userData = data;
+        });
         // User is logged in
         this.isLoggedIn = true;
         this.userId = user.uid; // Retrieve the user ID
@@ -85,12 +94,13 @@ export class DocumentsPage{
 
   async add137(){
     const alert = await this.alertCtrl.create({
-      header: 'Add Request',
+      header: 'Confirm Request?',
       inputs: [
         {
           name: 'student_name',
-          placeholder: 'Enter Name',
-          type: 'text'
+          value: this.userData.displayName,
+          type: 'text',
+          disabled: true
         },
 
         {
@@ -104,7 +114,14 @@ export class DocumentsPage{
           value: 'Pending',
           type: 'text',
           disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
         }
+
       ],
       buttons:[
         {
@@ -114,7 +131,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -129,7 +146,7 @@ export class DocumentsPage{
       inputs: [
         {
           name: 'student_name',
-          placeholder: 'Enter Name',
+          value: this.userData.displayName,
           type: 'text'
         },
 
@@ -144,7 +161,14 @@ export class DocumentsPage{
           value: 'Pending',
           type: 'text',
           disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
         }
+
       ],
       buttons:[
         {
@@ -154,7 +178,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -169,7 +193,7 @@ export class DocumentsPage{
       inputs: [
         {
           name: 'student_name',
-          placeholder: 'Enter Name',
+          value: this.userData.displayName,
           type: 'text'
         },
 
@@ -184,7 +208,14 @@ export class DocumentsPage{
           value: 'Pending',
           type: 'text',
           disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
         }
+
       ],
       buttons:[
         {
@@ -194,7 +225,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -209,7 +240,7 @@ export class DocumentsPage{
       inputs: [
         {
           name: 'student_name',
-          placeholder: 'Enter Name',
+          value: this.userData.displayName,
           type: 'text'
         },
 
@@ -224,7 +255,14 @@ export class DocumentsPage{
           value: 'Pending',
           type: 'text',
           disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
         }
+
       ],
       buttons:[
         {
@@ -234,7 +272,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -249,7 +287,7 @@ export class DocumentsPage{
       inputs: [
         {
           name: 'student_name',
-          placeholder: 'Enter Name',
+          value: this.userData.displayName,
           type: 'text'
         },
 
@@ -264,7 +302,14 @@ export class DocumentsPage{
           value: 'Pending',
           type: 'text',
           disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
         }
+
       ],
       buttons:[
         {
@@ -274,7 +319,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -289,7 +334,7 @@ export class DocumentsPage{
       inputs: [
         {
           name: 'student_name',
-          placeholder: 'Enter Name',
+          value: this.userData.displayName,
           type: 'text'
         },
 
@@ -304,7 +349,14 @@ export class DocumentsPage{
           value: 'Pending',
           type: 'text',
           disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
         }
+
       ],
       buttons:[
         {
@@ -314,7 +366,8 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.setOpen(true);
           }
         }
       ]

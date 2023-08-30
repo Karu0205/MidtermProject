@@ -17,6 +17,7 @@ export interface Request{
   student_name: string;
   document_type: string;
   status: string;
+  student_id: string;
 }
 
 @Injectable({
@@ -79,7 +80,11 @@ export class FirebaseService {
 
   updateRequest(request: Request){
     const noteDocRef = doc(this.firestore, `requests/${request.id}`);
-    return updateDoc(noteDocRef, {student_name: request.student_name, document_type: request.document_type, status: request.status});
+    return updateDoc(noteDocRef, {student_name: request.student_name, document_type: request.document_type, status: request.status, student_id: request.student_id});
+  }
+
+  getUserDataByUID(uid: string): Observable<any[]> {
+    return this.fireStore.collection('requests', ref => ref.where('student_id', '==', uid)).valueChanges();
   }
 
 }

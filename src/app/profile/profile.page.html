@@ -1,6 +1,8 @@
 <ion-header [translucent]="true">
   <p> Leaders Shining <br> Forward to Fullness </p>
+  <div class="image-container">
   <ion-img src=".\assets\whitelogo.png"></ion-img>
+  </div>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -9,19 +11,21 @@
         <img src="/assets/profilepic.png" class="profile-pic">
         <ion-item>
           <ion-label>      
-            <div *ngIf="userEmail"> {{ userEmail }}</div>
+            <div *ngIf="userData"> {{ userData.displayName }}</div>
           </ion-label>   
         </ion-item>
 
-        <ion-searchbar value={{userEmail}} (ionChange)="filterList($event)"></ion-searchbar>
+        <ion-searchbar (ionChange)="filterList($event)"></ion-searchbar>
 
         <ion-list class="scrollable-list">
-          <ion-item class="table" *ngFor = "let request of requests" (click) = "requestList(requests)">
-            <ion-label (click)="openRequest(request)">{{ request.student_name }}</ion-label>
-            <ion-label>{{ request.document_type }}</ion-label>
-            <ion-label>{{ request.status }}</ion-label>
+          <ion-item class="table" *ngFor = "let rq of userRequest">
+            <ion-label>{{ rq.student_name }}</ion-label>
+            <ion-label>{{ rq.document_type }}</ion-label>
+            <ion-label>{{ rq.status }}</ion-label>
           </ion-item>
         </ion-list>
+        
+        
 
         <ion-footer>
           <ion-toolbar>

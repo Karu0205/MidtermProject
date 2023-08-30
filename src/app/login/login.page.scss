@@ -3,8 +3,13 @@ ion-card{
   justify-content: center;
   width: 70% !important;
   top: 50px !important;
+  bottom: 0px !important;
   margin: auto;
+  border-radius: 8%;
+}
 
+ion-card-header{
+  font-family: baskerville;
 }
 
 ion-text{
@@ -31,11 +36,13 @@ ion-button {
   margin-left: auto;
   margin-right: auto;
   display: block !important;
+  width: 50%;
 }
 
 
 ion-content {
-  --background: #9b2226;
-  padding-bottom: 0;
-  height: 100%;
+  //--background: #ffe5ec;
+  --background: url('/assets/bg.png') no-repeat center center fixed;
+  background-size: cover;
+  height: 200px;
 }

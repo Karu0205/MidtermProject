@@ -37,13 +37,20 @@ export class AdmindocuPage implements OnInit {
   ngOnInit() {
   }
 
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 2000);
+  }
+
   async initializeItems(): Promise<any> {
     const requests = await this.firestore.collection('requests').valueChanges().pipe(first()).toPromise();
     return requests;
   }
 
   async filterList(event) {
-    this.requests = await this.initializeItems();
+    //this.requests = await this.initializeItems();
     const searchTerm = event.target.value;
   
     if (!searchTerm) {

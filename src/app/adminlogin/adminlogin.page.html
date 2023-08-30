@@ -1,7 +1,4 @@
 
-<ion-header [translucent]="true">
-
-
   <ion-content [fullscreen]="true">
   
   <div class="class">
@@ -22,14 +19,16 @@
       <ion-card-content>
         
         <ion-item>
-          <ion-input label="Email: " type="email" placeholder="email@domain.com"></ion-input>
+          <ion-label position="stacked">Email:</ion-label>
+          <ion-input [(ngModel)]='email'></ion-input>
         </ion-item>
   
         <ion-item>
-          <ion-input label="Password: " type="password" placeholder="password"></ion-input>
+          <ion-label position="stacked">Password:</ion-label>
+          <ion-input type="password" [(ngModel)]='password'></ion-input>
         </ion-item>
   
-        <ion-button align ='center' (click) ="adminDoc()">Login</ion-button>
+        <ion-button align ='center' (click) ="logIn()">Login</ion-button>
   
         <ion-text color="tertiary">
           <h3>Forgot Password</h3>

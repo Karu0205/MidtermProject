@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 
 
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -19,6 +20,8 @@ export class ProfilePage implements OnInit {
   isLoggedIn: boolean;
   userName: any;
   userEmail: any;
+  userData: any;
+  userRequest: any[];
 
   accounts: Account[] = []; 
   requests: Request[] = []; 
@@ -42,6 +45,19 @@ export class ProfilePage implements OnInit {
 
     this.afAuth.authState.subscribe(user => {
       if (user) {
+
+        this.dataService.getUserDataByUID(user.uid).subscribe(rq => {
+          this.userRequest = rq;
+          console.log(user.uid);
+        });
+
+        this.firestore
+        .collection('users')
+        .doc(user.uid)
+        .valueChanges()
+        .subscribe((data) => {
+          this.userData = data;
+        });
         // User is logged in
         this.isLoggedIn = true;
         this.userId = user.uid; // Retrieve the user ID
