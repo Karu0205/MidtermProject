@@ -1,14 +1,15 @@
-<ion-header>
+
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-title>Accounts</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
 
 <ion-content class="ion-pading">
   <div class="form">
+
+  <div class="create"><ion-label>Create Account</ion-label></div>
+
     <ion-item>
       <ion-label position="stacked">Name</ion-label>
       <ion-input [(ngModel)]='displayName'></ion-input>
@@ -24,4 +25,46 @@
     </ion-item>
     <ion-button (click)='signup()' expand='block'>Signup</ion-button>
   </div>
+
+  <ion-card>
+
+    <ion-searchbar (ionChange)="filterList($event)"></ion-searchbar>
+
+  <ion-list class="scrollable-list">
+    <ion-item class="table" *ngFor = "let user of accounts">
+      <ion-label>{{ user.displayName }}</ion-label>
+      <ion-label>{{ user.email }}</ion-label>
+      <ion-label>{{ user.password }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  </ion-card>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button [disabled]="true">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <ion-label>Manage Students</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button (click)="openStorage()">
+            <ion-icon name="documents-outline"></ion-icon>
+            <ion-label>Storage</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button (click)="openDocu()">
+            <ion-icon name="documents-outline"></ion-icon>
+            <ion-label>Requests</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button (click)="logOut()">
+            <ion-icon name="power-outline"></ion-icon>
+            <ion-label>Log Out</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>

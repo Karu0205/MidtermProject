@@ -18,6 +18,8 @@ export class AdmindocuPage implements OnInit {
 
   accounts = [] as any;
   requests: Request[] = []; 
+  items: any[];
+  searchText: string;
   
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
@@ -35,6 +37,10 @@ export class AdmindocuPage implements OnInit {
    }
 
   ngOnInit() {
+    this.dataService.getItems().subscribe((requests) => {
+      console.log(requests)
+      this.requests = requests;
+    });
   }
 
   handleRefresh(event) {
@@ -43,6 +49,30 @@ export class AdmindocuPage implements OnInit {
       event.target.complete();
     }, 2000);
   }
+
+  searchItems() {
+
+    console.log('SearchItems method called');
+    console.log('Search Text:', this.searchText);
+    if (!this.searchText) {
+      // If the search text is empty, display all items.
+      this.dataService.getItems().subscribe((requests) => {
+        this.requests = requests;
+      });
+    } else {
+      // If there is a search text, filter items based on it.
+      this.dataService.getItems().subscribe((requests) => {
+        this.requests = requests.filter((requests) => {
+          return (
+            requests.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            requests.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            requests.document_type.toLowerCase().includes(this.searchText.toLowerCase())
+          );
+        });
+      });
+    }
+  }
+  
 
   async initializeItems(): Promise<any> {
     const requests = await this.firestore.collection('requests').valueChanges().pipe(first()).toPromise();
@@ -94,6 +124,59 @@ export class AdmindocuPage implements OnInit {
   openDocu(){
     this.router.navigate(['/documents'])
   }
+
+  openRegister(){
+    this.router.navigate(['/signup'])
+  }
+
+  openStorage(){
+    this.router.navigate(['/storage'])
+  }
+  
+  editItem(id: string, newData: any) {
+    this.dataService.updateItem(id, newData)
+      .then(() => {
+        console.log('Item updated successfully.');
+      })
+      .catch((error) => {
+        console.error('Error updating item:', error);
+      });
+  }
+
+  async deleteItem(id: string) {
+    const confirmationAlert = await this.alertCtrl.create({
+      header: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this item?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            // User confirmed deletion, proceed with delete operation.
+            this.dataService
+              .deleteItem(id)
+              .then(() => {
+                console.log('Item deleted successfully.');
+                // Remove the deleted item from the local array to update the UI.
+                this.requests = this.requests.filter((requests) => requests.id !== id);
+              })
+              .catch((error) => {
+                console.error('Error deleting item:', error);
+              });
+          },
+        },
+      ],
+    });
+  
+    await confirmationAlert.present();
+  }
+
+  
+
+
 
 
 

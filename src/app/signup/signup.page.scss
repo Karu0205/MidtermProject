@@ -1,0 +1,55 @@
+ion-toolbar{
+    --background: #9b2226;
+    text-align: center;
+}
+
+ion-title{
+    color: white;
+    font-family: baskerville;
+}
+
+ion-button{
+    --background: #4f000b;
+    font-family: baskerville;
+}
+
+.create{
+    padding: 20px;
+    font-family: baskerville;
+    text-align: center;
+}
+
+ion-card{
+    float: right;
+    width: 46%;
+}
+
+.form{
+    float: left;
+    width:40%;
+}
+
+ion-footer{
+    position:fixed;
+    bottom: 0;
+    text-align: center;
+    --background: #9b2226;
+  }
+  
+  ion-tab-button {
+    background-color: #4f000b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+ion-tab-bar{
+    background-color:#9b2226;
+  }

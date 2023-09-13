@@ -119,7 +119,8 @@ export class DocumentsPage{
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
-          disabled: true
+          disabled: true,
+          cssClass: 'invisible-input',
         }
 
       ],
@@ -147,7 +148,8 @@ export class DocumentsPage{
         {
           name: 'student_name',
           value: this.userData.displayName,
-          type: 'text'
+          type: 'text',
+          disabled: true
         },
 
         {
@@ -194,7 +196,8 @@ export class DocumentsPage{
         {
           name: 'student_name',
           value: this.userData.displayName,
-          type: 'text'
+          type: 'text',
+          disabled: true
         },
 
         {
@@ -241,7 +244,8 @@ export class DocumentsPage{
         {
           name: 'student_name',
           value: this.userData.displayName,
-          type: 'text'
+          type: 'text',
+          disabled: true
         },
 
         {
@@ -288,7 +292,8 @@ export class DocumentsPage{
         {
           name: 'student_name',
           value: this.userData.displayName,
-          type: 'text'
+          type: 'text',
+          disabled: true
         },
 
         {
@@ -335,7 +340,8 @@ export class DocumentsPage{
         {
           name: 'student_name',
           value: this.userData.displayName,
-          type: 'text'
+          type: 'text',
+          disabled: true
         },
 
         {
@@ -374,6 +380,8 @@ export class DocumentsPage{
     });
     await alert.present(); 
   }
+
+  
 
 }
 

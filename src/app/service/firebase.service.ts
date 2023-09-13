@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collectionData, deleteDoc, doc, docData } from '@angular/fire/firestore';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AlertController } from '@ionic/angular'
 
 export interface Account{
   id?: string;
-  name: string;
+  displayName: string;
+  email: string;
   password: string;
 }
 
@@ -26,7 +28,7 @@ export interface Request{
 export class FirebaseService {
 
   constructor(private firestore: Firestore, public fireStore: AngularFirestore,
-    public auth: AngularFireAuth) { }
+    public auth: AngularFireAuth, private storage: AngularFireStorage, private alertController: AlertController) { }
 
   loginWithEmail(data) {
     return this.auth.signInWithEmailAndPassword(data.email, data.password);
@@ -86,5 +88,50 @@ export class FirebaseService {
   getUserDataByUID(uid: string): Observable<any[]> {
     return this.fireStore.collection('requests', ref => ref.where('student_id', '==', uid)).valueChanges();
   }
+
+  getFilesFromFolder(folderPath: string) {
+    const ref = this.storage.refFromURL(`gs://your-firebase-project.appspot.com/documents`);
+    return ref.listAll().toPromise();
+  }
+
+  getFolderContents(folderPath: string): Observable<any[]> {
+    const ref = this.storage.ref(folderPath);
+
+    return ref.listAll().pipe(
+      switchMap((res) => {
+        // Use forkJoin to fetch download URLs for all items in parallel
+        const urlObservables = res.items.map((item) => item.getDownloadURL());
+
+        return forkJoin(urlObservables).pipe(
+          map((urls) =>
+            res.items.map((item, index) => ({
+              name: item.name,
+              url: urls[index],
+            }))
+          )
+        );
+      })
+    );
+  }
+
+  getItems(): Observable<any[]> {
+    return this.fireStore.collection('requests').valueChanges()
+  }
+
+  updateItem(id: string, newData: any): Promise<void> {
+    return this.fireStore.doc(`requests/${id}`).update(newData);
+  }
+
+ deleteItem(id: string): Promise<void> {
+    return this.fireStore.doc(`requests/${id}`).delete();
+  } 
+
+  deleteFile(filePath: string): Observable<void> {
+    const ref = this.storage.ref(filePath);
+    return ref.delete();
+  }
+
+
+
 
 }

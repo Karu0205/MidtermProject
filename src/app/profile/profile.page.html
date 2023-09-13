@@ -7,7 +7,6 @@
 
 <ion-content [fullscreen]="true">
        
-        <img src="'/assets/menu.png'" class="menu-icon">
         <img src="/assets/profilepic.png" class="profile-pic">
         <ion-item>
           <ion-label>      
@@ -31,17 +30,17 @@
           <ion-toolbar>
             <ion-tabs>
               <ion-tab-bar slot="bottom">
-                <ion-tab-button tab="tab1" [disabled]="true">
+                <ion-tab-button [disabled]="true">
                   <ion-icon name="person-circle-outline"></ion-icon>
                   <ion-label>Profile</ion-label>
                 </ion-tab-button>
             
-                <ion-tab-button tab="tab2" (click)="logIn()">
+                <ion-tab-button (click)="logIn()">
                   <ion-icon name="documents-outline"></ion-icon>
                   <ion-label>Documents</ion-label>
                 </ion-tab-button>
             
-                <ion-tab-button tab="tab3" (click)="logOut()">
+                <ion-tab-button (click)="logOut()">
                   <ion-icon name="power-outline"></ion-icon>
                   <ion-label>Log Out</ion-label>
                 </ion-tab-button>

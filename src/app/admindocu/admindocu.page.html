@@ -31,13 +31,31 @@
       </ion-grid>
     </ion-toolbar>
   </ion-header>
-  <ion-searchbar (ionInput)="filterList($event)"></ion-searchbar>
+  <!--<ion-searchbar (ionChange)="filterList($event)"></ion-searchbar>
 
   <ion-list class="scrollable-list">
     <ion-item class="table" *ngFor = "let request of requests" (click) = "requestList(requests)">
       <ion-label (click)="openRequest(request)">{{ request.student_name }}</ion-label>
       <ion-label>{{ request.document_type }}</ion-label>
       <ion-label>{{ request.status }}</ion-label>
+    </ion-item>
+  </ion-list>-->
+
+  <ion-searchbar [(ngModel)]="searchText" (ionChange)="searchItems()"></ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let request of requests">
+      <!-- Display your table data here -->
+      <ion-label>{{ request.student_name }}</ion-label>
+      <ion-label>{{ request.document_type }}</ion-label>
+      <ion-select [(ngModel)]="request.status" >
+        <ion-select-option value="Accepted">Accepted</ion-select-option>
+        <ion-select-option value="In Progress">In Progress</ion-select-option>
+        <ion-select-option value="Ready for Pickup">Ready for Pickup</ion-select-option>
+        <ion-select-option value="Completed">Completed</ion-select-option>
+      </ion-select>
+      <ion-button (click)="editItem(request.id, request)">Edit</ion-button>
+      <ion-button (click)="deleteItem(request.id)">Delete</ion-button>
     </ion-item>
   </ion-list>
 
@@ -46,17 +64,22 @@
     <ion-toolbar>
       <ion-tabs>
         <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="tab1" [disabled]="true">
+          <ion-tab-button (click)="openRegister()">
             <ion-icon name="person-circle-outline"></ion-icon>
             <ion-label>Manage Students</ion-label>
           </ion-tab-button>
       
-          <ion-tab-button tab="tab2" [disabled]="true">
+          <ion-tab-button (click)="openStorage()">
+            <ion-icon name="documents-outline"></ion-icon>
+            <ion-label>Storage</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button [disabled]="true">
             <ion-icon name="documents-outline"></ion-icon>
             <ion-label>Requests</ion-label>
           </ion-tab-button>
       
-          <ion-tab-button tab="tab3" (click)="logOut()">
+          <ion-tab-button (click)="logOut()">
             <ion-icon name="power-outline"></ion-icon>
             <ion-label>Log Out</ion-label>
           </ion-tab-button>

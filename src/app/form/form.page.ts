@@ -59,7 +59,7 @@ export class FormPage implements OnInit {
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
-          disabled: true
+          disabled: true,
         }
 
       ],
