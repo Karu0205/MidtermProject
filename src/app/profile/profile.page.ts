@@ -84,12 +84,14 @@ export class ProfilePage implements OnInit {
   async filterList(event) {
     this.requests = await this.initializeItems();
     const searchTerm = event.target.value;
+    console.log(searchTerm);
   
     if (!searchTerm) {
+      this.userRequest = this.requests; // Reset the userRequest array to its original state
       return;
     }
   
-    this.requests = this.requests.filter((currentReq) => {
+    this.userRequest = this.requests.filter((currentReq) => {
       if (currentReq.student_name && searchTerm) {
         return (
           currentReq.student_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
@@ -97,7 +99,7 @@ export class ProfilePage implements OnInit {
           currentReq.document_type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
         );
       }
-      return false; // Add a default return statement
+      return false;
     });
   }
 
@@ -110,6 +112,7 @@ export class ProfilePage implements OnInit {
   }
 
   logOut(){
+    this.dataService.logout();
     this.router.navigate(['/login'])
   }
 
@@ -124,5 +127,6 @@ export class ProfilePage implements OnInit {
   toProfile(){
     this.router.navigate(['/profile'])
   }
+  
 
 }

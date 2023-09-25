@@ -17,6 +17,7 @@ export class SignupPage implements OnInit {
   public email:any;
   public password:any;
   public displayName:any;
+  public isAdmin: any;
 
   accounts: Account[] = []; 
   requests: Request[] = []; 
@@ -66,6 +67,7 @@ export class SignupPage implements OnInit {
           email:this.email,
           password:this.password,
           displayName:this.displayName,
+          isAdmin:this.isAdmin,
           uid:res.user!.uid
         }
         this.fireService.saveDetails(data).then(res=>{
@@ -94,7 +96,7 @@ export class SignupPage implements OnInit {
   }
 
   openStorage(){
-    this.router.navigate(['/storage'])
+    this.router.navigate(['/storage-menu'])
   }
 
 

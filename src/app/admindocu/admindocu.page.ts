@@ -118,6 +118,7 @@ export class AdmindocuPage implements OnInit {
   }
 
   logOut(){
+    this.dataService.logout();
     this.router.navigate(['/adminlogin'])
   }
 
@@ -130,9 +131,9 @@ export class AdmindocuPage implements OnInit {
   }
 
   openStorage(){
-    this.router.navigate(['/storage'])
+    this.router.navigate(['/storage-menu'])
   }
-  
+
   editItem(id: string, newData: any) {
     this.dataService.updateItem(id, newData)
       .then(() => {

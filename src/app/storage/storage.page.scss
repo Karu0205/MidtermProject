@@ -2,16 +2,21 @@ ion-header{
     background-color: #9b2226;
     text-align: center;
     position: sticky;
+    border-end-end-radius: 30%;
+    border-end-start-radius: 30%;
+}
+
+.scrollable-container {
+  height: 500px; /* Adjust the height as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
 }
 
 p{
-    float: left;
     font-family: baskerville;
     font-size: 250%;
     color: white;
-    text-align: left;
-    margin-top: 45px;
-    padding-left:30px;
+    text-align: center;
+
 }
 
 ion-img{
@@ -65,19 +70,11 @@ ion-img{
   margin-bottom: 11px;
 }
 
-ion-header{
-background-color: #9b2226;
-}
 
-p{
-float: left;
-font-family: baskerville;
-font-size: 250%;
-color: white;
-text-align: left;
-margin-top: 45px;
-padding-left:30px;
-}
+
+
+
+
 
 
 

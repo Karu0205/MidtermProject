@@ -11,8 +11,10 @@ import { FirebaseService } from '../service/firebase.service';
 export class AdminloginPage implements OnInit {
   public email:any;
   public password:any;
+  isAdmin= false;
 
-  constructor(private router: Router, public fireService:FirebaseService) { }
+  constructor(private router: Router, public fireService:FirebaseService,
+    ) { }
 
   ngOnInit() {
   }

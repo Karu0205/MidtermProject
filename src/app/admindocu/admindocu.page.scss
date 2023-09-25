@@ -5,6 +5,11 @@ ion-footer{
   --background: #9b2226;
 }
 
+.scrollable-container {
+  height: 300px; /* Adjust the height as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
 ion-toolbar {
   --background: #f4f4f4;
 }

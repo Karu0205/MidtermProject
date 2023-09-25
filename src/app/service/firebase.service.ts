@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Firestore, collectionData, deleteDoc, doc, docData } from '@angular/fire/firestore';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AlertController } from '@ionic/angular'
+import { AlertController } from '@ionic/angular';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 
 export interface Account{
   id?: string;
@@ -25,10 +26,25 @@ export interface Request{
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseService {
+export class FirebaseService implements OnInit {
 
   constructor(private firestore: Firestore, public fireStore: AngularFirestore,
-    public auth: AngularFireAuth, private storage: AngularFireStorage, private alertController: AlertController) { }
+    public auth: AngularFireAuth, private storage: AngularFireStorage, private alertController: AlertController,
+    private afMessaging: AngularFireMessaging) { 
+      
+    }
+
+  ngOnInit(): void {
+    this.afMessaging.requestToken.subscribe(
+      (token) => {
+        // Save the token to your server or database for sending notifications
+        console.log('FCM token:', token);
+      },
+      (error) => {
+        console.error('Error requesting permission:', error);
+      }
+    );
+  }
 
   loginWithEmail(data) {
     return this.auth.signInWithEmailAndPassword(data.email, data.password);
@@ -36,6 +52,10 @@ export class FirebaseService {
 
   signup(data) {
     return this.auth.createUserWithEmailAndPassword(data.email, data.password);
+  }
+
+  logout() {
+    this.auth.signOut();
   }
 
   saveDetails(data) {
@@ -130,6 +150,7 @@ export class FirebaseService {
     const ref = this.storage.ref(filePath);
     return ref.delete();
   }
+
 
 
 

@@ -23,6 +23,15 @@
       <ion-label position="stacked">Password</ion-label>
       <ion-input [(ngModel)]='password'></ion-input>
     </ion-item>
+
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Is Admin?</ion-label>
+      <ion-select [(ngModel)]='isAdmin'>
+        <ion-select-option value="true">Yes</ion-select-option>
+        <ion-select-option value="false">No</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-button (click)='signup()' expand='block'>Signup</ion-button>
   </div>
 

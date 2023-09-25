@@ -9,6 +9,11 @@ ion-img{
     margin-bottom: 11px;
   }
 
+  .scrollable-container {
+    height: 300px; /* Adjust the height as needed */
+    overflow-y: scroll; /* Enable vertical scrolling */
+  }
+
 ion-title{
   text-align: center;
   background-color: #4f000b;

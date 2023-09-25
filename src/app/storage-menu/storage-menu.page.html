@@ -13,16 +13,41 @@
 
 <div class="class">
 
-<ion-card>
-    <ion-title>      
-    <div class="option">Select an Option</div>
-    </ion-title>     
-    
-    <ion-button>Upload a Document</ion-button>
-    <ion-button>View Documents</ion-button>
-  
-  
-</ion-card>
+    <ion-card>
+      <div class="scrollable-container">
+      <div class="scrollable-content">     
+      <ion-list>
+        <ion-item>
+          <ion-label (click)="form137()">Form 137</ion-label> <!--done-->
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="ESC()">ESC Certificate</ion-label> <!--done-->
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="goodmoral()">Certificate of Good Moral</ion-label> <!--done-->
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="completion()">Certificate of Completion</ion-label> <!--done-->
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="enrollment()">Certificate of Enrollment</ion-label> <!--done-->
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="ranking()">Certificate of Ranking</ion-label> 
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="cemi()">Certificate of English as Medium of Instruction</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label (click)="transcript()">Transcript of Records</ion-label>
+        </ion-item>
+        
+
+      </ion-list>
+      </div>
+      </div>
+      
+    </ion-card>
 
 
 </div>
@@ -37,12 +62,12 @@
         <ion-label>Manage Students</ion-label>
       </ion-tab-button>
   
-      <ion-tab-button (click)="openStorage()">
+      <ion-tab-button [disabled]="true">
         <ion-icon name="documents-outline"></ion-icon>
         <ion-label>Storage</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button [disabled]="true">
+      <ion-tab-button (click)="openDocu()">
         <ion-icon name="documents-outline"></ion-icon>
         <ion-label>Requests</ion-label>
       </ion-tab-button>

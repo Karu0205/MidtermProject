@@ -16,13 +16,17 @@
     <ion-card>
         <ion-title>      
         <div *ngIf="userData">Welcome: {{ userData.displayName }}</div>
-        </ion-title>        
+        </ion-title>
+    
+    <div class="scrollable-container">
+    <div class="scrollable-content">
+        
       <ion-list>
         <ion-item>
           <ion-label (click)="add137()">Form 137</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label (click)="add138()">Form 138</ion-label>
+          <ion-label (click)="addESC()">ESC Certificate</ion-label>
         </ion-item>
         <ion-item>
           <ion-label (click)="addGoodMoral()">Certificate of Good Moral</ion-label>
@@ -31,13 +35,20 @@
           <ion-label (click)="addCompletion()">Certificate of Completion</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label (click)="addEnrollment()">Enrollment Form</ion-label>
+          <ion-label (click)="addEnrollment()">Certificate of Enrollment</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label (click)="addTranscript()">Transcript of Records</ion-label>
+          <ion-label (click)="addTranscript()">Certificate of Ranking</ion-label>
         </ion-item>
+        <ion-item>
+          <ion-label (click)="addCEMI()">Certificate of English as Medium of Instruction</ion-label>
+        </ion-item>
+        
 
       </ion-list>
+    
+    </div>
+    </div>
     
       <ion-alert
 
@@ -68,12 +79,18 @@
             <ion-icon name="documents-outline"></ion-icon>
             <ion-label>Documents</ion-label>
           </ion-tab-button>
+
+          <ion-tab-button (click)="toNotif()">
+            <ion-icon name="power-outline"></ion-icon>
+            <ion-label>Notifications</ion-label>
+          </ion-tab-button>
       
           <ion-tab-button (click)="logOut()">
             <ion-icon name="power-outline"></ion-icon>
             <ion-label>Log Out</ion-label>
           </ion-tab-button>
         </ion-tab-bar>
+
       </ion-tabs>
     </ion-toolbar>
   </ion-footer>

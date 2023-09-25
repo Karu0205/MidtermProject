@@ -92,6 +92,10 @@ export class DocumentsPage{
     this.router.navigate(['/profile'])
   }
 
+  toNotif(){
+    this.router.navigate(['/notifications'])
+  }
+
   async add137(){
     const alert = await this.alertCtrl.create({
       header: 'Confirm Request?',
@@ -141,9 +145,9 @@ export class DocumentsPage{
     await alert.present(); 
   }
   
-  async add138(){
+  async addESC(){
     const alert = await this.alertCtrl.create({
-      header: 'Add Request',
+      header: 'Confirm Request?',
       inputs: [
         {
           name: 'student_name',
@@ -154,7 +158,7 @@ export class DocumentsPage{
 
         {
           name:'document_type',
-          value: 'Form 138',
+          value: 'ESC Certificate',
           type: 'text',
           disabled: true
         },
@@ -191,7 +195,7 @@ export class DocumentsPage{
 
   async addCompletion(){
     const alert = await this.alertCtrl.create({
-      header: 'Add Request',
+      header: 'Confirm Request?',
       inputs: [
         {
           name: 'student_name',
@@ -239,7 +243,7 @@ export class DocumentsPage{
 
   async addGoodMoral(){
     const alert = await this.alertCtrl.create({
-      header: 'Add Request',
+      header: 'Confirm Request?',
       inputs: [
         {
           name: 'student_name',
@@ -287,7 +291,7 @@ export class DocumentsPage{
 
   async addEnrollment(){
     const alert = await this.alertCtrl.create({
-      header: 'Add Request',
+      header: 'Confirm Request?',
       inputs: [
         {
           name: 'student_name',
@@ -298,7 +302,7 @@ export class DocumentsPage{
 
         {
           name:'document_type',
-          value: 'Enrollment Form',
+          value: 'Certificate of Enrollment',
           type: 'text',
           disabled: true
         },
@@ -335,7 +339,7 @@ export class DocumentsPage{
 
   async addTranscript(){
     const alert = await this.alertCtrl.create({
-      header: 'Add Request',
+      header: 'Confirm Request?',
       inputs: [
         {
           name: 'student_name',
@@ -347,6 +351,54 @@ export class DocumentsPage{
         {
           name:'document_type',
           value: 'Transcript of Records',
+          type: 'text',
+          disabled: true
+        },
+        {
+          name: 'status',
+          value: 'Pending',
+          type: 'text',
+          disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true
+        }
+
+      ],
+      buttons:[
+        {
+          text: 'Cancel',
+          role : 'cancel',
+        },
+        {
+          text: 'Add',
+          handler: (req) => {
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.setOpen(true);
+          }
+        }
+      ]
+    });
+    await alert.present(); 
+  }
+
+  async addCEMI(){
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm Request?',
+      inputs: [
+        {
+          name: 'student_name',
+          value: this.userData.displayName,
+          type: 'text',
+          disabled: true
+        },
+
+        {
+          name:'document_type',
+          value: 'Certificate of English as Medium of Instruction',
           type: 'text',
           disabled: true
         },

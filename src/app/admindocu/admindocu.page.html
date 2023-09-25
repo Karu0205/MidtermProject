@@ -44,8 +44,11 @@
   <ion-searchbar [(ngModel)]="searchText" (ionChange)="searchItems()"></ion-searchbar>
 
   <ion-list>
+
+    <div class="scrollable-container">
+    <div class="scrollable-content">
     <ion-item *ngFor="let request of requests">
-      <!-- Display your table data here -->
+
       <ion-label>{{ request.student_name }}</ion-label>
       <ion-label>{{ request.document_type }}</ion-label>
       <ion-select [(ngModel)]="request.status" >
@@ -57,6 +60,9 @@
       <ion-button (click)="editItem(request.id, request)">Edit</ion-button>
       <ion-button (click)="deleteItem(request.id)">Delete</ion-button>
     </ion-item>
+  </div>
+  </div>
+
   </ion-list>
 
 

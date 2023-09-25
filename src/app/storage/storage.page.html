@@ -1,18 +1,21 @@
-<!--<ion-header [translucent]="true">
-  <p> Leaders Shining <br> Forward to Fullness </p>
-  <div class="image-container">
-  <ion-img src=".\assets\whitelogo.png"></ion-img>
-  </div>
-</ion-header>-->
+<ion-header [translucent]="true">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/storage-menu"></ion-back-button>
+      <ion-button (click)="refreshPage()" ><ion-icon name="refresh-outline"></ion-icon></ion-button>
+    </ion-buttons>
 
-<ion-content [fullscreen]="true">
+
+    <p> Form 137 </p> 
+</ion-header>
+
+<ion-content [fullscreen]="true" style="height: calc(100vh - 56px); overflow-y: auto;">
 
   <ion-card>
 
   <ion-input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx"></ion-input>
-  <ion-button (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
+  <ion-button color="danger" (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
   <div *ngIf="uploadProgress !== null">Uploading... {{ uploadProgress }}%</div>
-  <div *ngIf="downloadURL">Download URL: {{ downloadURL }}</div>
+  <div *ngIf="downloadURL">File Successfully Uploaded!: {{ downloadURL }}</div>
 
   </ion-card>
 

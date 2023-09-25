@@ -18,7 +18,7 @@ export class StorageMenuPage implements OnInit {
   }
 
   openDocu(){
-    this.router.navigate(['/documents'])
+    this.router.navigate(['/admindocu'])
   }
 
   openRegister(){
@@ -27,6 +27,38 @@ export class StorageMenuPage implements OnInit {
 
   openStorage(){
     this.router.navigate(['/storage'])
+  }
+
+  form137(){
+    this.router.navigate(['/storage'])
+  }
+
+  ESC(){
+    this.router.navigate(['/esc'])
+  }
+
+  goodmoral(){
+    this.router.navigate(['/goodmoral'])
+  }
+
+  completion(){
+    this.router.navigate(['/completion'])
+  }
+
+  enrollment(){
+    this.router.navigate(['/enrollment'])
+  }
+
+  ranking(){
+    this.router.navigate(['/ranking'])
+  }
+
+  cemi(){
+    this.router.navigate(['/cemi'])
+  }
+
+  transcript(){
+    this.router.navigate(['/transcript'])
   }
 
 }

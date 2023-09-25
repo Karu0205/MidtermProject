@@ -8,6 +8,7 @@ import { Platform } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 
+
 @Component({
   selector: 'app-storage',
   templateUrl: './storage.page.html',
@@ -27,13 +28,21 @@ export class StoragePage implements OnInit {
   allContents: any[] = [];
   filteredContents: any[] = [];
 
+
   constructor(private router: Router, private fileUploadService: FileUploadService, 
     private firebaseService: FirebaseService, private sanitizer: DomSanitizer,
     private platform: Platform, private afStorage: AngularFireStorage) { }
 
+    refreshPage() {
+      // You can place the code to refresh your page here
+      // For example, you can reload data or perform any other necessary actions
+      location.reload(); // This will reload the current page
+    }
+
     onFileSelected(event: any): void {
       this.selectedFile = event.target.files[0];
     }
+  
 
     uploadFile(): void{
       if(this.selectedFile){
@@ -112,17 +121,25 @@ downloadItem(item: any) {
 
 deleteItem(item: any) {
   const filePath = `${this.folderPath}/${item.name}`;
-  
-  // Use AngularFireStorage to delete the file
-  this.afStorage.storage.ref(filePath).delete()
-    .then(() => {
-      console.log(`File ${item.name} deleted successfully.`);
-      // After deletion, refresh the list of contents
-      this.getFolderContents();
-    })
-    .catch((error) => {
-      console.error(`Error deleting file ${item.name}:`, error);
-    });
+
+  // Display a confirmation dialog
+  const confirmDelete = window.confirm(`Are you sure you want to delete ${item.name}?`);
+
+  if (confirmDelete) {
+    // User confirmed deletion, proceed to delete the file
+    this.afStorage.storage.ref(filePath).delete()
+      .then(() => {
+        console.log(`File ${item.name} deleted successfully.`);
+        // After deletion, refresh the list of contents
+        this.getFolderContents();
+      })
+      .catch((error) => {
+        console.error(`Error deleting file ${item.name}:`, error);
+      });
+  } else {
+    // User canceled the deletion
+    console.log('Deletion canceled.');
+  }
 }
 
 

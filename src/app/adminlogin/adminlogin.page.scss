@@ -1,39 +1,48 @@
 ion-card{
-    align-items: center;
-    justify-content: center;
-    width: 70% !important;
-    top: 50px !important;
-    margin: auto;
+  align-items: center;
+  justify-content: center;
+  width: 50% !important;
+  top: 13%;
+  bottom: 0px !important;
+  margin: auto;
+  border-radius: 8%;
+}
 
-  }
+ion-card-header{
+  font-family: baskerville;
+}
 
-  ion-text{
-    text-align: center;
-  }
+ion-text{
+  text-align: center;
+}
 
-  ion-card-header{
-    justify-content: center;
-    align-items: center;
-    font-style:  helvetica;
-  }
+ion-card-header{
+  justify-content: center;
+  align-items: center;
+  font-style:  helvetica;
+}
 
-  ion-card-content{
-    justify-content: center;
-    align-items: center;
-    font-style: helvetica;
-  }
+ion-card-content{
+  justify-content: center;
+  align-items: center;
+  font-style: helvetica;
+}
 
-  ion-button {
+ion-button {
 
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
-    --background: #9b2226;
-    margin-left: auto;
-    margin-right: auto;
-    display: block !important;
-  }
+  --background: #9b2226;
+  margin-left: auto;
+  margin-right: auto;
+  display: block !important;
+  width: 50%;
+}
 
-  
-  ion-content {
-    --background: #9b2226;
-  }
+
+ion-content {
+  //--background: #ffe5ec;
+  --background: url('/assets/bg.png') no-repeat center center fixed;
+  background-size: cover;
+  height: 200px;
+}
