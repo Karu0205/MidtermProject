@@ -60,5 +60,10 @@ export class StorageMenuPage implements OnInit {
   transcript(){
     this.router.navigate(['/transcript'])
   }
+  
+  openCalendar(){
+    this.router.navigate(['/calendar'])
+  }
+
 
 }

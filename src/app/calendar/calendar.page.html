@@ -1,0 +1,75 @@
+
+
+<ion-content>
+
+  <ion-card>
+
+    <ion-input [(ngModel)]="selectedEvent.title" placeholder="Event Title"></ion-input>
+    <ion-textarea [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
+    <ion-button expand="full" (click)="addEvent()">Add Event</ion-button>
+    
+  </ion-card>
+
+    <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.startDate" label="Start Date"></ion-datetime>
+    <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.endDate" label="End Date"></ion-datetime>
+    
+
+
+
+    <ion-card>
+      <ion-list>
+        <ion-item *ngFor="let event of events">
+          {{ event.title }}
+        <ion-item>       </ion-item>
+          {{ event.startDate }}
+        <ion-item>-</ion-item>
+          {{ event.endDate }}
+        <ion-item>-</ion-item>
+        <ion-input [(ngModel)]="event.description" ></ion-input>
+    
+          <ion-buttons slot="end">
+            <ion-button (click)="editEvent(event)">Edit</ion-button>
+            <ion-button (click)="deleteEvent(event.id)">Delete</ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+      </ion-card>
+
+
+    <ion-footer>
+      <ion-toolbar>
+        <ion-tabs>
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button (click)="openRegister()">
+              <ion-icon name="person-circle-outline"></ion-icon>
+              <ion-label>Manage Students</ion-label>
+            </ion-tab-button>
+        
+            <ion-tab-button (click)="openStorage()">
+              <ion-icon name="documents-outline"></ion-icon>
+              <ion-label>Storage</ion-label>
+            </ion-tab-button>
+  
+            <ion-tab-button (click)="openDocu()">
+              <ion-icon name="documents-outline"></ion-icon>
+              <ion-label>Requests</ion-label>
+            </ion-tab-button>
+  
+            
+            <ion-tab-button [disabled]="true">
+              <ion-icon name="calendar"></ion-icon>
+              <ion-label>Calendar</ion-label>
+            </ion-tab-button>
+        
+            <ion-tab-button (click)="logOut()">
+              <ion-icon name="power-outline"></ion-icon>
+              <ion-label>Log Out</ion-label>
+            </ion-tab-button>
+  
+          </ion-tab-bar>
+        </ion-tabs>
+      </ion-toolbar>
+    </ion-footer>
+
+  </ion-content>
+

@@ -1,6 +1,8 @@
-<ion-header [translucent]="true">
-      <p> Leaders Shining <br> Forward to Fullness </p>
-      <ion-img src=".\assets\whitelogo.png"></ion-img>
+<ion-header [translucent]="true" class="header-container">
+  <div class="header-content">
+    <p>The Home of Christian Leaders <br> Shining Forward to Fullness</p>
+  </div>
+  <ion-img src="./assets/whitelogo.png"></ion-img>
 </ion-header>
 
 
@@ -78,11 +80,6 @@
           <ion-tab-button [disabled]="true">
             <ion-icon name="documents-outline"></ion-icon>
             <ion-label>Documents</ion-label>
-          </ion-tab-button>
-
-          <ion-tab-button (click)="toNotif()">
-            <ion-icon name="power-outline"></ion-icon>
-            <ion-label>Notifications</ion-label>
           </ion-tab-button>
       
           <ion-tab-button (click)="logOut()">

@@ -18,6 +18,7 @@ export class SignupPage implements OnInit {
   public password:any;
   public displayName:any;
   public isAdmin: any;
+  public uid: any;
 
   accounts: Account[] = []; 
   requests: Request[] = []; 
@@ -83,6 +84,8 @@ export class SignupPage implements OnInit {
     })
   }
 
+  
+
   logOut(){
     this.router.navigate(['/adminlogin'])
   }
@@ -98,6 +101,11 @@ export class SignupPage implements OnInit {
   openStorage(){
     this.router.navigate(['/storage-menu'])
   }
+
+  openCalendar(){
+    this.router.navigate(['/calendar'])
+  }
+
 
 
 }

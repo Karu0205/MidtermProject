@@ -1,16 +1,44 @@
+@media screen and (min-width: 768px) {
+  /* Custom styles for medium-sized screens and larger */
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px; /* Optional: Add padding as needed */
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+p {
+  margin: 0; /* Remove default margin for the paragraph */
+  float: left;
+  font-family: baskerville;
+  font-size: 130%;
+  color: white;
+  text-align: left;
+  margin-top: 15px;
+}
+
+
 ion-img{
     position: static;
     float: right !important;
-
-    max-width: 13%;
+    display: flex;
+    max-width: 12%;
     max-height: auto;
-    padding-right: 15px;
     margin-top: 11px;
     margin-bottom: 11px;
+    margin-left: 10px;
+    margin-bottom: 25px;
   }
 
   .scrollable-container {
-    height: 300px; /* Adjust the height as needed */
+    height: 350px; /* Adjust the height as needed */
     overflow-y: scroll; /* Enable vertical scrolling */
   }
 
@@ -24,17 +52,9 @@ ion-title{
 }
 
 ion-header{
+  background-image: url('/assets/3.png');
+  background-size: cover;
   background-color: #9b2226;
-}
-
-p{
-  float: left;
-  font-family: baskerville;
-  font-size: 250%;
-  color: white;
-  text-align: left;
-  margin-top: 45px;
-  padding-left:30px;
 }
 
 
@@ -52,6 +72,7 @@ ion-label{
 ion-list{
     text-align: center;
     align-items: center;
+
 }
 
 ion-label{
@@ -117,12 +138,7 @@ ion-searchbar{
   
 }
 
-ion-header{
-  font-size: 12px;
-}
-
-.invisible-input{
-  visibility: hidden;
-  color: #9b2226;
+.invisible-input {
+  display: none;
 }
 

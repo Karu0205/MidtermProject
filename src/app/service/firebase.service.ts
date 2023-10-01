@@ -151,6 +151,11 @@ export class FirebaseService implements OnInit {
     return ref.delete();
   }
 
+  deleteUser(userId: string) {
+    return this.fireStore.collection('users').doc(userId).delete();
+  }
+
+
 
 
 

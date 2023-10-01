@@ -1,36 +1,97 @@
-<ion-header [translucent]="true">
-  <p> Leaders Shining <br> Forward to Fullness </p>
-  <div class="image-container">
-  <ion-img src=".\assets\whitelogo.png"></ion-img>
+<ion-header [translucent]="true" class="header-container">
+  <div class="header-content">
+    <p>The Home of Christian Leaders <br> Shining Forward to Fullness</p>
   </div>
+  <ion-img src="./assets/whitelogo.png"></ion-img>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-       
-        <img src="/assets/profilepic.png" class="profile-pic">
-        <ion-item>
+
+  <ion-card class="detail transparent-background">
+        <ion-item lines="none" class="transparent-background">
           <ion-label>      
             <div *ngIf="userData"> {{ userData.displayName }}</div>
+            <div *ngIf="userData"> {{ userData.email }}</div>
           </ion-label>   
         </ion-item>
-        
+
+
+    
+  </ion-card>
 
         <ion-searchbar (ionChange)="filterList($event)"></ion-searchbar>
 
-        <ion-list class="scrollable-list">
+        <ion-card class="request">
+        <div class="scrollable-container">
+        <div class="scrollable-content">
+
+        <ion-list class="scrollable-list" id="adjustable-list">
           <ion-item class="table" *ngFor = "let rq of userRequest">
-            <ion-label>{{ rq.student_name }}</ion-label>
             <ion-label>{{ rq.document_type }}</ion-label>
             <ion-label>{{ rq.status }}</ion-label>
+          </ion-item> 
+        </ion-list>
+
+        </div>
+        </div>
+
+      </ion-card>
+
+      <ion-card class="events">
+    <ion-header>
+      
+      <ion-label>Events</ion-label>
+    </ion-header>
+
+      <ion-header>
+        <ion-toolbar>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label>Event</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>Start Date</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>End Date</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>Details</ion-label>
+              </ion-col>
+    
+            </ion-row>
+          </ion-grid>
+        </ion-toolbar>
+      </ion-header>
+
+      <div class="scrollable-container2">
+      <div class="scrollable-content2">
+        <ion-list lines="none">
+          <ion-item *ngFor="let event of events">
+            {{ event.title }}
+          <ion-item>       </ion-item>
+            {{ event.startDate }}
+          <ion-item>-</ion-item>
+            {{ event.endDate }}
+          <ion-item>-</ion-item>
+          {{ event.description }}
           </ion-item>
         </ion-list>
-        
-        
+      </div>
+      </div>
+      </ion-card>
 
         <ion-footer>
           <ion-toolbar>
             <ion-tabs>
               <ion-tab-bar slot="bottom">
+
+                <ion-tab-button (click)="deleteAccount()">
+                  <ion-icon name="alert-outline"></ion-icon>
+                  <ion-label>Delete Account</ion-label>
+                </ion-tab-button>
+
                 <ion-tab-button [disabled]="true">
                   <ion-icon name="person-circle-outline"></ion-icon>
                   <ion-label>Profile</ion-label>

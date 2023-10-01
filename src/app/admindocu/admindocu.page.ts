@@ -134,6 +134,10 @@ export class AdmindocuPage implements OnInit {
     this.router.navigate(['/storage-menu'])
   }
 
+  openCalendar(){
+    this.router.navigate(['/calendar'])
+  }
+
   editItem(id: string, newData: any) {
     this.dataService.updateItem(id, newData)
       .then(() => {

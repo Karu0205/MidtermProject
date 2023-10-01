@@ -1,11 +1,15 @@
 ion-card{
   align-items: center;
   justify-content: center;
-  width: 50% !important;
-  top: 13%;
-  bottom: 0px !important;
+  width: 80% !important;
+  top: 11%;
+  bottom: 13% !important;
   margin: auto;
   border-radius: 8%;
+}
+
+h3{
+  margin: 1%;
 }
 
 ion-card-header{

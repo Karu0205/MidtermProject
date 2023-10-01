@@ -67,7 +67,8 @@ const routes: Routes = [
   {
     path: 'storage-menu',
     loadChildren: () => import('./storage-menu/storage-menu.module').then( m => m.StorageMenuPageModule)
-  },  {
+  },
+  {
     path: 'esc',
     loadChildren: () => import('./esc/esc.module').then( m => m.EscPageModule)
   },
@@ -94,6 +95,14 @@ const routes: Routes = [
   {
     path: 'completion',
     loadChildren: () => import('./completion/completion.module').then( m => m.CompletionPageModule)
+  },
+  {
+    path: 'resetpass',
+    loadChildren: () => import('./resetpass/resetpass.module').then( m => m.ResetpassPageModule)
+  },
+  {
+    path: 'calendar',
+    loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule)
   },
 
 

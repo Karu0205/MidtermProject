@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { first } from 'rxjs/operators';
+import { UserService } from '../user.service';
+import { Event } from '../event.model';
+import { EventService } from '../event.service';
 
 
 
@@ -26,9 +29,13 @@ export class ProfilePage implements OnInit {
   accounts: Account[] = []; 
   requests: Request[] = []; 
 
+  
+  events: Event[] = [];
+  selectedEvent: Event = { title: '', description: '', startDate: new Date(), endDate: new Date() };
+
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController, private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore ) {
+    private firestore: AngularFirestore, private userService: UserService, private eventService: EventService ) {
       this.dataService.getAccounts().subscribe(res => {
         console.log(res);
         this.accounts=res;
@@ -42,6 +49,7 @@ export class ProfilePage implements OnInit {
   
 
   ngOnInit() {
+    this.loadEvents();
 
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -75,6 +83,13 @@ export class ProfilePage implements OnInit {
       }
     });
   }
+
+  loadEvents() {
+    this.eventService.getEvents().subscribe((events) => {
+      this.events = events;
+    });
+  }
+
 
  async initializeItems(): Promise<any> {
     const requests = await this.firestore.collection('requests').valueChanges().pipe(first()).toPromise();
@@ -127,6 +142,30 @@ export class ProfilePage implements OnInit {
   toProfile(){
     this.router.navigate(['/profile'])
   }
-  
 
+
+  async deleteAccount() {
+    const confirmDelete = window.confirm('Are you sure you want to delete your account?');
+  
+    if (confirmDelete) {
+      try {
+        const user = await this.afAuth.currentUser;
+        if (user) {
+          // Delete the user's Firestore document
+          await this.dataService.deleteUser(user.uid);
+  
+          // Delete the user's Firebase Authentication account
+          await user.delete();
+  
+          // Sign out the user
+          await this.afAuth.signOut();
+  
+          this.router.navigate(['/login']);
+        }
+      } catch (error) {
+        console.error('Error deleting account:', error);
+      }
+    }
+  }
+  
 }
