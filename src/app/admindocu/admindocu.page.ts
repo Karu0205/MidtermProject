@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { first } from 'rxjs/operators';
+import { EmailService } from '../email.service';
 
 
 @Component({
@@ -16,6 +17,11 @@ import { first } from 'rxjs/operators';
 })
 export class AdmindocuPage implements OnInit {
 
+  toEmail: string = '';
+  subject: string = '';
+  message: string = '';
+  fromName: string = 'Sto. Nino Formation and Science School';
+
   accounts = [] as any;
   requests: Request[] = []; 
   items: any[];
@@ -23,7 +29,8 @@ export class AdmindocuPage implements OnInit {
   
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
-    private router: Router, private modalCtrl: ModalController, private firestore: AngularFirestore ) {
+    private router: Router, private modalCtrl: ModalController, private firestore: AngularFirestore,
+    private emailService: EmailService ) {
     this.dataService.getAccounts().subscribe(res => {
       console.log(res);
       this.accounts=res;
@@ -41,6 +48,21 @@ export class AdmindocuPage implements OnInit {
       console.log(requests)
       this.requests = requests;
     });
+  }
+
+  sendEmail() {
+    this.emailService
+      .sendEmail(this.toEmail, this.message, this.fromName,)
+      .then(() => {
+        // Clear form fields or handle success as needed
+        this.toEmail = '';
+        this.message = '';
+        this.fromName = '';
+      })
+      .catch((error) => {
+        // Handle error as needed
+        console.error(error);
+      });
   }
 
   handleRefresh(event) {
