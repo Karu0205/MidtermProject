@@ -21,6 +21,7 @@ export interface Request{
   document_type: string;
   status: string;
   student_id: string;
+  email: string;
 }
 
 @Injectable({

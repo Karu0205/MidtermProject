@@ -15,7 +15,7 @@
 
   <ion-item>
     <ion-label position="floating">To Email</ion-label>
-    <ion-input [(ngModel)]="toEmail" type="email"></ion-input>
+    <ion-input #textInput [(ngModel)]="toEmail" type="email"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -62,9 +62,10 @@
 
     <div class="scrollable-container">
     <div class="scrollable-content">
-    <ion-item *ngFor="let request of requests">
+    <ion-item *ngFor="let request of requests" (click)="copyText(request.email)">
 
       <ion-label>{{ request.student_name }}</ion-label>
+      <ion-label>{{ request.email }}</ion-label>
       <ion-label>{{ request.document_type }}</ion-label>
       <ion-select [(ngModel)]="request.status" >
         <ion-select-option value="Accepted">Accepted</ion-select-option>

@@ -71,7 +71,7 @@ export class FormPage implements OnInit {
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
           }
         }
       ]

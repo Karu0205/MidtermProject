@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService, Request } from '../service/firebase.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { first } from 'rxjs/operators';
 import { EmailService } from '../email.service';
-
+import { IonInput } from '@ionic/angular';
 
 @Component({
   selector: 'app-admindocu',
@@ -16,6 +16,9 @@ import { EmailService } from '../email.service';
   styleUrls: ['./admindocu.page.scss'],
 })
 export class AdmindocuPage implements OnInit {
+
+  copiedText: string = '';
+  @ViewChild('textInput', { static: false }) textInput: IonInput;
 
   toEmail: string = '';
   subject: string = '';
@@ -27,6 +30,10 @@ export class AdmindocuPage implements OnInit {
   items: any[];
   searchText: string;
   
+  copyText(text: string) {
+    this.copiedText = text;
+    this.textInput.value = text;
+  }
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController, private firestore: AngularFirestore,

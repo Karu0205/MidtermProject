@@ -114,11 +114,19 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+
+        {
           name: 'status',
           value: 'Pending',
           type: 'text',
           disabled: true
         },
+        
         {
           name: 'student_id',
           value: this.userData.uid,
@@ -136,7 +144,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -169,6 +177,12 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+        {
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
@@ -184,7 +198,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -211,6 +225,12 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+        {
           name: 'status',
           value: 'Pending',
           type: 'text',
@@ -232,7 +252,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -259,6 +279,12 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+        {
           name: 'status',
           value: 'Pending',
           type: 'text',
@@ -280,7 +306,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -307,6 +333,12 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+        {
           name: 'status',
           value: 'Pending',
           type: 'text',
@@ -328,7 +360,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -355,6 +387,12 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+        {
           name: 'status',
           value: 'Pending',
           type: 'text',
@@ -376,7 +414,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
           }
         }
@@ -403,6 +441,12 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+        {
           name: 'status',
           value: 'Pending',
           type: 'text',
@@ -424,7 +468,7 @@ export class DocumentsPage{
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, student_id: req.student_id});
+            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
           }
         }

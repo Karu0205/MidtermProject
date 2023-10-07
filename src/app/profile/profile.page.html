@@ -7,21 +7,19 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-card class="detail transparent-background">
-        <ion-item lines="none" class="transparent-background">
-          <ion-label>      
+      
+      <ion-card class="info">
+          <ion-label class="label">      
             <div *ngIf="userData"> {{ userData.displayName }}</div>
             <div *ngIf="userData"> {{ userData.email }}</div>
           </ion-label>   
-        </ion-item>
+      </ion-card>
+     
 
-
-    
-  </ion-card>
-
+      <ion-card class="request">
         <ion-searchbar (ionChange)="filterList($event)"></ion-searchbar>
 
-        <ion-card class="request">
+        
         <div class="scrollable-container">
         <div class="scrollable-content">
 
@@ -39,8 +37,9 @@
 
       <ion-card class="events">
     <ion-header>
-      
+      <ion-toolbar class="event_head">
       <ion-label>Events</ion-label>
+      </ion-toolbar>
     </ion-header>
 
       <ion-header>
@@ -65,17 +64,14 @@
         </ion-toolbar>
       </ion-header>
 
-      <div class="scrollable-container2">
-      <div class="scrollable-content2">
-        <ion-list lines="none">
+        <div class="scrollable-container2">
+        <div class="scrollable-content2">
+        <ion-list>
           <ion-item *ngFor="let event of events">
-            {{ event.title }}
-          <ion-item>       </ion-item>
-            {{ event.startDate }}
-          <ion-item>-</ion-item>
-            {{ event.endDate }}
-          <ion-item>-</ion-item>
-          {{ event.description }}
+          <ion-label>{{ event.title }}</ion-label>
+          <ion-label>{{ event.startDate }}</ion-label>
+          <ion-label>{{ event.endDate }}</ion-label>
+          <ion-label>{{ event.description }}</ion-label>
           </ion-item>
         </ion-list>
       </div>
@@ -87,7 +83,7 @@
             <ion-tabs>
               <ion-tab-bar slot="bottom">
 
-                <ion-tab-button (click)="deleteAccount()">
+                <ion-tab-button class="delete" (click)="deleteAccount()">
                   <ion-icon name="alert-outline"></ion-icon>
                   <ion-label>Delete Account</ion-label>
                 </ion-tab-button>

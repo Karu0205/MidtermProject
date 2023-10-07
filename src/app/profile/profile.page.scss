@@ -17,6 +17,13 @@
   align-items: center;
 }
 
+.delete{
+  width: 60px; /* Adjust the width and height as needed */
+  height: 60px;
+  border-radius: 50%; 
+  font-size: 10px; /* Adjust the font size as needed */
+}
+
 p {
   margin: 0; /* Remove default margin for the paragraph */
   float: left;
@@ -40,27 +47,38 @@ ion-img{
     margin-bottom: 25px;
   }
 
-.transparent-background {
-  --background: url('/assets/2.png') no-repeat center center fixed;
-  background-size: 10px 10px;
+.info {
+  --background: #4f000b;
   color: #fff;
+  height: 50px
+}
+
+.request{
+  float: left;
+  width: 48%;
+  left: 30px;
+  height: 70%;
+  top: 10px;
 }
 
 .events{
-  width: 100%;
   justify-content: center;
   align-items: center;
-  
+  float: right;
+  width: 45%;
+  height: 70%;
+  right: 30px;
+  top: 10px;
 }
 
 .scrollable-container {
-  height: 150px; /* Adjust the height as needed */
+  height: 250px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
   
 }
 
 .scrollable-container2 {
-  height: 320px; /* Adjust the height as needed */
+  height: 200px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
 }
 .container{
@@ -79,10 +97,15 @@ ion-content{
     padding: 40px 90px;
     color: #fff;
     position: relative;
-    border-radius: 20px;
 
 ion-label{
   text-align: center;
+}
+
+.event_head{
+  --background: #9b2226;
+  color:white;
+  height: 42px;
 }
 
 ion-searchbar{
@@ -94,6 +117,17 @@ ion-searchbar{
 ion-list{
   align-items: center;
   text-align: center;
+}
+
+ion-item{
+  white-space: normal; /* Allows text to wrap to the next line */
+
+  word-wrap: break-word; /* Breaks words that exceed the container width */
+
+}
+ion-label {
+  white-space: normal; /* Allows text to wrap to the next line */
+  word-wrap: break-word; /* Breaks words that exceed the container width */
 }
 
 }
