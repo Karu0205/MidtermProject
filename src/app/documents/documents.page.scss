@@ -72,6 +72,7 @@ ion-label{
 ion-list{
     text-align: center;
     align-items: center;
+    
 
 }
 
@@ -108,6 +109,7 @@ ion-tab-button {
 
 ion-tab-bar{
   background-color:#9b2226;
+  font-family: baskerville;
 }
 
 ion-tab-button ion-icon {
@@ -128,6 +130,47 @@ ion-tab-button.ion-selected {
     background-size: cover;
     height: 200px;
   }
+
+  /* button-page.page.scss */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+ion-card{
+  height: 80%;
+  --background: url('/assets/back.png') no-repeat center center fixed;
+}
+
+ion-button {
+  width: 35%; /* Adjust the width to fit your design */
+  margin: 10px;
+  font-family: baskerville;
+  --background: #9b2226;
+  margin-top: 30px;
+}
+
+ion-button.button-text-wrap {
+  white-space: normal; /* Allow the text to wrap */
+  overflow: hidden; /* Hide any overflow */
+  text-overflow: ellipsis; /* Add ellipsis (...) if the text overflows */
+  margin: auto;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 600px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  ion-button {
+    width: 100%; /* Make the buttons take up the full width on smaller screens */
+    margin: 5px;
+  }
+}
 
 ion-toolbar{
   --background: #9b2226;

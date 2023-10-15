@@ -19,12 +19,13 @@ export class AdmindocuPage implements OnInit {
 
   copiedText: string = '';
   @ViewChild('textInput', { static: false }) textInput: IonInput;
+  fromName: string;
+  initialFromName: string;
 
   toEmail: string = '';
   subject: string = '';
   message: string = '';
-  fromName: string = 'Sto. Nino Formation and Science School';
-
+  
   accounts = [] as any;
   requests: Request[] = []; 
   items: any[];
@@ -38,6 +39,10 @@ export class AdmindocuPage implements OnInit {
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController, private firestore: AngularFirestore,
     private emailService: EmailService ) {
+
+      this.fromName = 'Sto. Nino Formation and Science School'; // Set this to the default value
+      this.initialFromName = this.fromName;
+
     this.dataService.getAccounts().subscribe(res => {
       console.log(res);
       this.accounts=res;
@@ -168,9 +173,26 @@ export class AdmindocuPage implements OnInit {
   }
 
   editItem(id: string, newData: any) {
+    // First, update the item in the existing collection
     this.dataService.updateItem(id, newData)
       .then(() => {
         console.log('Item updated successfully.');
+
+        // After successful update, add the updated data to the "logs" collection
+        const logData = {
+          itemId: id,
+          updatedData: newData,
+          timestamp: new Date() // This captures the current timestamp
+        };
+
+        // Use AngularFire to add data to the "logs" collection
+        this.firestore.collection('logs').add(logData)
+          .then(() => {
+            console.log('Log added successfully.');
+          })
+          .catch((error) => {
+            console.error('Error adding log:', error);
+          });
       })
       .catch((error) => {
         console.error('Error updating item:', error);

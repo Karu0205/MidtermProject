@@ -31,7 +31,6 @@ export class DocumentsPage{
     private afAuth: AngularFireAuth, private firestore: AngularFirestore ) {
       
     this.dataService.getRequests().subscribe(req => {
-      console.log(req);
       this.requests=req;
 
     })
@@ -67,9 +66,7 @@ export class DocumentsPage{
         this.userId = user.uid; // Retrieve the user ID
         this.userEmail = user.email;
         this.userName = user.displayName// Retrieve the user name
-        console.log('User ID:', this.userId);
-        console.log('User Email:', this.userEmail);
-        console.log('User Name:', this.userName);
+
       } else {
         // User is not logged in
         this.isLoggedIn = false;
@@ -81,7 +78,14 @@ export class DocumentsPage{
   }
 
   logOut(){
+    this.dataService.logout();
     this.router.navigate(['/login'])
+
+    this.afAuth.signOut().then(() => {
+      // Handle successful logout (e.g., navigate to login page).
+    }).catch((error) => {
+      console.error('Error logging out:', error);
+    });
   }
 
   openForm(){
@@ -382,7 +386,7 @@ export class DocumentsPage{
 
         {
           name:'document_type',
-          value: 'Transcript of Records',
+          value: 'Certificate of Ranking',
           type: 'text',
           disabled: true
         },

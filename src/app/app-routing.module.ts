@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AdminGuard } from './admin.guard';
+import { AuthGuard } from './auth.guard';
 
 //const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 //const redirectLoggedInToHome = () => redirectLoggedInTo(['documents']);
@@ -28,10 +29,13 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard] // Use a guard to protect student routes
   },
   {
     path: 'documents',
     loadChildren: () => import('./documents/documents.module').then( m => m.DocumentsPageModule),
+    canActivate: [AuthGuard] // Use a guard to protect student routes
+
   },
   {
     path: 'admindocu',

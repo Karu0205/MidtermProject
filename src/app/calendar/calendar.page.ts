@@ -20,6 +20,7 @@ export class CalendarPage implements OnInit {
 
   ngOnInit() {
     this.loadEvents();
+    this.sortEventsByStartDate();
   }
 
   loadEvents() {
@@ -46,6 +47,16 @@ export class CalendarPage implements OnInit {
       });
     });
   }
+
+  sortEventsByStartDate() {
+    this.events.sort((a, b) => {
+      const dateA = new Date(a.startDate).getTime();
+      const dateB = new Date(b.startDate).getTime();
+      return dateA - dateB;
+    });
+  }
+  
+  
   
   
 

@@ -28,6 +28,8 @@ export class StoragePage implements OnInit {
   allContents: any[] = [];
   filteredContents: any[] = [];
 
+  uploadTimestamp: number;
+
 
   constructor(private router: Router, private fileUploadService: FileUploadService, 
     private firebaseService: FirebaseService, private sanitizer: DomSanitizer,

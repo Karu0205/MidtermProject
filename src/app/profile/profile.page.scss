@@ -5,6 +5,18 @@
     font-family: 'poppins', sans-serif;
 }
 
+img{
+  margin-top: 3%;
+  border-radius: 360%;
+  border: 3px solid white;
+}
+
+ion-button{
+  width: 120px; /* Adjust the width and height to make a perfect circle */
+  height: 30px;
+  margin: auto;
+}
+
 .header-container {
   display: flex;
   justify-content: center;
@@ -48,37 +60,49 @@ ion-img{
   }
 
 .info {
-  --background: #4f000b;
+  background-image: url('/assets/3.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
   color: #fff;
-  height: 50px
+  width: 70%;
+  margin: auto;
+  margin-top: 3%;
+  border-bottom: 5px solid white;
+  height: 370px;
+  border-radius: 3%;
 }
 
 .request{
-  float: left;
-  width: 48%;
-  left: 30px;
-  height: 70%;
-  top: 10px;
+  width: 70%;
+  margin: auto;
+  height: 250px;
+  margin-top: 5%;
 }
 
 .events{
   justify-content: center;
   align-items: center;
-  float: right;
-  width: 45%;
-  height: 70%;
-  right: 30px;
-  top: 10px;
+  margin: auto;
+  width: 70%;
+  height: 260px;
+  margin-top: 5%;
+  margin-bottom: 15%;
+}
+
+.pfp{
+  margin-bottom: 5%;
 }
 
 .scrollable-container {
-  height: 250px; /* Adjust the height as needed */
+  height: 170px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
   
 }
 
 .scrollable-container2 {
-  height: 200px; /* Adjust the height as needed */
+  height: 175px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
 }
 .container{
@@ -100,6 +124,10 @@ ion-content{
 
 ion-label{
   text-align: center;
+}
+
+button{
+  margin-bottom: 10px;
 }
 
 .event_head{
@@ -205,6 +233,7 @@ ion-footer{
     font-weight: bold;
     text-transform: uppercase;
     transition: color 0.3s ease;
+    font-family: baskerville;
   }
   
   ion-tab-bar{
