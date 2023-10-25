@@ -12,8 +12,8 @@
 
   <ion-card>
 
-  <ion-input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx"></ion-input>
-  <ion-button color="danger" (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
+  <ion-input style="font-family: baskerville" type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx"></ion-input>
+  <ion-button style="font-family: baskerville" color="danger" (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
   <div *ngIf="uploadProgress !== null">Uploading... {{ uploadProgress }}%</div>
   <div *ngIf="downloadURL">File Successfully Uploaded!: {{ downloadURL }}</div>
 
@@ -21,14 +21,19 @@
 
   <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="filterContents()" placeholder="Enter name or title"></ion-searchbar>
 
+  <div class="scrollable-container">
+  <div class="scrollable-content">
   <ion-list>
     <ion-item *ngFor="let item of filteredContents">
-      <ion-label>{{ item.name }}</ion-label>
+      <ion-label style="white-space: normal; font-family: baskerville">{{ item.name }}</ion-label>
       <ion-button fill="outline" (click)="downloadItem(item)">Download</ion-button>
       <ion-button fill="outline" color="danger" (click)="deleteItem(item)">Delete</ion-button>
 
     </ion-item>
   </ion-list>
+
+  </div>
+  </div>
 
 
   <ion-header collapse="condense">
@@ -55,6 +60,11 @@
           <ion-tab-button (click)="openDocu()">
             <ion-icon name="documents-outline"></ion-icon>
             <ion-label>Requests</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button (click)="openCalendar()">
+            <ion-icon name="calendar"></ion-icon>
+            <ion-label>Calendar</ion-label>
           </ion-tab-button>
       
           <ion-tab-button (click)="logOut()">

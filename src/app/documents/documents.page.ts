@@ -4,6 +4,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { EmailService } from '../email.service';
 
 @Component({
   selector: 'app-documents',
@@ -28,7 +29,7 @@ export class DocumentsPage{
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController, private route: ActivatedRoute,
-    private afAuth: AngularFireAuth, private firestore: AngularFirestore ) {
+    private afAuth: AngularFireAuth, private firestore: AngularFirestore, private emailService: EmailService ) {
       
     this.dataService.getRequests().subscribe(req => {
       this.requests=req;
@@ -150,6 +151,7 @@ export class DocumentsPage{
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Form 137 request', this.userData.displayName);
           }
         }
       ]
@@ -204,6 +206,7 @@ export class DocumentsPage{
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new ESC Certificate request', this.userData.displayName);
           }
         }
       ]
@@ -258,6 +261,7 @@ export class DocumentsPage{
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Completion request', this.userData.displayName);
           }
         }
       ]
@@ -312,6 +316,7 @@ export class DocumentsPage{
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Good Moral request', this.userData.displayName);
           }
         }
       ]
@@ -366,6 +371,7 @@ export class DocumentsPage{
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Enrollment request', this.userData.displayName);
           }
         }
       ]
@@ -420,6 +426,7 @@ export class DocumentsPage{
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Ranking request', this.userData.displayName);
           }
         }
       ]
@@ -474,6 +481,7 @@ export class DocumentsPage{
           handler: (req) => {
             this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
             this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new CEMI request', this.userData.displayName);
           }
         }
       ]

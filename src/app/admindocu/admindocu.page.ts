@@ -44,12 +44,12 @@ export class AdmindocuPage implements OnInit {
       this.initialFromName = this.fromName;
 
     this.dataService.getAccounts().subscribe(res => {
-      console.log(res);
+
       this.accounts=res;
     })
 
     this.dataService.getRequests().subscribe(req => {
-      console.log(req);
+
       this.requests=req;
     })
 
@@ -57,12 +57,15 @@ export class AdmindocuPage implements OnInit {
 
   ngOnInit() {
     this.dataService.getItems().subscribe((requests) => {
-      console.log(requests)
       this.requests = requests;
     });
   }
 
   sendEmail() {
+    console.log("Value of this.toEmail before splitting:", this.toEmail);
+    const emailAddresses = this.toEmail.split(',');
+    console.log("Email addresses after splitting:", emailAddresses);
+  
     this.emailService
       .sendEmail(this.toEmail, this.message, this.fromName,)
       .then(() => {
@@ -75,6 +78,8 @@ export class AdmindocuPage implements OnInit {
         // Handle error as needed
         console.error(error);
       });
+      console.log("Value of this.toEmail after sending:", this.toEmail);
+
   }
 
   handleRefresh(event) {

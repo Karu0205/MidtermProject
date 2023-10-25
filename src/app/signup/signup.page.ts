@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Account, FirebaseService } from '../service/firebase.service';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, IonInput, ModalController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { EmailService } from '../email.service';
 
 
 @Component({
@@ -23,13 +24,30 @@ export class SignupPage implements OnInit {
   accounts: Account[] = []; 
   requests: Request[] = []; 
 
+  copiedText: string = '';
+  @ViewChild('textInput', { static: false }) textInput: IonInput;
+  fromName: string;
+  initialFromName: string;
+
+  toEmail: string = '';
+  subject: string = '';
+  message: string = '';
+
+  copyText(text: string) {
+    this.copiedText = text;
+    this.textInput.value = text;
+  }
+
 
   constructor(public fireService:FirebaseService, public firestore: AngularFirestore, 
-    private afAuth: AngularFireAuth, private router: Router) { 
+    private afAuth: AngularFireAuth, private router: Router, private emailService: EmailService) { 
       this.fireService.getAccounts().subscribe(res => {
         console.log(res);
         this.accounts=res;
       })
+      
+      this.fromName = 'Sto. Nino Formation and Science School'; // Set this to the default value
+      this.initialFromName = this.fromName;
     }
 
   ngOnInit() {
@@ -76,6 +94,7 @@ export class SignupPage implements OnInit {
         },err=>{
           console.log(err);
         })
+        this.emailService.sendEmail(this.email, 'Your account has been created with the following password: ' + this.password, 'Sto. Nino Formation and Science School');
       }
     },err=>{
       alert(err.message);
@@ -104,6 +123,27 @@ export class SignupPage implements OnInit {
 
   openCalendar(){
     this.router.navigate(['/calendar'])
+  }
+
+  sendEmail() {
+    console.log("Value of this.toEmail before splitting:", this.toEmail);
+    const emailAddresses = this.toEmail.split(',');
+    console.log("Email addresses after splitting:", emailAddresses);
+  
+    this.emailService
+      .sendEmail2(this.toEmail, this.message, this.fromName,)
+      .then(() => {
+        // Clear form fields or handle success as needed
+        this.toEmail = '';
+        this.message = '';
+        this.fromName = '';
+      })
+      .catch((error) => {
+        // Handle error as needed
+        console.error(error);
+      });
+      console.log("Value of this.toEmail after sending:", this.toEmail);
+
   }
 
 

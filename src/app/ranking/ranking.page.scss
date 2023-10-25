@@ -6,6 +6,18 @@ ion-header{
     border-end-start-radius: 30%;
 }
 
+.scrollable-container {
+  height: 250px; /* Adjust the height as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
+@media (max-width: 768px) {
+  .scrollable-container {
+    height: 450px !important; /* Adjust the height as needed */
+    overflow-y: scroll; /* Enable vertical scrolling */
+  }
+}
+
 p{
     font-family: baskerville;
     font-size: 250%;

@@ -43,9 +43,19 @@ export class GoodmoralPage implements OnInit {
     }
   
 
-    uploadFile(): void{
-      if(this.selectedFile){
-        this.fileUploadService.uploadFile(this.selectedFile, 'GoodMoral').subscribe(
+    uploadFile(){
+      this.upload('GoodMoral');
+
+// Upload to the backup folder
+      const currentDate = new Date();
+      const backupFolder = `backups/${currentDate.toISOString().split('T')[0]}/`;
+      this.upload(backupFolder);
+    }
+  
+
+    upload(destinationFolder: string): void {
+      if (this.selectedFile) {
+        this.fileUploadService.uploadFile(this.selectedFile, destinationFolder).subscribe(
           (url) => {
             this.downloadURL = url;
             this.uploadProgress = null;
@@ -57,7 +67,7 @@ export class GoodmoralPage implements OnInit {
           () => {
             this.uploadProgress = null;
           }
-        )
+        );
       }
     }
 
@@ -80,6 +90,7 @@ export class GoodmoralPage implements OnInit {
   }
 
   logOut(){
+    this.firebaseService.logout();
     this.router.navigate(['/adminlogin'])
   }
 
@@ -93,6 +104,10 @@ export class GoodmoralPage implements OnInit {
 
   openStorage(){
     this.router.navigate(['/storage'])
+  }
+
+  openCalendar(){
+    this.router.navigate(['/calendar'])
   }
 
 

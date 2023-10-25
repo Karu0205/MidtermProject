@@ -2,38 +2,84 @@
 
 <ion-content>
 
-  <ion-card>
+  <ion-card class="title" style=" height: 180px">
 
-    <ion-input [(ngModel)]="selectedEvent.title" placeholder="Event Title"></ion-input>
-    <ion-textarea [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
-    <ion-button expand="full" (click)="addEvent()">Add Event</ion-button>
-    
+    <ion-input style="font-family: baskerville;" [(ngModel)]="selectedEvent.title" placeholder="Event Title"></ion-input>
+    <ion-textarea style="font-family: baskerville;" [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
+    <ion-button style="margin: auto; font-family: baskerville; --background: #4f000b; margin-bottom: 20px;" expand="full" (click)="addEvent()">Add Event</ion-button>
+
   </ion-card>
 
-    <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.startDate" label="Start Date"></ion-datetime>
-    <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.endDate" label="End Date"></ion-datetime>
+  <div class="stacked-cards">
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-card class="responsive-card">
+            <ion-header>
+              <ion-toolbar style="height: 40px; --background: #9b2226; color: white;">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="12" size-sm="6">
+                      <ion-label style="font-family: baskerville;">Start Date</ion-label>
+                    </ion-col>
+                    <ion-col size="12" size-sm="6">
+                      <ion-label style="font-family: baskerville;">End Date</ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-toolbar>
+            </ion-header>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.startDate" label="Start Date"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.endDate" label="End Date" class="ion-hide-sm"></ion-datetime>
+          </ion-card>
+          
+        </ion-col>
     
-
-
-
-    <ion-card>
-      <ion-list>
-        <ion-item *ngFor="let event of events">
-          {{ event.title }}
-        <ion-item>       </ion-item>
-          {{ event.startDate }}
-        <ion-item>-</ion-item>
-          {{ event.endDate }}
-        <ion-item>-</ion-item>
-        <ion-input [(ngModel)]="event.description" ></ion-input>
+        <ion-col size="12" size-md="6">
+          <ion-card class="responsive-card second-card"
+          >
+            <ion-header>
+              <ion-toolbar class="event_head">
+                <ion-label style="font-family: baskerville;">Events</ion-label>
+              </ion-toolbar>
     
-          <ion-buttons slot="end">
-            <ion-button (click)="editEvent(event)">Edit</ion-button>
-            <ion-button (click)="deleteEvent(event.id)">Delete</ion-button>
-          </ion-buttons>
-        </ion-item>
-      </ion-list>
-      </ion-card>
+              <ion-toolbar style="height: 45px;">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      <ion-label style="font-family: baskerville;">Event</ion-label>
+                    </ion-col>
+                    <ion-col>
+                      <ion-label style="font-family: baskerville;">Start Date (Y-M-D-T)</ion-label>
+                    </ion-col>
+                    <ion-col>
+                      <ion-label style="font-family: baskerville;">End Date (Y-M-D-T)</ion-label>
+                    </ion-col>
+                    <ion-col>
+                      <ion-label style="font-family: baskerville;">Details</ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-toolbar>
+            </ion-header>
+            <div class="scrollable-container2">
+              <div class="scrollable-content2">
+                <ion-list>
+                  <ion-item *ngFor="let event of events" (click)="deleteEvent(event.id)">
+                    <ion-label class="wrap-label" style="font-family: baskerville;">{{ event.title }}</ion-label>
+                    <ion-label class="wrap-label" style="font-family: baskerville;">{{ event.startDate }}</ion-label>
+                    <ion-label class= "wrap-label" style="font-family: baskerville;">{{ event.endDate }}</ion-label>
+                    <ion-label class="wrap-label" style="font-family: baskerville;">{{ event.description }}</ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 
     <ion-footer>

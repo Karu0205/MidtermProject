@@ -24,23 +24,23 @@ p {
   margin-top: 15px;
 }
 
-
 ion-img{
-    position: static;
-    float: right !important;
-    display: flex;
-    max-width: 12%;
-    max-height: auto;
-    margin-top: 11px;
-    margin-bottom: 11px;
-    margin-left: 10px;
-    margin-bottom: 25px;
-  }
+  position: static;
+  float: right !important;
+  display: flex;
+  max-width: 12%;
+  max-height: auto;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
 
-  .scrollable-container {
-    height: 350px; /* Adjust the height as needed */
-    overflow-y: scroll; /* Enable vertical scrolling */
-  }
+.scrollable-container {
+  height: 310px !important; /* Adjust the height as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
 
 ion-title{
   text-align: center;
@@ -167,8 +167,13 @@ ion-button.button-text-wrap {
   }
 
   ion-button {
-    width: 100%; /* Make the buttons take up the full width on smaller screens */
+    width: 90%; /* Make the buttons take up the full width on smaller screens */
     margin: 5px;
+  }
+
+  .scrollable-container {
+    height: 600px !important; /* Adjust the height as needed */
+    overflow-y: scroll; /* Enable vertical scrolling */
   }
 }
 

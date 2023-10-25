@@ -44,11 +44,20 @@ export class StoragePage implements OnInit {
     onFileSelected(event: any): void {
       this.selectedFile = event.target.files[0];
     }
+
+    uploadFile(){
+      this.upload('Form137');
+
+// Upload to the backup folder
+      const currentDate = new Date();
+      const backupFolder = `backups/${currentDate.toISOString().split('T')[0]}/`;
+      this.upload(backupFolder);
+    }
   
 
-    uploadFile(): void{
-      if(this.selectedFile){
-        this.fileUploadService.uploadFile(this.selectedFile, 'Form137').subscribe(
+    upload(destinationFolder: string): void {
+      if (this.selectedFile) {
+        this.fileUploadService.uploadFile(this.selectedFile, destinationFolder).subscribe(
           (url) => {
             this.downloadURL = url;
             this.uploadProgress = null;
@@ -60,7 +69,7 @@ export class StoragePage implements OnInit {
           () => {
             this.uploadProgress = null;
           }
-        )
+        );
       }
     }
 
@@ -83,6 +92,7 @@ export class StoragePage implements OnInit {
   }
 
   logOut(){
+    this.firebaseService.logout();
     this.router.navigate(['/adminlogin'])
   }
 
@@ -96,6 +106,10 @@ export class StoragePage implements OnInit {
 
   openStorage(){
     this.router.navigate(['/storage'])
+  }
+
+  openCalendar(){
+    this.router.navigate(['/calendar'])
   }
 
 

@@ -13,7 +13,6 @@ export class EmailService {
 
   sendEmail(
     toEmail: string,
- 
     message: string,
     fromName: string
   ) {
@@ -21,11 +20,33 @@ export class EmailService {
       to_email: toEmail,
       from_name: fromName,
       message: message,
-
     };
 
     return emailjs
       .send('service_kalatas', 'template_tp0cneh', emailParams)
+      .then((response) => {
+        console.log('Email sent: ', response);
+        return response;
+      })
+      .catch((error) => {
+        console.error('Email error: ', error);
+        throw error;
+      });
+  }
+
+    sendEmail2(
+    toEmail: string,
+    message: string,
+    fromName: string
+  ) {
+    const emailParams = {
+      to_email: toEmail,
+      from_name: fromName,
+      message: message,
+    };
+
+    return emailjs
+      .send('service_kalatas', 'template_tms145d', emailParams)
       .then((response) => {
         console.log('Email sent: ', response);
         return response;

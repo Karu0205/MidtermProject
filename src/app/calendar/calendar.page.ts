@@ -3,6 +3,7 @@ import { EventService } from '../event.service';
 import { Event } from '../event.model';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../service/firebase.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-calendar',
@@ -16,7 +17,7 @@ export class CalendarPage implements OnInit {
 
 
   constructor(private eventService: EventService, private router: Router,
-    private dataService: FirebaseService) { }
+    private dataService: FirebaseService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.loadEvents();
@@ -66,10 +67,30 @@ export class CalendarPage implements OnInit {
     });
   }
 
-  deleteEvent(eventId: string) {
-    this.eventService.deleteEvent(eventId).then(() => {
-      this.loadEvents();
+  async deleteEvent(eventId: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this event?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            // Do nothing, the user canceled the deletion.
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.eventService.deleteEvent(eventId).then(() => {
+              this.loadEvents();
+            });
+          }
+        }
+      ]
     });
+  
+    await alert.present();
   }
 
   logOut(){

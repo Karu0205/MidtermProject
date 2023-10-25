@@ -1,6 +1,6 @@
 ion-toolbar{
     font-family: baskerville;
-
+    --background: #9b2226;
   }
 
 ion-title{
@@ -17,4 +17,15 @@ ion-button{
     --background: #9b2226;
     font-family: baskerville;
 
+}
+ion-content{
+    --background: url('/assets/bg.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 200px;
+}
+
+ion-card{
+    width: 50%;
+    margin: auto;
+    margin-top: 250px;
 }

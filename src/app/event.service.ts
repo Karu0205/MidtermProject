@@ -9,7 +9,7 @@ export class EventService {
   constructor(private firestore: AngularFirestore) {}
 
   getEvents() {
-    return this.firestore.collection<Event>('events').valueChanges();
+    return this.firestore.collection<Event>('events', ref => ref.orderBy('startDate')).valueChanges();
   }
 
   addEvent(event: Event) {

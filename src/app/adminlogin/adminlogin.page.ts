@@ -46,4 +46,8 @@ export class AdminloginPage implements OnInit {
     this.router.navigate(['/admindocu']);
   }
 
+  resetPass(){
+    this.router.navigate(['/resetpass']);
+  }
+
 }

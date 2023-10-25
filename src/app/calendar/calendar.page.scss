@@ -1,8 +1,124 @@
 ion-datetime{
     float: left;
+    position: static;
+    width: 300px;
+}
+
+.wrap-label {
+  white-space: normal; /* This allows the text to wrap within the label */
+  word-wrap: break-word; /* This ensures long words are broken and don't overflow the container */
+  text-align: center;
+}
+.scrollable-container2 {
+  height: 270px; /* Adjust the height as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
 }
 ion-toolbar {
     --background: #f4f4f4;
+  }
+
+/* Styles for larger screens */
+/* Default style for PC view */
+.responsive-card {
+  width: 600px;
+  margin-right: 10px;
+  height: 450px;
+  margin-bottom: 30px;
+  margin-top: 5px !important;
+}
+
+/* Media query for mobile view (adjust the breakpoint as needed) */
+@media (max-width: 767px) {
+  .responsive-card {
+    width: 380px; /* Full width on mobile */
+    margin-right: 0 !important; /* No right margin on mobile */
+    height: auto; /* Let the content determine the height */
+    margin-left: 0 !important;
+  }
+  
+  /* Style for the second card on mobile */
+  .second-card {
+    margin-top: 10px; /* Add margin to separate the cards on mobile */
+    width:390px !important;
+    margin-left: 0 !important; /* Remove left margin on mobile */
+    /* Add additional mobile-specific styles here */
+    height: 290px !important;
+    margin: auto !important;
+    
+  }
+  .scrollable-container2{
+    height: 180px !important;
+  }
+
+  ion-datetime{
+    float: none;
+    position: static;
+    width: 700px;
+}
+
+}
+
+.center-label {
+  text-align: center;
+  word-wrap: break-word;
+  white-space: pre-line;
+}
+
+
+/* Style for the second card */
+.second-card {
+  margin-top: 10px; /* Add margin to separate the cards */
+  width: 600px;
+  height: 350px;
+}
+
+  ion-item{
+    white-space: normal; /* Allows text to wrap to the next line */
+  
+    word-wrap: break-word; /* Breaks words that exceed the container width */
+  
+  }
+  ion-label {
+    white-space: normal; /* Allows text to wrap to the next line */
+    word-wrap: break-word; /* Breaks words that exceed the container width */
+  }
+
+  .title{
+    --background: url('/assets/3.png') no-repeat center center fixed;
+    color: #fff;
+  }
+
+  ion-content{
+    --background: url('/assets/bg.png') no-repeat center center fixed;
+      text-align: center;
+      padding: 40px 90px;
+      color: #fff;
+      position: relative;
+  }
+  .event_head{
+    --background: #9b2226;
+    color:white;
+    height: 42px;
+  }
+
+  .events{
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 70%;
+    height: 300px;
+    margin-top: 5%;
+    margin-bottom: 15%;
+  }
+  
+
+  .event-title {
+    margin-bottom: 10px; /* Adjust the value to control the vertical spacing */
+    margin-right: 20px;
+  }
+  
+  .event-dates {
+    margin-bottom: 20px; /* Adjust the value to control the vertical spacing */
   }
 
 ion-footer{
@@ -10,6 +126,12 @@ ion-footer{
     bottom: 0;
     text-align: center;
     --background: #9b2226;
+  }
+
+  .custom-card {
+    width: 90%;
+    flex: 1;
+    margin-right: 10px;
   }
 
   ion-tab-button {
@@ -35,7 +157,42 @@ ion-footer{
     text-align: center;
   }
 
-  ion-item {
-    white-space: normal;
-    word-wrap: break-word;
+  ion-item{
+    white-space: normal; /* Allows text to wrap to the next line */
+  
+    word-wrap: break-word; /* Breaks words that exceed the container width */
+  
   }
+  ion-label {
+    white-space: normal; /* Allows text to wrap to the next line */
+    word-wrap: break-word; /* Breaks words that exceed the container width */
+  }
+
+
+
+/* CSS for mobile view */
+@media (max-width: 767px) {
+  .ion-card {
+    width: 100%; /* Full width on mobile */
+    margin-right: 0; /* Remove margin between cards */
+    float: none; /* Remove float */
+  }
+  .ion-list {
+    padding: 10px; /* Add padding for better spacing on mobile */
+  }
+
+  .ion-label {
+    font-family: baskerville;
+  }
+
+  .ion-buttons {
+    flex-direction: column; /* Stack buttons vertically on mobile */
+  }
+
+  /* Add this to stack the cards on top of each other on mobile */
+  .stacked-cards {
+    display: flex;
+    flex-direction: column;
+  }
+}
+

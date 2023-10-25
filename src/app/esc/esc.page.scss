@@ -14,6 +14,18 @@ p{
 
 }
 
+@media (max-width: 768px) {
+  .scrollable-container {
+    height: 450px !important; /* Adjust the height as needed */
+    overflow-y: scroll; /* Enable vertical scrolling */
+  }
+}
+
+.scrollable-container {
+  height: 250px; /* Adjust the height as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
 ion-img{
     position: static;
     float: right !important;

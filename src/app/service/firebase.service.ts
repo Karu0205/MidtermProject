@@ -1,12 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Firestore, collectionData, deleteDoc, doc, docData } from '@angular/fire/firestore';
-import { addDoc, collection, updateDoc } from 'firebase/firestore';
-import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { addDoc, collection, updateDoc, query, where, getDocs } from 'firebase/firestore';
+import { Observable, forkJoin, map, switchMap, tap, catchError } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AlertController } from '@ionic/angular';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import { from, of } from 'rxjs';
 
 export interface Account{
   id?: string;
@@ -88,9 +89,27 @@ export class FirebaseService implements OnInit {
 
   addRequest(request: Request) {
     const notesRef = collection(this.firestore, 'requests');
-    return addDoc(notesRef, request);
+    const compositeKey = `${request.student_id}_${request.document_type}`;
+  
+    return getDocs(query(notesRef, where('compositeKey', '==', compositeKey)))
+      .then((querySnapshot) => {
+        if (querySnapshot.size === 0) {
+          // No duplicate found, so add the request.
+          return addDoc(notesRef, {
+            ...request, // Add other fields to the document
+            compositeKey, // Store the composite key in Firestore
+          });
+        } else {
+          // A duplicate request already exists.
+          return Promise.reject(new Error('Duplicate request found.'));
+        }
+      })
+      .catch((error) => {
+        console.error('Error checking for duplicates or adding request:', error);
+        return Promise.reject(error);
+      });
   }
-
+  
   addAccount(account: Account) {
     const notesRef = collection(this.firestore, 'users');
     return addDoc(notesRef, account);
