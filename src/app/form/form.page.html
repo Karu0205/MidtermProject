@@ -1,31 +1,51 @@
-<ion-header [translucent]="true">
-  <p> Leaders Shining <br> Forward to Fullness </p>
-  <ion-img src=".\assets\whitelogo.png"></ion-img>
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white; font-family: baskerville;">Document Request Form</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label style="font-family: baskerville;">Student Name:</ion-label>
+      <ion-input style="font-family: baskerville;" [(ngModel)]="formData.student_name" type="text"></ion-input>
+    </ion-item>
+    
 
-<!--image-->
-<div class="image"></div>
+    <ion-item>
+      <ion-label style="font-family: baskerville;">Document Type:</ion-label>
+      <ion-select style="font-family: baskerville;" class="my-select" [(ngModel)]="selectedDocumentType" style="width: 200px;">
+        <ion-select-option style="font-family: baskerville !important;" *ngFor="let type of documentTypes" [value]="type">{{ type }}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <!--button-->
-  <div class="ion-text-center">
-    <ion-button (click)="addRequest()">Make Request</ion-button>
-  </div>
+    <ion-item *ngIf="showStatusInput">
+      <ion-label>Status:</ion-label>
+      <ion-input [(ngModel)]="formData.status" type="text">Pending</ion-input>
+    </ion-item>
 
-  <ion-footer>
-    <ion-toolbar>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="person-circle-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e (click)="toDocuments()"><ion-icon name="documents-outline" ></ion-icon></ion-button>
-      <ion-button color=#5e070e (click)="logOut()"><ion-icon name="power-outline" id="power"></ion-icon></ion-button>
-    </ion-toolbar>
-  </ion-footer>
+    <ion-item *ngIf="showStatusInput">
+      <ion-label>Reference ID:</ion-label>
+      <ion-input [(ngModel)]="formData.student_id" type="text"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-label style="font-family: baskerville;">Email:</ion-label>
+      <ion-input style="font-family: baskerville;" [(ngModel)]="formData.email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="showStatusInput">
+      <ion-label style="font-family: baskerville;">Request Date:</ion-label>
+      <ion-input style="font-family: baskerville;" [(ngModel)]="formData.request_date" type="date"></ion-input>
+    </ion-item>
+  </ion-list>
+    <ion-row>
+      <ion-col>
+        <ion-button style="font-family: baskerville; margin-top: 10px; --background: #9b2226;" expand="full" (click)="submitForm()">Submit</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button style="font-family: baskerville; margin-top: 10px; --background: #9b2226;"expand="full" (click)="closeModal()">Close</ion-button>
+      </ion-col>
+    </ion-row>
 
 </ion-content>
-  

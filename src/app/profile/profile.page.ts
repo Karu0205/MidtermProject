@@ -10,8 +10,11 @@ import { Event } from '../event.model';
 import { EventService } from '../event.service';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-
-
+import { EmailService } from '../email.service';
+import { FormPage } from '../form/form.page';
+import { SchedulePage } from '../schedule/schedule.page';
+import { SettingsPage } from '../settings/settings.page';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -20,6 +23,21 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+
+  private subscription: Subscription;
+
+  notificationCount = 0; // Initialize count
+
+  numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
+
+  isAlertOpen = false;
+  public alertButtons = ['OK'];
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
+
+  progressBarValue: number;
 
   selectedImage: File | null = null;
   userProfile: any = {}; // Initialize an empty object for the user's profile data.
@@ -39,12 +57,12 @@ export class ProfilePage implements OnInit {
 
   
   events: Event[] = [];
-  selectedEvent: Event = { title: '', description: '', startDate: new Date(), endDate: new Date() };
+  selectedEvent: Event = { title: '', description: '', startDate: new Date()};
 
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController, private afAuth: AngularFireAuth,
     private firestore: AngularFirestore, private userService: UserService, private eventService: EventService,
-    private storage: AngularFireStorage ) {
+    private storage: AngularFireStorage, private emailService:EmailService ) {
       this.dataService.getAccounts().subscribe(res => {
 
         this.accounts=res;
@@ -52,8 +70,51 @@ export class ProfilePage implements OnInit {
       this.dataService.getRequests().subscribe(req => {
 
         this.requests=req;
+        this.updateProgressBarValue();
       })
+
+      this.notificationsCollection = this.firestore.collection('notifications');
+
+      // Subscribe to changes in the Firestore collection
+      this.subscription = this.notificationsCollection.valueChanges().subscribe((data) => {
+        this.notificationCount = data.length;
+      });
      }
+
+     updateProgressBarValue() {
+      // For demonstration, we assume there's only one order in the requests array.
+      if (this.requests && this.requests.length > 0) {
+        const order = this.requests[0];
+        switch (order.status) {
+          case 'pending':
+            this.progressBarValue = 10;
+            break;
+          case 'accepted':
+            this.progressBarValue = 30;
+            break;
+          case 'in progress':
+            this.progressBarValue = 50;
+            break;
+          case 'ready for pickup':
+            this.progressBarValue = 70;
+            break;
+          case 'completed':
+            this.progressBarValue = 100;
+            break;
+          default:
+            this.progressBarValue = 0;
+            break;
+        }
+      } else {
+        this.progressBarValue = 0;
+      }
+    }
+
+    showFileUpload: boolean = false;
+
+    toggleFileUpload() {
+      this.showFileUpload = !this.showFileUpload;
+    }
 
      onFileSelected(event: any) {
       const file = event.target.files[0];
@@ -117,6 +178,38 @@ export class ProfilePage implements OnInit {
         }, 'image/jpeg'); // You can adjust the format if needed.
       };
     }
+
+    async openFormModal() {
+      const modal = await this.modalCtrl.create({
+        component: FormPage, // Use your form component here
+      });
+
+      modal.componentProps = {
+        userEmail: this.userEmail,
+        userName: this.userName,
+        userId: this.userId,
+      };
+  
+      return await modal.present();
+    }
+
+    async openSchedModal() {
+      const modal = await this.modalCtrl.create({
+        component: SchedulePage, // Use your form component here
+      });
+  
+      return await modal.present();
+    }
+
+    async openSettingsModal() {
+      const modal = await this.modalCtrl.create({
+        component: SettingsPage, // Use your form component here
+      });
+  
+      return await modal.present();
+    }
+
+
   
     fetchUserProfile(userId: string) {
       const userRef = this.firestore.collection('users').doc(userId);
@@ -285,5 +378,89 @@ export class ProfilePage implements OnInit {
       }
     }
   }
+
+  async addRequest() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+  
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm Request?',
+      inputs: [
+        {
+          name: 'student_name',
+          value: this.userData.displayName,
+          type: 'text',
+          disabled: true
+        },
+        {
+          name: 'document_type',
+          value: 'Form 137',
+          type: 'text',
+          disabled: true
+        },
+        {
+          name: 'email',
+          value: this.userData.email,
+          type: 'text',
+          disabled: true
+        },
+        {
+          name: 'status',
+          value: 'Pending',
+          type: 'text',
+          disabled: true
+        },
+        {
+          name: 'student_id',
+          value: this.userData.uid,
+          type: 'text',
+          disabled: true,
+          cssClass: 'invisible-input',
+        },
+        {
+          name: 'request_date',
+          value: formattedDate,
+          type: 'text',
+          disabled: true
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Add',
+          handler: (req) => {
+            this.dataService.addRequest(req); // Include the entire request object
+            this.setOpen(true);
+            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Form 137 request', this.userData.displayName);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+    // Create a reference to your Firestore collection
+    notificationsCollection = this.firestore.collection('notifications');
+
+    addNotification() {
+      this.notificationsCollection.add({ /* your data */ }).then(() => {
+        this.notificationCount++; // Increment the count
+      });
+    }
+
+    clearNotifications() {
+      // Clear notifications by resetting the count and removing all entries from the collection
+      this.notificationCount = 0;
+      this.notificationsCollection.get().subscribe((snapshot) => {
+        snapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      });
+    }
+
+
   
 }

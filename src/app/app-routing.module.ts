@@ -116,7 +116,19 @@ const routes: Routes = [
     path: 'calendar',
     loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule),
     canActivate: [AdminGuard] // Use a guard to protect admin routes
+  },  {
+    path: 'schedule',
+    loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'adminprofile',
+    loadChildren: () => import('./adminprofile/adminprofile.module').then( m => m.AdminprofilePageModule)
+  },
+
 
 
 

@@ -4,6 +4,7 @@ import { Event } from '../event.model';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../service/firebase.service';
 import { AlertController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-calendar',
@@ -13,15 +14,20 @@ import { AlertController } from '@ionic/angular';
 export class CalendarPage implements OnInit {
 
     events: Event[] = [];
-  selectedEvent: Event = { title: '', description: '', startDate: new Date(), endDate: new Date() };
+  selectedEvent: Event = { title: '', description: '', startDate: new Date()};
 
 
   constructor(private eventService: EventService, private router: Router,
-    private dataService: FirebaseService, private alertController: AlertController) { }
+    private dataService: FirebaseService, private alertController: AlertController,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     this.loadEvents();
     this.sortEventsByStartDate();
+  }
+
+  async closeModal() {
+    await this.modalController.dismiss();
   }
 
   loadEvents() {
@@ -38,7 +44,7 @@ export class CalendarPage implements OnInit {
       // Update the document in Firestore with the generated document ID
       docRef.update({ id: docRef.id }).then(() => {
         // Reset selectedEvent
-        this.selectedEvent = { title: '', description: '', startDate: new Date(), endDate: new Date() };
+        this.selectedEvent = { title: '', description: '', startDate: new Date()};
   
         // Now you can use eventData, which includes the document ID
         console.log("Event with ID:", { ...eventData, id: docRef.id });

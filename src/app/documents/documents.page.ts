@@ -101,7 +101,10 @@ export class DocumentsPage{
     this.router.navigate(['/notifications'])
   }
 
-  async add137(){
+  async add137() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+  
     const alert = await this.alertCtrl.create({
       header: 'Confirm Request?',
       inputs: [
@@ -111,9 +114,8 @@ export class DocumentsPage{
           type: 'text',
           disabled: true
         },
-
         {
-          name:'document_type',
+          name: 'document_type',
           value: 'Form 137',
           type: 'text',
           disabled: true
@@ -124,42 +126,49 @@ export class DocumentsPage{
           type: 'text',
           disabled: true
         },
-
         {
           name: 'status',
           value: 'Pending',
           type: 'text',
           disabled: true
         },
-        
         {
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
           disabled: true,
           cssClass: 'invisible-input',
+        },
+        {
+          name: 'request_date',
+          value: formattedDate,
+          type: 'text',
+          disabled: true
         }
-
       ],
-      buttons:[
+      buttons: [
         {
           text: 'Cancel',
-          role : 'cancel',
+          role: 'cancel'
         },
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
+            this.dataService.addRequest(req); // Include the entire request object
             this.setOpen(true);
             this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Form 137 request', this.userData.displayName);
           }
         }
       ]
     });
-    await alert.present(); 
+    await alert.present();
   }
   
-  async addESC(){
+  
+  async addESC() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+  
     const alert = await this.alertCtrl.create({
       header: 'Confirm Request?',
       inputs: [
@@ -169,16 +178,9 @@ export class DocumentsPage{
           type: 'text',
           disabled: true
         },
-
         {
-          name:'document_type',
+          name: 'document_type',
           value: 'ESC Certificate',
-          type: 'text',
-          disabled: true
-        },
-        {
-          name: 'status',
-          value: 'Pending',
           type: 'text',
           disabled: true
         },
@@ -189,32 +191,48 @@ export class DocumentsPage{
           disabled: true
         },
         {
+          name: 'status',
+          value: 'Pending',
+          type: 'text',
+          disabled: true
+        },
+        {
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
+          disabled: true,
+          cssClass: 'invisible-input',
+        },
+        {
+          name: 'request_date',
+          value: formattedDate,
+          type: 'text',
           disabled: true
         }
-
       ],
-      buttons:[
+      buttons: [
         {
           text: 'Cancel',
-          role : 'cancel',
+          role: 'cancel'
         },
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
+            this.dataService.addRequest(req); // Include the entire request object
             this.setOpen(true);
             this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new ESC Certificate request', this.userData.displayName);
           }
         }
       ]
     });
-    await alert.present(); 
+    await alert.present();
   }
+  
 
-  async addCompletion(){
+  async addCompletion() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+  
     const alert = await this.alertCtrl.create({
       header: 'Confirm Request?',
       inputs: [
@@ -224,10 +242,9 @@ export class DocumentsPage{
           type: 'text',
           disabled: true
         },
-
         {
-          name:'document_type',
-          value: 'Certificate of Completion',
+          name: 'Certificate of Completion',
+          value: 'Form 137',
           type: 'text',
           disabled: true
         },
@@ -247,29 +264,39 @@ export class DocumentsPage{
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
+          disabled: true,
+          cssClass: 'invisible-input',
+        },
+        {
+          name: 'request_date',
+          value: formattedDate,
+          type: 'text',
           disabled: true
         }
-
       ],
-      buttons:[
+      buttons: [
         {
           text: 'Cancel',
-          role : 'cancel',
+          role: 'cancel'
         },
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
+            this.dataService.addRequest(req); // Include the entire request object
             this.setOpen(true);
             this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Completion request', this.userData.displayName);
           }
         }
       ]
     });
-    await alert.present(); 
+    await alert.present();
   }
+  
 
-  async addGoodMoral(){
+  async addGoodMoral() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+  
     const alert = await this.alertCtrl.create({
       header: 'Confirm Request?',
       inputs: [
@@ -279,9 +306,8 @@ export class DocumentsPage{
           type: 'text',
           disabled: true
         },
-
         {
-          name:'document_type',
+          name: 'document_type',
           value: 'Certificate of Good Moral',
           type: 'text',
           disabled: true
@@ -302,29 +328,39 @@ export class DocumentsPage{
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
+          disabled: true,
+          cssClass: 'invisible-input',
+        },
+        {
+          name: 'request_date',
+          value: formattedDate,
+          type: 'text',
           disabled: true
         }
-
       ],
-      buttons:[
+      buttons: [
         {
           text: 'Cancel',
-          role : 'cancel',
+          role: 'cancel'
         },
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
+            this.dataService.addRequest(req); // Include the entire request object
             this.setOpen(true);
             this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Good Moral request', this.userData.displayName);
           }
         }
       ]
     });
-    await alert.present(); 
+    await alert.present();
   }
+  
 
-  async addEnrollment(){
+  async addEnrollment() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+  
     const alert = await this.alertCtrl.create({
       header: 'Confirm Request?',
       inputs: [
@@ -334,9 +370,8 @@ export class DocumentsPage{
           type: 'text',
           disabled: true
         },
-
         {
-          name:'document_type',
+          name: 'document_type',
           value: 'Certificate of Enrollment',
           type: 'text',
           disabled: true
@@ -357,137 +392,161 @@ export class DocumentsPage{
           name: 'student_id',
           value: this.userData.uid,
           type: 'text',
+          disabled: true,
+          cssClass: 'invisible-input',
+        },
+        {
+          name: 'request_date',
+          value: formattedDate,
+          type: 'text',
           disabled: true
         }
-
       ],
-      buttons:[
+      buttons: [
         {
           text: 'Cancel',
-          role : 'cancel',
+          role: 'cancel'
         },
         {
           text: 'Add',
           handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
+            this.dataService.addRequest(req); // Include the entire request object
             this.setOpen(true);
             this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Enrollment request', this.userData.displayName);
           }
         }
       ]
     });
-    await alert.present(); 
+    await alert.present();
   }
+  
 
-  async addTranscript(){
-    const alert = await this.alertCtrl.create({
-      header: 'Confirm Request?',
-      inputs: [
-        {
-          name: 'student_name',
-          value: this.userData.displayName,
-          type: 'text',
-          disabled: true
-        },
+async addTranscript() {
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString();
 
-        {
-          name:'document_type',
-          value: 'Certificate of Ranking',
-          type: 'text',
-          disabled: true
-        },
-        {
-          name: 'email',
-          value: this.userData.email,
-          type: 'text',
-          disabled: true
-        },
-        {
-          name: 'status',
-          value: 'Pending',
-          type: 'text',
-          disabled: true
-        },
-        {
-          name: 'student_id',
-          value: this.userData.uid,
-          type: 'text',
-          disabled: true
+  const alert = await this.alertCtrl.create({
+    header: 'Confirm Request?',
+    inputs: [
+      {
+        name: 'student_name',
+        value: this.userData.displayName,
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'document_type',
+        value: 'Certificate of Ranking',
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'email',
+        value: this.userData.email,
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'status',
+        value: 'Pending',
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'student_id',
+        value: this.userData.uid,
+        type: 'text',
+        disabled: true,
+        cssClass: 'invisible-input',
+      },
+      {
+        name: 'request_date',
+        value: formattedDate,
+        type: 'text',
+        disabled: true
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Add',
+        handler: (req) => {
+          this.dataService.addRequest(req); // Include the entire request object
+          this.setOpen(true);
+          this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Ranking request', this.userData.displayName);
         }
+      }
+    ]
+  });
+  await alert.present();
+}
 
-      ],
-      buttons:[
-        {
-          text: 'Cancel',
-          role : 'cancel',
-        },
-        {
-          text: 'Add',
-          handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
-            this.setOpen(true);
-            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of Ranking request', this.userData.displayName);
-          }
+
+async addCEMI() {
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString();
+
+  const alert = await this.alertCtrl.create({
+    header: 'Confirm Request?',
+    inputs: [
+      {
+        name: 'student_name',
+        value: this.userData.displayName,
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'document_type',
+        value: 'Certificate of English as Medium of Instruction',
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'email',
+        value: this.userData.email,
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'status',
+        value: 'Pending',
+        type: 'text',
+        disabled: true
+      },
+      {
+        name: 'student_id',
+        value: this.userData.uid,
+        type: 'text',
+        disabled: true,
+        cssClass: 'invisible-input',
+      },
+      {
+        name: 'request_date',
+        value: formattedDate,
+        type: 'text',
+        disabled: true
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Add',
+        handler: (req) => {
+          this.dataService.addRequest(req); // Include the entire request object
+          this.setOpen(true);
+          this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Certificate of English as Medium of Instruction request', this.userData.displayName);
         }
-      ]
-    });
-    await alert.present(); 
-  }
-
-  async addCEMI(){
-    const alert = await this.alertCtrl.create({
-      header: 'Confirm Request?',
-      inputs: [
-        {
-          name: 'student_name',
-          value: this.userData.displayName,
-          type: 'text',
-          disabled: true
-        },
-
-        {
-          name:'document_type',
-          value: 'Certificate of English as Medium of Instruction',
-          type: 'text',
-          disabled: true
-        },
-        {
-          name: 'email',
-          value: this.userData.email,
-          type: 'text',
-          disabled: true
-        },
-        {
-          name: 'status',
-          value: 'Pending',
-          type: 'text',
-          disabled: true
-        },
-        {
-          name: 'student_id',
-          value: this.userData.uid,
-          type: 'text',
-          disabled: true
-        }
-
-      ],
-      buttons:[
-        {
-          text: 'Cancel',
-          role : 'cancel',
-        },
-        {
-          text: 'Add',
-          handler: (req) => {
-            this.dataService.addRequest({student_name: req.student_name, document_type: req.document_type, status: req.status, email: req.email, student_id: req.student_id});
-            this.setOpen(true);
-            this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new CEMI request', this.userData.displayName);
-          }
-        }
-      ]
-    });
-    await alert.present(); 
-  }
+      }
+    ]
+  });
+  await alert.present();
+}
 
   
 

@@ -36,8 +36,7 @@ export class StoragePage implements OnInit {
     private platform: Platform, private afStorage: AngularFireStorage) { }
 
     refreshPage() {
-      // You can place the code to refresh your page here
-      // For example, you can reload data or perform any other necessary actions
+
       location.reload(); // This will reload the current page
     }
 

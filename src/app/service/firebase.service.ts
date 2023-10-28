@@ -16,13 +16,14 @@ export interface Account{
   password: string;
 }
 
-export interface Request{
+export interface Request {
   id?: string;
   student_name: string;
   document_type: string;
   status: string;
   student_id: string;
   email: string;
+  request_date: string; // Add the request_date property
 }
 
 @Injectable({

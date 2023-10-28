@@ -1,121 +1,56 @@
 
-
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white; font-family: baskerville; margin-left:10px">Edit Calendar</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-
-  <ion-card class="title" style=" height: 180px">
-
+  <ion-card class="add">
     <ion-input style="font-family: baskerville;" [(ngModel)]="selectedEvent.title" placeholder="Event Title"></ion-input>
-    <ion-textarea style="font-family: baskerville;" [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
-    <ion-button style="margin: auto; font-family: baskerville; --background: #4f000b; margin-bottom: 20px;" expand="full" (click)="addEvent()">Add Event</ion-button>
-
+    <ion-input style="font-family: baskerville;" [(ngModel)]="selectedEvent.startDate" type="date"></ion-input>
+    <ion-textarea style="font-family: baskerville; height:100px;" [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
+    <ion-button style="margin: auto; font-family: baskerville; --background: #4f000b; margin-top:10px;margin-bottom: 10px;" expand="full" (click)="addEvent()">Add Event</ion-button>
   </ion-card>
 
-  <div class="stacked-cards">
-    </div>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" size-md="6">
-          <ion-card class="responsive-card">
-            <ion-header>
-              <ion-toolbar style="height: 40px; --background: #9b2226; color: white;">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="12" size-sm="6">
-                      <ion-label style="font-family: baskerville;">Start Date</ion-label>
-                    </ion-col>
-                    <ion-col size="12" size-sm="6">
-                      <ion-label style="font-family: baskerville;">End Date</ion-label>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-toolbar>
-            </ion-header>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.startDate" label="Start Date"></ion-datetime>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="selectedEvent.endDate" label="End Date" class="ion-hide-sm"></ion-datetime>
-          </ion-card>
-          
-        </ion-col>
+    <ion-card class="events" style="border: 3px solid white;">
+      <ion-header style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <ion-toolbar class="event_head">
+        <ion-label style="font-family: baskerville;">Events (Click to Delete)</ion-label>
+        </ion-toolbar>
+  
+        <ion-toolbar style="height: 40px; color: white;">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label style="font-family: baskerville;">Event</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label style="font-family: baskerville;">Date(Y-M-D)</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label style="font-family: baskerville;">Details</ion-label>
+              </ion-col>
     
-        <ion-col size="12" size-md="6">
-          <ion-card class="responsive-card second-card"
-          >
-            <ion-header>
-              <ion-toolbar class="event_head">
-                <ion-label style="font-family: baskerville;">Events</ion-label>
-              </ion-toolbar>
-    
-              <ion-toolbar style="height: 45px;">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col>
-                      <ion-label style="font-family: baskerville;">Event</ion-label>
-                    </ion-col>
-                    <ion-col>
-                      <ion-label style="font-family: baskerville;">Start Date (Y-M-D-T)</ion-label>
-                    </ion-col>
-                    <ion-col>
-                      <ion-label style="font-family: baskerville;">End Date (Y-M-D-T)</ion-label>
-                    </ion-col>
-                    <ion-col>
-                      <ion-label style="font-family: baskerville;">Details</ion-label>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-toolbar>
-            </ion-header>
-            <div class="scrollable-container2">
-              <div class="scrollable-content2">
-                <ion-list>
-                  <ion-item *ngFor="let event of events" (click)="deleteEvent(event.id)">
-                    <ion-label class="wrap-label" style="font-family: baskerville;">{{ event.title }}</ion-label>
-                    <ion-label class="wrap-label" style="font-family: baskerville;">{{ event.startDate }}</ion-label>
-                    <ion-label class= "wrap-label" style="font-family: baskerville;">{{ event.endDate }}</ion-label>
-                    <ion-label class="wrap-label" style="font-family: baskerville;">{{ event.description }}</ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-
-    <ion-footer>
-      <ion-toolbar>
-        <ion-tabs>
-          <ion-tab-bar slot="bottom">
-            <ion-tab-button (click)="openRegister()">
-              <ion-icon name="person-circle-outline"></ion-icon>
-              <ion-label>Manage Students</ion-label>
-            </ion-tab-button>
-        
-            <ion-tab-button (click)="openStorage()">
-              <ion-icon name="documents-outline"></ion-icon>
-              <ion-label>Storage</ion-label>
-            </ion-tab-button>
+            </ion-row>
+          </ion-grid>
+        </ion-toolbar>
+      </ion-header>
   
-            <ion-tab-button (click)="openDocu()">
-              <ion-icon name="documents-outline"></ion-icon>
-              <ion-label>Requests</ion-label>
-            </ion-tab-button>
+          <div class="scrollable-container2">
+          <div class="scrollable-content2">
+          <ion-list>
+            <ion-item style="font-size: 11.5px;" *ngFor="let event of events" (click)="deleteEvent(event.id)">
+            <ion-label style="font-family: baskerville;">{{ event.title }}</ion-label>
+            <ion-label style="font-family: baskerville;">{{ event.startDate }}</ion-label>
+            <ion-label style="font-family: baskerville;">{{ event.description }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+        </div>
+        </ion-card>
   
-            
-            <ion-tab-button [disabled]="true">
-              <ion-icon name="calendar"></ion-icon>
-              <ion-label>Calendar</ion-label>
-            </ion-tab-button>
-        
-            <ion-tab-button (click)="logOut()">
-              <ion-icon name="power-outline"></ion-icon>
-              <ion-label>Log Out</ion-label>
-            </ion-tab-button>
+        <ion-button style="font-family: baskerville; margin-top: 10px; --background: #9b2226;" expand="full" (click)="closeModal()">Close</ion-button>
   
-          </ion-tab-bar>
-        </ion-tabs>
-      </ion-toolbar>
-    </ion-footer>
 
   </ion-content>
 

@@ -1,198 +1,283 @@
-ion-datetime{
-    float: left;
-    position: static;
-    width: 300px;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'poppins', sans-serif;
 }
 
-.wrap-label {
-  white-space: normal; /* This allows the text to wrap within the label */
-  word-wrap: break-word; /* This ensures long words are broken and don't overflow the container */
-  text-align: center;
+.custom-content {
+  --ion-grid-width: 100%; /* Makes the grid take the full width */
 }
+
+.add{
+  text-align: left !important;
+  width: 90%;
+  margin: auto;
+}
+
+ion-input,
+ion-textarea,
+ion-button {
+  width: 100%; /* Set the elements to take the full width within the grid */
+  max-width: 100%;
+  margin: 0; /* Remove any default margin */
+  --padding-start: 16px; /* Add some padding to the left for spacing */
+  --padding-end: 16px;
+}
+
+ion-toolbar{
+--background: #9b2226;
+}
+
+ion-title{
+color: white;
+font-family: baskerville;
+margin-right: 10% !important;
+}
+
+img{
+margin-top: 3%;
+border-radius: 360%;
+border: 3px solid white;
+}
+
+ion-button{
+width: 120px; /* Adjust the width and height to make a perfect circle */
+height: 30px;
+margin: auto;
+margin-bottom: 20px;
+}
+
+.header-container {
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 10px; /* Optional: Add padding as needed */
+}
+
+.header-content {
+display: flex;
+align-items: center;
+}
+
+.delete{
+width: 60px; /* Adjust the width and height as needed */
+height: 60px;
+font-size: 10px; /* Adjust the font size as needed */
+}
+
+ion-header{
+  background-color: #9b2226;
+  font-family: baskerville;
+  }
+
+p {
+margin: 0; /* Remove default margin for the paragraph */
+float: left;
+font-family: baskerville;
+font-size: 130%;
+color: white;
+text-align: left;
+margin-top: 15px;
+}
+
+
+ion-img{
+  position: static;
+  float: right !important;
+  display: flex;
+  max-width: 12%;
+  max-height: auto;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+
+.info {
+background-image: url('/assets/3.png');
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+background-size: 100% 100%;
+color: #fff;
+width: 20%;
+float: inline-start;
+margin-top: 3%;
+height: 450px;
+margin-left: 40px;
+
+}
+
+.request{
+width: 70%;
+margin: auto;
+height: 250px;
+}
+
+.events{
+justify-content: center;
+align-items: center;
+margin: auto;
+width: 90%;
+height: 400px;
+margin-top: 4%;
+}
+
+.pfp{
+margin-bottom: 5%;
+}
+
+.scrollable-container {
+height: 500px; /* Adjust the height as needed */
+overflow-y: scroll; /* Enable vertical scrolling */
+
+}
+
 .scrollable-container2 {
-  height: 270px; /* Adjust the height as needed */
-  overflow-y: scroll; /* Enable vertical scrolling */
+height: 320px; /* Adjust the height as needed */
+overflow-y: scroll; /* Enable vertical scrolling */
 }
-ion-toolbar {
-    --background: #f4f4f4;
-  }
-
-/* Styles for larger screens */
-/* Default style for PC view */
-.responsive-card {
-  width: 600px;
-  margin-right: 10px;
-  height: 450px;
-  margin-bottom: 30px;
-  margin-top: 5px !important;
+.container{
+  width: 100%;
+  height: 100vh;
+  background-image: url('/assets/panlikod.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-/* Media query for mobile view (adjust the breakpoint as needed) */
-@media (max-width: 767px) {
-  .responsive-card {
-    width: 380px; /* Full width on mobile */
-    margin-right: 0 !important; /* No right margin on mobile */
-    height: auto; /* Let the content determine the height */
-    margin-left: 0 !important;
-  }
-  
-  /* Style for the second card on mobile */
-  .second-card {
-    margin-top: 10px; /* Add margin to separate the cards on mobile */
-    width:390px !important;
-    margin-left: 0 !important; /* Remove left margin on mobile */
-    /* Add additional mobile-specific styles here */
-    height: 290px !important;
-    margin: auto !important;
-    
-  }
-  .scrollable-container2{
-    height: 180px !important;
-  }
-
-  ion-datetime{
-    float: none;
-    position: static;
-    width: 700px;
-}
-
-}
-
-.center-label {
+ion-content{
   text-align: center;
-  word-wrap: break-word;
-  white-space: pre-line;
+  padding: 40px 90px;
+  color: #fff;
+  position: relative;
+
+ion-label{
+text-align: center;
 }
 
-
-/* Style for the second card */
-.second-card {
-  margin-top: 10px; /* Add margin to separate the cards */
-  width: 600px;
-  height: 350px;
+button{
+margin-bottom: 10px;
 }
 
-  ion-item{
-    white-space: normal; /* Allows text to wrap to the next line */
-  
-    word-wrap: break-word; /* Breaks words that exceed the container width */
-  
-  }
-  ion-label {
-    white-space: normal; /* Allows text to wrap to the next line */
-    word-wrap: break-word; /* Breaks words that exceed the container width */
-  }
+.event_head{
+--background: #9b2226;
+color:white !important;
+height: 42px;
+}
 
-  .title{
-    --background: url('/assets/3.png') no-repeat center center fixed;
-    color: #fff;
-  }
+ion-searchbar{
+--background: #9b2226;
+background-size: cover;
+color:white;
+}
 
-  ion-content{
-    --background: url('/assets/bg.png') no-repeat center center fixed;
-      text-align: center;
-      padding: 40px 90px;
-      color: #fff;
-      position: relative;
-  }
-  .event_head{
-    --background: #9b2226;
-    color:white;
-    height: 42px;
-  }
+ion-list{
+align-items: center;
+text-align: center;
+}
 
-  .events{
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    width: 70%;
-    height: 300px;
-    margin-top: 5%;
-    margin-bottom: 15%;
-  }
-  
+ion-item{
+white-space: normal; /* Allows text to wrap to the next line */
 
-  .event-title {
-    margin-bottom: 10px; /* Adjust the value to control the vertical spacing */
-    margin-right: 20px;
-  }
-  
-  .event-dates {
-    margin-bottom: 20px; /* Adjust the value to control the vertical spacing */
-  }
+word-wrap: break-word; /* Breaks words that exceed the container width */
+
+}
+ion-label {
+white-space: normal; /* Allows text to wrap to the next line */
+word-wrap: break-word; /* Breaks words that exceed the container width */
+}
+
+}
+.social-icons a{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6e3e3;
+  margin: 20px 10px;
+
+}
+.social-icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons a:hover{
+  background-color: #000000;
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
+  transition: all ease 0.5s;
+}
+.menu-icon{
+  width: 25px;
+  position: absolute;
+  right: 40px; 
+  top: 40px;
+}
+.profile-pic{
+  width: 150px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 6px;  
+}
+
+ion-header{
+  background-image: url('/assets/3.png');
+  background-size: cover;
+  background-color: #9b2226;
+}
+
+p{
+float: left;
+font-family: baskerville;
+font-size: 150%;
+color: white;
+text-align: left;
+margin-top: 45px;
+padding-left:30px;
+}
+
+ion-text{
+font-family: baskerville;
+}
 
 ion-footer{
-    position:fixed;
-    bottom: 0;
-    text-align: center;
-    --background: #9b2226;
-  }
-
-  .custom-card {
-    width: 90%;
-    flex: 1;
-    margin-right: 10px;
-  }
-
-  ion-tab-button {
-    background-color: #4f000b;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-  }
-
-  ion-tab-bar{
-    background-color:#9b2226;
-  }
-
-  ion-button{
-    width: 40%;
-    text-align: center;
-  }
-
-  ion-item{
-    white-space: normal; /* Allows text to wrap to the next line */
-  
-    word-wrap: break-word; /* Breaks words that exceed the container width */
-  
-  }
-  ion-label {
-    white-space: normal; /* Allows text to wrap to the next line */
-    word-wrap: break-word; /* Breaks words that exceed the container width */
-  }
-
-
-
-/* CSS for mobile view */
-@media (max-width: 767px) {
-  .ion-card {
-    width: 100%; /* Full width on mobile */
-    margin-right: 0; /* Remove margin between cards */
-    float: none; /* Remove float */
-  }
-  .ion-list {
-    padding: 10px; /* Add padding for better spacing on mobile */
-  }
-
-  .ion-label {
-    font-family: baskerville;
-  }
-
-  .ion-buttons {
-    flex-direction: column; /* Stack buttons vertically on mobile */
-  }
-
-  /* Add this to stack the cards on top of each other on mobile */
-  .stacked-cards {
-    display: flex;
-    flex-direction: column;
-  }
+  position:fixed;
+  bottom: 0;
+  text-align: center;
+  --background: #9b2226;
 }
+
+
+ion-tab-button {
+  background-color: #4f000b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  font-family: baskerville;
+}
+
+ion-tab-bar{
+  background-color:#9b2226;
+}
+
+ion-tab-button ion-icon {
+  font-size: 24px;
+}
+
+ion-tab-button.ion-selected {
+  color: #333;
+}
+
 

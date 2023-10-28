@@ -24,3 +24,19 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h{
+    white-space: normal !important;
+}
+.alert-radio-label.sc-ion-alert-md {
+    white-space: normal !important;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-top: 30px;
+    font-size: small;
+    font-family: baskerville;
+  }
+
+  .alert-title.sc-ion-alert-ios{
+    font-family: baskerville;
+  }

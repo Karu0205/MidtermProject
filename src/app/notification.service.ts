@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class NotificationService {
-  constructor(private afMessaging: AngularFireMessaging) {}
+  private notificationCount = new BehaviorSubject<number>(0);
 
-  requestPermission() {
-    return this.afMessaging.requestToken;
+  getNotificationCount() {
+    return this.notificationCount.asObservable();
   }
 
-  listenForMessages() {
-    return this.afMessaging.messages;
+  updateNotificationCount(count: number) {
+    this.notificationCount.next(count);
+  }
+
+  clearNotifications() {
+    this.updateNotificationCount(0); // Reset the count to zero
   }
 }

@@ -8,11 +8,20 @@ ion-icon {
   font-size: 32px;
 }
 
+
+:root {
+  --select-option-width: 500px; /* Set your desired width here */
+}
+
 ion-button{
-  margin-left: 8%;
-  margin-right: 8%;
-  background-color: #4f000b;
-  width: 70px;
+  width: 120px; /* Adjust the width and height to make a perfect circle */
+  height: 30px;
+  margin: auto;
+}
+
+.my-select {
+  width: 200px; /* Adjust the width to your desired size */
+  height: 40px; /* Adjust the height to your desired size */
 }
 
 
@@ -31,8 +40,15 @@ ion-img{
   margin-bottom: 11px;
 }
 
+ion-select {
+  white-space: normal; /* Allow text to wrap */
+  overflow: hidden;    /* Hide any overflow */
+  font-size: small;
+}
+
 ion-header{
 background-color: #9b2226;
+font-family: baskerville;
 }
 
 p{
@@ -88,6 +104,12 @@ padding-left:30px;
     .ion-text-center{
       position: center;
       margin-bottom: 20%;
+    }
+
+    @media (max-width: 767px) {
+      ion-content{
+        height:300px;
+      }
     }
 
 
