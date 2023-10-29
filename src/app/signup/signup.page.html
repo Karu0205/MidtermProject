@@ -8,7 +8,7 @@
 <ion-content class="ion-padding">
   <div class="form">
 
-    <ion-card style="float: left;" class="left-card">
+    <ion-card style="margin:auto; width:500px">
   <div class="create"><ion-label>Create Account</ion-label></div>
 
     <ion-item>
@@ -37,7 +37,7 @@
   </ion-card>
   </div>
 
-  <ion-card style="float: right; width:700px; height:350px;" class="right-card">
+  <ion-card style="width:500px; height:350px;margin:auto">
 
     <ion-toolbar style="height: 40px;">
       <ion-grid>
@@ -67,37 +67,4 @@
 
   </ion-card>
   
-
-  <ion-footer>
-    <ion-toolbar>
-      <ion-tabs>
-        <ion-tab-bar slot="bottom">
-          <ion-tab-button [disabled]="true">
-            <ion-icon name="person-circle-outline"></ion-icon>
-            <ion-label>Manage Students</ion-label>
-          </ion-tab-button>
-      
-          <ion-tab-button (click)="openStorage()">
-            <ion-icon name="documents-outline"></ion-icon>
-            <ion-label>Storage</ion-label>
-          </ion-tab-button>
-
-          <ion-tab-button (click)="openDocu()">
-            <ion-icon name="documents-outline"></ion-icon>
-            <ion-label>Requests</ion-label>
-          </ion-tab-button>
-
-          <ion-tab-button (click)="openCalendar()">
-            <ion-icon name="calendar"></ion-icon>
-            <ion-label>Calendar</ion-label>
-          </ion-tab-button>
-      
-          <ion-tab-button (click)="logOut()">
-            <ion-icon name="power-outline"></ion-icon>
-            <ion-label>Log Out</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
-      </ion-tabs>
-    </ion-toolbar>
-  </ion-footer>
 </ion-content>

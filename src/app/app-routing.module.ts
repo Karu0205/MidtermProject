@@ -116,7 +116,8 @@ const routes: Routes = [
     path: 'calendar',
     loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule),
     canActivate: [AdminGuard] // Use a guard to protect admin routes
-  },  {
+  },
+  {
     path: 'schedule',
     loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
   },
@@ -126,8 +127,25 @@ const routes: Routes = [
   },
   {
     path: 'adminprofile',
-    loadChildren: () => import('./adminprofile/adminprofile.module').then( m => m.AdminprofilePageModule)
+    loadChildren: () => import('./adminprofile/adminprofile.module').then( m => m.AdminprofilePageModule),
+    canActivate: [AdminGuard] // Use a guard to protect admin routes
   },
+  {
+    path: 'requests',
+    loadChildren: () => import('./requests/requests.module').then( m => m.RequestsPageModule)
+  },  {
+    path: 'approval',
+    loadChildren: () => import('./approval/approval.module').then( m => m.ApprovalPageModule)
+  },
+  {
+    path: 'completed',
+    loadChildren: () => import('./completed/completed.module').then( m => m.CompletedPageModule)
+  },
+  {
+    path: 'principal',
+    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
+  },
+
 
 
 

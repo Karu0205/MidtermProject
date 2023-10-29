@@ -6,16 +6,15 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl } from '@angular/forms';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { EmailService } from '../email.service';
 import { IonInput } from '@ionic/angular';
-
 @Component({
-  selector: 'app-admindocu',
-  templateUrl: './admindocu.page.html',
-  styleUrls: ['./admindocu.page.scss'],
+  selector: 'app-completed',
+  templateUrl: './completed.page.html',
+  styleUrls: ['./completed.page.scss'],
 })
-export class AdmindocuPage implements OnInit {
+export class CompletedPage implements OnInit {
 
   copiedText: string = '';
   @ViewChild('textInput', { static: false }) textInput: IonInput;
@@ -30,6 +29,9 @@ export class AdmindocuPage implements OnInit {
   requests: Request[] = []; 
   items: any[];
   searchText: string;
+
+  completed = [] as any;
+  
   
   copyText(text: string) {
     this.copiedText = text;
@@ -53,66 +55,81 @@ export class AdmindocuPage implements OnInit {
       this.requests=req;
     })
 
+    this.dataService.getCompleted()
+      .pipe(
+        map((completedItems: any[]) => {
+          // Store the original items
+          this.completed = completedItems;
+          return completedItems;
+        })
+      )
+      .subscribe();
+
    }
 
   ngOnInit() {
-    this.dataService.getItems().subscribe((requests) => {
-      this.requests = requests;
+
+    this.dataService.getCompleted().subscribe((completed) => {
+      this.completed = completed.sort((a, b) => {
+        // Assuming completedDateTime is a Firebase timestamp (e.g., a Firestore Timestamp).
+        // You can access the JavaScript Date from Firebase Timestamp using .toDate().
+        const dateA = a.completedDateTime.toDate();
+        const dateB = b.completedDateTime.toDate();
+    
+        // Compare the dates to sort in ascending order, to reverse the order, swap a and b.
+        return dateA - dateB;
+      });
     });
   }
 
-  sendEmail() {
-    console.log("Value of this.toEmail before splitting:", this.toEmail);
-    const emailAddresses = this.toEmail.split(',');
-    console.log("Email addresses after splitting:", emailAddresses);
-  
-    this.emailService
-      .sendEmail(this.toEmail, this.message, this.fromName,)
-      .then(() => {
-        // Clear form fields or handle success as needed
-        this.toEmail = '';
-        this.message = '';
-        this.fromName = '';
-      })
-      .catch((error) => {
-        // Handle error as needed
-        console.error(error);
-      });
-      console.log("Value of this.toEmail after sending:", this.toEmail);
-
-  }
-
-  handleRefresh(event) {
-    setTimeout(() => {
-      // Any calls to load data go here
-      event.target.complete();
-    }, 2000);
-  }
-
   searchItems() {
-    console.log('SearchItems method called');
-    console.log('Search Text:', this.searchText);
-  
-    if (!this.searchText) {
-      // If the search text is empty, display all items.
-      this.dataService.getItems().subscribe((requests) => {
-        this.requests = requests;
-        console.log('All items:', this.requests); // Log the items retrieved
+    if (this.searchText) {
+      this.completed = this.completed.filter((completed) => {
+        const searchText = this.searchText.toLowerCase();
+        return (
+          completed.student_name.toLowerCase().includes(searchText) ||
+          completed.document_type.toLowerCase().includes(searchText) ||
+          completed.request_date.toLowerCase().includes(searchText) ||
+          this.formatTimestamp(completed.completedDateTime).toLowerCase().includes(searchText)
+        );
       });
     } else {
-      // If there is a search text, filter items based on it.
-      this.dataService.getItems().subscribe((requests) => {
-        const filteredRequests = requests.filter((request) => {
-          const match = (
-            request.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.request_date.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.document_type.toLowerCase().includes(this.searchText.toLowerCase())
-          );
-          return match;
-        });
-        this.requests = filteredRequests;
-        console.log('Filtered items:', this.requests); // Log the filtered items
+      // If the search text is empty, display all completed items
+      this.dataService.getCompleted().subscribe((completedItems: any[]) => {
+        this.completed = completedItems;
+      });
+    }
+  }
+  
+
+  formatTimestamp(timestamp: { seconds: number, nanoseconds: number }): string {
+    const date = new Date(timestamp.seconds * 1000); // Convert seconds to milliseconds
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZoneName: 'short',
+    });
+  }
+
+
+  searchTerm: string = '';
+  filteredRequests: any[]; // A new array to hold the filtered requests
+
+
+  filterRequests() {
+    if (this.searchTerm === '') {
+      this.filteredRequests = this.requests; // Show all requests if the search bar is empty
+    } else {
+      this.filteredRequests = this.requests.filter(request => {
+        return (
+          request.student_name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          request.request_date.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          request.document_type.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
       });
     }
   }
@@ -240,10 +257,8 @@ export class AdmindocuPage implements OnInit {
     await confirmationAlert.present();
   }
 
-  
   async closeModal() {
     await this.modalCtrl.dismiss();
   }
-
 
 }

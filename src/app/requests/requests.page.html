@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Firebase Content List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="filterContents()"></ion-searchbar>
+
+  <ion-list>
+    <ion-item (click)="openEditModal(content)" *ngFor="let content of filteredContents">
+      {{ content.student_name }}
+      {{ content.email }}
+      {{ content.document_type }}
+      {{ content.request_date }}
+      {{ content.status }}
+    </ion-item>
+  </ion-list>
+</ion-content>

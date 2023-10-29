@@ -31,7 +31,7 @@ export class AdminloginPage implements OnInit {
           console.log('User ID:', userId);
           console.log('User Name:', userName);
           console.log('User Email:', userEmail);
-          this.router.navigate(['/admindocu']);
+          this.router.navigate(['/adminprofile']);
         },err=>{
           console.log(err);
         });

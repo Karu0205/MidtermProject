@@ -29,17 +29,9 @@
     <ion-item>
       <ion-label style="font-family: baskerville;" position="stacked">Status Update</ion-label>
       <ion-select style="font-family: baskerville;" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()">
-        <ion-select-option value="Accepted at the Registrar's Office">Accepted at the Registrar's Office</ion-select-option>
-        <ion-select-option value="Request undergoing review">Request undergoing review</ion-select-option>
-        <ion-select-option value="Request to be approved by the principal" *ngIf="request.document_type === 'Form 137'">
-          Request to be approved by the principal
-        </ion-select-option>
-        
-        <ion-select-option value="Awaiting signature from principal" *ngIf="request.document_type === 'Form 137'">
-          Awaiting signature from principal
-        </ion-select-option>
-        <ion-select-option value="Ready for Pickup at the Registrar's Office">Ready for Pickup at the Registrar's Office</ion-select-option>
-        <ion-select-option value="Completed">Completed</ion-select-option>
+        <ion-select-option value="Request is accepted at the principal's office">Request Accepted</ion-select-option>
+        <ion-select-option value="Request is confirmed by the principal">Request Confirmed</ion-select-option>
+        <ion-select-option value="Request is signed by the principal">Request Signed</ion-select-option>
 
       </ion-select>
     </ion-item>

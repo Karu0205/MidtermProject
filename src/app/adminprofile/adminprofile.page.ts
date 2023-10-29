@@ -17,8 +17,10 @@ import { SettingsPage } from '../settings/settings.page';
 import { NotificationService } from '../notification.service';
 import { Subscription } from 'rxjs';
 import { CalendarPage } from '../calendar/calendar.page';
-
-
+import { SignupPage } from '../signup/signup.page';
+import { AdmindocuPage } from '../admindocu/admindocu.page';
+import { CompletedPage } from '../completed/completed.page';
+import { ApprovalPage } from '../approval/approval.page';
 
 @Component({
   selector: 'app-adminprofile',
@@ -48,6 +50,8 @@ export class AdminprofilePage implements OnInit {
 
   
   notificationCount = 0; // Initialize count
+
+  notificationCount2 = 0; // Initialize count
 
 
   userId: any;
@@ -81,6 +85,12 @@ export class AdminprofilePage implements OnInit {
 
       this.subscription = this.notificationsCollection.valueChanges().subscribe((data) => {
         this.notificationCount = data.length;
+      });
+
+      this.notificationsCollection2 = this.firestore.collection('notifications2');
+
+      this.subscription = this.notificationsCollection2.valueChanges().subscribe((data) => {
+        this.notificationCount2 = data.length;
       });
      }
 
@@ -153,19 +163,41 @@ export class AdminprofilePage implements OnInit {
        };
      }
  
-     async openFormModal() {
+     async openAccountsModal() {
        const modal = await this.modalCtrl.create({
-         component: FormPage, // Use your form component here
+         component: SignupPage, // Use your form component here
        });
- 
-       modal.componentProps = {
-         userEmail: this.userEmail,
-         userName: this.userName,
-         userId: this.userId,
-       };
    
        return await modal.present();
      }
+
+     async openApprovalModal() {
+      const modal = await this.modalCtrl.create({
+        component: ApprovalPage, // Use your form component here
+      });
+      this.clearNotifications2();
+      return await modal.present();
+    }
+
+     async openRequestsModal() {
+      const modal = await this.modalCtrl.create({
+        component: AdmindocuPage, // Use your form component here
+      });
+
+      this.clearNotifications();
+  
+      return await modal.present();
+    }
+
+    async openCompletedModal() {
+      const modal = await this.modalCtrl.create({
+        component: CompletedPage, // Use your form component here
+      });
+
+      this.clearNotifications();
+  
+      return await modal.present();
+    }
  
      async openSchedModal() {
        const modal = await this.modalCtrl.create({
@@ -425,6 +457,7 @@ export class AdminprofilePage implements OnInit {
 
        // Create a reference to your Firestore collection
        notificationsCollection = this.firestore.collection('notifications');
+       notificationsCollection2 = this.firestore.collection('notifications2');
 
 
   // Increment the notification count
@@ -443,6 +476,23 @@ export class AdminprofilePage implements OnInit {
       });
     });
   }
+
+    // Increment the notification count
+    addNotification2() {
+      this.notificationsCollection2.add({ /* your data */ }).then(() => {
+        this.notificationCount2++; // Increment the count
+      });
+    }
+  
+    clearNotifications2() {
+      // Clear notifications by resetting the count and removing all entries from the collection
+      this.notificationCount2 = 0;
+      this.notificationsCollection2.get().subscribe((snapshot) => {
+        snapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      });
+    }
     
 
 }

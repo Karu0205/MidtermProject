@@ -21,8 +21,7 @@ ion-button{
 }
 
 ion-card{
-    width: 500px;
-    margin-top: 70px;
+    width: 400px;
 }
 
 ion-footer{
@@ -51,8 +50,6 @@ ion-tab-bar{
   }
   ion-content {
     //--background: #ffe5ec;
-    --background: url('/assets/bg.png') no-repeat center center fixed;
-    background-size: cover;
     height: 200px;
   }
 

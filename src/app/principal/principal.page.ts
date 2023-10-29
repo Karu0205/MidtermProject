@@ -5,14 +5,12 @@ import { EmailService } from '../email.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Subscription } from 'rxjs';
 
-
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.page.html',
-  styleUrls: ['./modal.page.scss'],
+  selector: 'app-principal',
+  templateUrl: './principal.page.html',
+  styleUrls: ['./principal.page.scss'],
 })
-
-export class ModalPage implements OnInit {
+export class PrincipalPage implements OnInit {
 
   private subscription: Subscription;
   @Input() id: string;
@@ -142,5 +140,4 @@ export class ModalPage implements OnInit {
       this.notificationCount2++; // Increment the count
     });
   }
-  
 }

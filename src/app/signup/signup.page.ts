@@ -40,7 +40,8 @@ export class SignupPage implements OnInit {
 
 
   constructor(public fireService:FirebaseService, public firestore: AngularFirestore, 
-    private afAuth: AngularFireAuth, private router: Router, private emailService: EmailService) { 
+    private afAuth: AngularFireAuth, private router: Router, private emailService: EmailService,
+    private modalCtrl:ModalController) { 
       this.fireService.getAccounts().subscribe(res => {
         console.log(res);
         this.accounts=res;
@@ -51,6 +52,10 @@ export class SignupPage implements OnInit {
     }
 
   ngOnInit() {
+  }
+
+  closeModal() {
+    this.modalCtrl.dismiss();
   }
 
   async initializeItems(): Promise<any> {
@@ -94,7 +99,7 @@ export class SignupPage implements OnInit {
         },err=>{
           console.log(err);
         })
-        this.emailService.sendEmail(this.email, 'Your account has been created with the following password: ' + this.password, 'Sto. Nino Formation and Science School');
+        this.emailService.sendEmail2(this.email, 'Your account has been created with the following password: ' + this.password, 'Sto. Nino Formation and Science School');
       }
     },err=>{
       alert(err.message);

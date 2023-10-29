@@ -9,13 +9,14 @@ import { ModalPage } from '../modal/modal.page';
 import { first } from 'rxjs/operators';
 import { EmailService } from '../email.service';
 import { IonInput } from '@ionic/angular';
-
+import { PrincipalPage } from '../principal/principal.page';
 @Component({
-  selector: 'app-admindocu',
-  templateUrl: './admindocu.page.html',
-  styleUrls: ['./admindocu.page.scss'],
+  selector: 'app-approval',
+  templateUrl: './approval.page.html',
+  styleUrls: ['./approval.page.scss'],
 })
-export class AdmindocuPage implements OnInit {
+export class ApprovalPage implements OnInit {
+
 
   copiedText: string = '';
   @ViewChild('textInput', { static: false }) textInput: IonInput;
@@ -30,6 +31,8 @@ export class AdmindocuPage implements OnInit {
   requests: Request[] = []; 
   items: any[];
   searchText: string;
+
+  approval = [] as any;
   
   copyText(text: string) {
     this.copiedText = text;
@@ -49,72 +52,53 @@ export class AdmindocuPage implements OnInit {
     })
 
     this.dataService.getRequests().subscribe(req => {
-
-      this.requests=req;
-    })
+      this.requests = req.filter(request => request.document_type === 'Form 137');
+    });
 
    }
 
   ngOnInit() {
     this.dataService.getItems().subscribe((requests) => {
-      this.requests = requests;
+      console.log("All Requests:", requests);
+    
+      this.requests = requests
+        .filter(request => request.document_type === "Form 137");
+    
+      console.log("Filtered Requests:", this.requests);
     });
-  }
 
-  sendEmail() {
-    console.log("Value of this.toEmail before splitting:", this.toEmail);
-    const emailAddresses = this.toEmail.split(',');
-    console.log("Email addresses after splitting:", emailAddresses);
-  
-    this.emailService
-      .sendEmail(this.toEmail, this.message, this.fromName,)
-      .then(() => {
-        // Clear form fields or handle success as needed
-        this.toEmail = '';
-        this.message = '';
-        this.fromName = '';
-      })
-      .catch((error) => {
-        // Handle error as needed
-        console.error(error);
-      });
-      console.log("Value of this.toEmail after sending:", this.toEmail);
+    this.dataService.getApproval().subscribe((approval) => {
+      this.approval = approval;
+    });
 
   }
 
-  handleRefresh(event) {
-    setTimeout(() => {
-      // Any calls to load data go here
-      event.target.complete();
-    }, 2000);
-  }
+
 
   searchItems() {
     console.log('SearchItems method called');
     console.log('Search Text:', this.searchText);
   
-    if (!this.searchText) {
-      // If the search text is empty, display all items.
-      this.dataService.getItems().subscribe((requests) => {
-        this.requests = requests;
-        console.log('All items:', this.requests); // Log the items retrieved
-      });
-    } else {
-      // If there is a search text, filter items based on it.
-      this.dataService.getItems().subscribe((requests) => {
+    this.dataService.getItems().subscribe((requests) => {
+      if (!this.searchText) {
+        // If the search text is empty, display all items with "Form 137."
+        this.requests = requests.filter(request => request.document_type === "Form 137");
+      } else {
+        // If there is a search text, filter items based on it and "Form 137."
         const filteredRequests = requests.filter((request) => {
-          const match = (
-            request.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.request_date.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.document_type.toLowerCase().includes(this.searchText.toLowerCase())
+          return (
+            request.document_type === "Form 137" &&
+            (
+              request.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+              request.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
+              request.request_date.toLowerCase().includes(this.searchText.toLowerCase())
+            )
           );
-          return match;
         });
         this.requests = filteredRequests;
-        console.log('Filtered items:', this.requests); // Log the filtered items
-      });
-    }
+      }
+      console.log('Filtered items:', this.requests); // Log the filtered items
+    });
   }
 
 
@@ -146,9 +130,9 @@ export class AdmindocuPage implements OnInit {
 
   }
 
-  async openRequest(request: Request){
+  async openRequest(request){
     const modal = await this.modalCtrl.create({
-      component: ModalPage,
+      component: PrincipalPage,
       componentProps: { id: request.id },
     });
     modal.present();
@@ -244,6 +228,5 @@ export class AdmindocuPage implements OnInit {
   async closeModal() {
     await this.modalCtrl.dismiss();
   }
-
 
 }

@@ -1,0 +1,56 @@
+
+
+<ion-content [fullscreen]="true">
+
+
+  <ion-card style="height: 350px;">
+    
+    <ion-header>
+      <ion-toolbar style="height: 40px; --background: #9b2226; color: white;">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label style="font-family: baskerville;">Name</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label style="font-family: baskerville; margin: auto;">Document type</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label style="font-family: baskerville;">Request Date</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label style="font-family: baskerville; margin: auto;">Completion Date</ion-label>
+            </ion-col>
+  
+          </ion-row>
+        </ion-grid>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-searchbar [(ngModel)]="searchText" (ionChange)="searchItems()"></ion-searchbar>
+  
+    <ion-list>
+  
+      <div class="scrollable-container">
+      <div class="scrollable-content">
+      <ion-item *ngFor="let completed of completed">
+  
+        <ion-label style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:small; text-align:center;">{{ completed.student_name }}</ion-label>
+        <ion-label style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:12px; text-align:center;">{{ completed.document_type }}</ion-label>
+        <ion-label style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:12px; text-align:center;" > {{ completed.request_date }}</ion-label>
+        <ion-label style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:12px; text-align:center;">{{ formatTimestamp(completed.completedDateTime) }}</ion-label>
+      </ion-item>
+    </div>
+    </div>
+  
+    </ion-list>
+  
+    </ion-card>
+
+    <ion-button style="font-family: baskerville; margin-top:50px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="closeModal()">
+      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+      Return
+    </ion-button>
+  
+  </ion-content>
+  
