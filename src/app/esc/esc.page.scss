@@ -1,9 +1,19 @@
+ion-content {
+  font-family: baskerville !important;
+}
+
 ion-header{
     background-color: #9b2226;
     text-align: center;
     position: sticky;
     border-end-end-radius: 30%;
     border-end-start-radius: 30%;
+    height: 130px;
+}
+
+.scrollable-container {
+  height: 250px; /* Adjust the height as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
 }
 
 p{
@@ -11,19 +21,7 @@ p{
     font-size: 250%;
     color: white;
     text-align: center;
-
-}
-
-@media (max-width: 768px) {
-  .scrollable-container {
-    height: 450px !important; /* Adjust the height as needed */
-    overflow-y: scroll; /* Enable vertical scrolling */
-  }
-}
-
-.scrollable-container {
-  height: 250px; /* Adjust the height as needed */
-  overflow-y: scroll; /* Enable vertical scrolling */
+    margin-top: 0%;
 }
 
 ion-img{
@@ -47,7 +45,6 @@ ion-footer{
   ion-toolbar {
     --background: #f4f4f4;
   }
-  
   ion-tab-button {
     background-color: #4f000b;
     display: flex;
@@ -61,6 +58,19 @@ ion-footer{
     text-transform: uppercase;
     transition: color 0.3s ease;
 }
+
+@media (max-width: 768px) {
+  .scrollable-container {
+    height: 450px !important; /* Adjust the height as needed */
+    overflow-y: scroll; /* Enable vertical scrolling */
+  }
+}
+
+ion-label {
+  white-space: normal; /* Allows text to wrap to the next line */
+  word-wrap: break-word; /* Breaks words that exceed the container width */
+}
+
 
 ion-tab-bar{
     background-color:#9b2226;
@@ -76,4 +86,10 @@ ion-img{
   margin-top: 11px;
   margin-bottom: 11px;
 }
+
+
+
+
+
+
 

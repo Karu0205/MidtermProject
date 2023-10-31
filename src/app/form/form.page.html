@@ -29,6 +29,11 @@
       <ion-input [(ngModel)]="formData.student_id" type="text"></ion-input>
     </ion-item>
 
+    <ion-item *ngIf="showStatusInput">
+      <ion-label>Student Status:</ion-label>
+      <ion-input [(ngModel)]="formData.Status" type="text"></ion-input>
+    </ion-item>
+
     <ion-item>
       <ion-label style="font-family: baskerville;">Email:</ion-label>
       <ion-input style="font-family: baskerville;" [(ngModel)]="formData.email" type="email"></ion-input>

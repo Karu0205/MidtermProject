@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-buttons slot="start">
-    <ion-back-button defaultHref="/storage-menu"></ion-back-button>
-    <ion-button (click)="refreshPage()" ><ion-icon name="refresh-outline"></ion-icon></ion-button>
+    <ion-button (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button (click)="refreshModalContent()" ><ion-icon name="refresh-outline"></ion-icon></ion-button>
   </ion-buttons>
 
 
@@ -10,31 +10,31 @@
 
 <ion-content [fullscreen]="true" style="height: calc(100vh - 56px); overflow-y: auto;">
 
-<ion-card>
+<ion-button (click)="showCardOnClick()"style="font-family: baskerville; margin-top:5px !important; width:50%; margin:auto;--background: #9b2226;" expand="block">Add Document</ion-button>
 
-<ion-input style="font-family: baskerville" type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx"></ion-input>
-<ion-button style="font-family: baskerville" color="danger" (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
-<div *ngIf="uploadProgress !== null">Uploading... {{ uploadProgress }}%</div>
-<div *ngIf="downloadURL">File Successfully Uploaded! Please Refresh Page: {{ downloadURL }}</div>
-
+<ion-card *ngIf="showCard">
+  <ion-input style="font-family: baskerville" type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx"></ion-input>
+  <ion-button style="font-family: baskerville; margin-top:5px !important; margin-bottom:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
+  <div *ngIf="uploadProgress !== null">Uploading... {{ uploadProgress }}%</div>
+  <div *ngIf="downloadURL">File Successfully Uploaded!: {{ downloadURL }}</div>
 </ion-card>
 
+
 <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="filterContents()" placeholder="Enter name or title"></ion-searchbar>
-
-
+<ion-card>
 <div class="scrollable-container">
-  <div class="scrollable-content">
+<div class="scrollable-content">
 <ion-list>
   <ion-item *ngFor="let item of filteredContents">
     <ion-label style="white-space: normal; font-family: baskerville">{{ item.name }}</ion-label>
     <ion-button fill="outline" (click)="downloadItem(item)">Download</ion-button>
-    <ion-button fill="outline" color="danger" (click)="deleteItem(item)">Delete</ion-button>
 
   </ion-item>
 </ion-list>
-</div>
-</div>
 
+</div>
+</div>
+</ion-card>
 
 <ion-header collapse="condense">
   <ion-toolbar>
@@ -42,38 +42,5 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button (click)="openRegister()">
-          <ion-icon name="person-circle-outline"></ion-icon>
-          <ion-label>Manage Students</ion-label>
-        </ion-tab-button>
-    
-        <ion-tab-button [disabled]="true">
-          <ion-icon name="documents-outline"></ion-icon>
-          <ion-label>Storage</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button (click)="openDocu()">
-          <ion-icon name="documents-outline"></ion-icon>
-          <ion-label>Requests</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button (click)="openCalendar()">
-          <ion-icon name="calendar"></ion-icon>
-          <ion-label>Calendar</ion-label>
-        </ion-tab-button>
-    
-        <ion-tab-button (click)="logOut()">
-          <ion-icon name="power-outline"></ion-icon>
-          <ion-label>Log Out</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
-  </ion-toolbar>
-</ion-footer>
 
 </ion-content>

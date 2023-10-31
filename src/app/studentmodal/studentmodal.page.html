@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Student</ion-title>
+    <ion-buttons slot="start">
+
+      <ion-button style="color: white;" (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="profile-picture-container">
+    <img [src]="user.profilePicture || '/assets/blank.png'" alt="Profile Picture" class="centered-profile-picture">
+  </div>
+  <ion-item>
+    <ion-label style="font-family: baskerville; font-size:medium" >Username:</ion-label>
+    <ion-input
+    [(ngModel)]="user.displayName"
+    style="font-family: baskerville; font-size: medium;"
+    class="right-input"
+  ></ion-input>
+
+  </ion-item>
+  <ion-item>
+    <ion-label style="font-family: baskerville; font-size:medium" >Email:</ion-label>
+    <ion-label style="font-family: baskerville; font-size:medium" class="center-label">{{ user.email }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label style="font-family: baskerville;" position="floating">Status</ion-label>
+    <ion-select style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:medium;  margin-right: 15px;" [(ngModel)]="user.Status">
+      <ion-select-option value="Currently Enrolled">Currently Enrolled</ion-select-option>
+      <ion-select-option value="Alumni">Alumni</ion-select-option>
+
+
+    </ion-select>
+  </ion-item>
+
+  <ion-button style="font-family: baskerville; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="full" (click)="saveChanges()">Save Changes</ion-button>
+</ion-content>

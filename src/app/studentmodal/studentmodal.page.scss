@@ -1,0 +1,30 @@
+ion-toolbar{
+    text-align: center;
+}
+ion-title{
+  font-family: baskerville;
+  color:white;
+  }
+
+ion-toolbar{
+  --background: #9b2226;
+}
+
+.centered-profile-picture {
+  display: block;
+  margin: 0 auto; /* Center the image horizontally */
+  width: 200px; /* Adjust the width as needed */
+  height: 200px; /* Adjust the height as needed */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+ion-select {
+  margin-left: 283px; /* Push the input to the right-most side */
+}
+
+.right-input {
+  display: block;
+  width: auto;
+  margin-left: 208px; /* Push the input to the right-most side */
+}

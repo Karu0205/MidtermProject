@@ -21,6 +21,7 @@ export class FormPage {
     student_id: '',
     email: '',
     request_date: '',
+    Status: ''
   };
   showStatusInput: boolean = false;
 
@@ -42,6 +43,7 @@ export class FormPage {
       this.formData.email = this.navParams.get('userEmail');
       this.formData.student_name = this.navParams.get('userName');
       this.formData.student_id = this.navParams.get('userId');
+      this.formData.Status = this.navParams.get('Status');
     }
 
   userName: any;
@@ -94,6 +96,7 @@ export class FormPage {
                   status: 'Pending',
                   student_id: this.navParams.get('userId'),
                   email: this.navParams.get('userEmail'),
+                  Status: this.navParams.get('Status'),
                   request_date: formattedDate, // Set the request_date to the formatted date
                 };
                 this.addNotification()
@@ -140,6 +143,8 @@ export class FormPage {
           .subscribe((data) => {
             this.userData = data;
             this.formData.student_name = this.userData.displayName; // Set it here
+            this.formData.Status = this.userData.Status
+            console.log(this.userData.Status)
           });
         // User is logged in
         this.isLoggedIn = true;

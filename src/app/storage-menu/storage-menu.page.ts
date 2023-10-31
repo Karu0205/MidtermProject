@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { StoragePage } from '../storage/storage.page';
+import { EscPage } from '../esc/esc.page';
+import { GoodmoralPage } from '../goodmoral/goodmoral.page';
+import { CompletionPage } from '../completion/completion.page';
+import { EnrollmentPage } from '../enrollment/enrollment.page';
+import { RankingPage } from '../ranking/ranking.page';
+import { CemiPage } from '../cemi/cemi.page';
 
 @Component({
   selector: 'app-storage-menu',
@@ -8,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class StorageMenuPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -65,5 +73,63 @@ export class StorageMenuPage implements OnInit {
     this.router.navigate(['/calendar'])
   }
 
+  async closeModal() {
+    await this.modalCtrl.dismiss();
+  }
 
+  async open137Modal() {
+    const modal = await this.modalCtrl.create({
+      component: StoragePage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openESCModal() {
+    const modal = await this.modalCtrl.create({
+      component: EscPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openGoodMoralModal() {
+    const modal = await this.modalCtrl.create({
+      component: GoodmoralPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openCompletionModal() {
+    const modal = await this.modalCtrl.create({
+      component: CompletionPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openEnrollmentModal() {
+    const modal = await this.modalCtrl.create({
+      component: EnrollmentPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openRankingModal() {
+    const modal = await this.modalCtrl.create({
+      component: RankingPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openCEMIModal() {
+    const modal = await this.modalCtrl.create({
+      component: CemiPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
 }

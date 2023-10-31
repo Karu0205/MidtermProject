@@ -33,13 +33,14 @@
 
     <div class="scrollable-container">
     <div class="scrollable-content">
-    <ion-item *ngFor="let request of requests" (click)="openRequest(request)">
-
+    <ng-container *ngFor="let request of requests">
+    <ion-item (click)="openRequest(request)" *ngIf="request.status !== 'Request to be approved by the principal'">
       <ion-label style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.student_name }}</ion-label>
       <ion-label style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:12px; margin-right: 15px;" > {{ request.request_date }}</ion-label>
       <ion-label style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:12px; margin-right: 15px;">{{ request.document_type }}</ion-label>
       <ion-label style="font-family: baskerville; font-size:12px;;" class="wrapped-text-select">{{ request.status }}</ion-label>
     </ion-item>
+    </ng-container>
   </div>
   </div>
 

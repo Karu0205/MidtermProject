@@ -49,15 +49,20 @@ export class AdmindocuPage implements OnInit {
     })
 
     this.dataService.getRequests().subscribe(req => {
-
-      this.requests=req;
-    })
+      this.requests = req.sort((a, b) => new Date(b.request_date).getTime() - new Date(a.request_date).getTime());
+    });
+    
 
    }
 
   ngOnInit() {
-    this.dataService.getItems().subscribe((requests) => {
-      this.requests = requests;
+    this.dataService.getItems().subscribe(requests => {
+      this.requests = requests.sort((a, b) => {
+        const dateA = new Date(a.request_date).getTime();
+        const dateB = new Date(b.request_date).getTime();
+    
+        return dateB - dateA; // Sort from newest to oldest, for oldest to newest, swap dateA and dateB.
+      });
     });
   }
 
@@ -94,10 +99,11 @@ export class AdmindocuPage implements OnInit {
     console.log('Search Text:', this.searchText);
   
     if (!this.searchText) {
-      // If the search text is empty, display all items.
+      // If the search text is empty, display all items and sort them.
       this.dataService.getItems().subscribe((requests) => {
         this.requests = requests;
-        console.log('All items:', this.requests); // Log the items retrieved
+        this.sortRequests();
+        console.log('All items sorted:', this.requests); // Log the items retrieved
       });
     } else {
       // If there is a search text, filter items based on it.
@@ -116,7 +122,16 @@ export class AdmindocuPage implements OnInit {
       });
     }
   }
-
+  
+  sortRequests() {
+    // Sort the requests by request_date in descending order (newest to oldest).
+    this.requests = this.requests.sort((a, b) => {
+      const dateA = new Date(a.request_date).getTime();
+      const dateB = new Date(b.request_date).getTime();
+      return dateB - dateA;
+    });
+  }
+  
 
   async filterList(event) {
     //this.requests = await this.initializeItems();

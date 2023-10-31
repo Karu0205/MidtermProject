@@ -231,6 +231,8 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
 
+    this.openSchedModal()
+
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userId = user.uid; // Store the current user's UID.

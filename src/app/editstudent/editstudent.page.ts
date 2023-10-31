@@ -6,15 +6,15 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { EmailService } from '../email.service';
-import { EditstudentPage } from '../editstudent/editstudent.page';
-
+import { StudentmodalPage } from '../studentmodal/studentmodal.page';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.page.html',
-  styleUrls: ['./signup.page.scss'],
+  selector: 'app-editstudent',
+  templateUrl: './editstudent.page.html',
+  styleUrls: ['./editstudent.page.scss'],
 })
-export class SignupPage implements OnInit {
+export class EditstudentPage implements OnInit {
+
 
   public email:any;
   public password:any;
@@ -22,6 +22,9 @@ export class SignupPage implements OnInit {
   public isAdmin: any;
   public Status: any;
   public uid: any;
+
+  searchTerm: string = '';
+  accountsToShow: any[] = [];
 
   accounts: Account[] = []; 
   requests: Request[] = []; 
@@ -45,7 +48,6 @@ export class SignupPage implements OnInit {
     private afAuth: AngularFireAuth, private router: Router, private emailService: EmailService,
     private modalCtrl:ModalController) { 
       this.fireService.getAccounts().subscribe(res => {
-        console.log(res);
         this.accounts=res;
       })
       
@@ -54,6 +56,10 @@ export class SignupPage implements OnInit {
     }
 
   ngOnInit() {
+    this.fireService.getAccounts().subscribe((accounts) => {
+      this.accounts = accounts;
+      console.log(this.accounts)
+    });
   }
 
   closeModal() {
@@ -65,24 +71,32 @@ export class SignupPage implements OnInit {
     return accounts;
   }
 
-  async filterList(event) {
-    this.accounts = await this.initializeItems();
-    const searchTerm = event.target.value;
-  
-    if (!searchTerm) {
-      return;
-    }
-  
-    this.accounts = this.accounts.filter((accountUser) => {
-      if (accountUser.displayName && searchTerm) {
-        return (
-          accountUser.displayName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
-          accountUser.password.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
-          accountUser.email.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
-        );
-      }
-      return false; // Add a default return statement
+  async openEditModal(uid: string) {
+    const modal = await this.modalCtrl.create({
+      component: StudentmodalPage,
+      componentProps: { uid },
     });
+    return await modal.present();
+  }
+
+  filterList() {
+    if (!this.searchTerm) {
+      // If the search term is empty, display all accounts.
+      this.fireService.getAccounts().subscribe((accounts) => {
+        this.accounts = accounts;
+      });
+    } else {
+      // If there is a search term, filter accounts based on it.
+      this.fireService.getAccounts().subscribe((accounts) => {
+        this.accounts = accounts.filter((account) => {
+          return (
+            account.displayName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            account.Status.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            account.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+          );
+        });
+      });
+    }
   }
 
 

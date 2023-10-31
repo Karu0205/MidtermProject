@@ -6,6 +6,8 @@ import { FirebaseService } from '../service/firebase.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Platform } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AlertController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 
 
@@ -29,11 +31,35 @@ export class StoragePage implements OnInit {
   filteredContents: any[] = [];
 
   uploadTimestamp: number;
+  showCard = false;
 
 
   constructor(private router: Router, private fileUploadService: FileUploadService, 
     private firebaseService: FirebaseService, private sanitizer: DomSanitizer,
-    private platform: Platform, private afStorage: AngularFireStorage) { }
+    private platform: Platform, private afStorage: AngularFireStorage, private alertCtrl:AlertController, 
+    private modalCrtl:ModalController) { }
+
+    showCardOnClick() {
+      this.showCard = !this.showCard; // Toggle the value of showCard
+    }
+
+    async refreshModalContent() {
+      // Implement the refresh logic here.
+      // You can update the content of your modal as needed.
+  
+      // For example, you can dismiss and then re-open the modal.
+      await this.modalCrtl.dismiss();
+      const modal = await this.modalCrtl.create({
+        component: StoragePage,
+      });
+      return await modal.present();
+    }
+
+    async closeModal() {
+      await this.modalCrtl.dismiss();
+    }
+  
+  
 
     refreshPage() {
 
@@ -43,14 +69,22 @@ export class StoragePage implements OnInit {
     onFileSelected(event: any): void {
       this.selectedFile = event.target.files[0];
     }
-
-    uploadFile(){
+    async uploadFile() {
       this.upload('Form137');
-
-// Upload to the backup folder
+    
+      // Upload to the backup folder
       const currentDate = new Date();
       const backupFolder = `backups/${currentDate.toISOString().split('T')[0]}/`;
       this.upload(backupFolder);
+    
+      // Show an alert after the upload is complete
+      const alert = await this.alertCtrl.create({
+        header: 'File Successfully Uploaded',
+        message: 'Please refresh the page.',
+        buttons: ['OK']
+      });
+    
+      await alert.present();
     }
   
 

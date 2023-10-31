@@ -83,22 +83,39 @@ export class CompletedPage implements OnInit {
   }
 
   searchItems() {
-    if (this.searchText) {
-      this.completed = this.completed.filter((completed) => {
-        const searchText = this.searchText.toLowerCase();
-        return (
-          completed.student_name.toLowerCase().includes(searchText) ||
-          completed.document_type.toLowerCase().includes(searchText) ||
-          completed.request_date.toLowerCase().includes(searchText) ||
-          this.formatTimestamp(completed.completedDateTime).toLowerCase().includes(searchText)
-        );
-      });
-    } else {
-      // If the search text is empty, display all completed items
-      this.dataService.getCompleted().subscribe((completedItems: any[]) => {
-        this.completed = completedItems;
-      });
-    }
+    console.log('SearchItems method called');
+    console.log('Search Text:', this.searchText);
+  
+    this.dataService.getCompleted().subscribe((completedItems: any[]) => {
+      if (!this.searchText) {
+        // If the search text is empty, sort all items.
+        this.completed = completedItems.sort((a, b) => {
+          const dateA = a.completedDateTime.toDate();
+          const dateB = b.completedDateTime.toDate();
+          return dateA - dateB;
+        });
+        console.log('All items sorted:', this.completed); // Log the sorted items
+      } else {
+        // If there is a search text, filter and sort items based on it.
+        const filteredCompletedItems = completedItems.filter((completed) => {
+          const searchText = this.searchText.toLowerCase();
+          const match =
+            completed.student_name.toLowerCase().includes(searchText) ||
+            completed.document_type.toLowerCase().includes(searchText) ||
+            completed.request_date.toLowerCase().includes(searchText) ||
+            this.formatTimestamp(completed.completedDateTime).toLowerCase().includes(searchText);
+          return match;
+        });
+  
+        this.completed = filteredCompletedItems.sort((a, b) => {
+          const dateA = a.completedDateTime.toDate();
+          const dateB = b.completedDateTime.toDate();
+          return dateA - dateB;
+        });
+  
+        console.log('Filtered and sorted items:', this.completed); // Log the filtered and sorted items
+      }
+    });
   }
   
 

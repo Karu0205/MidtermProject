@@ -2,6 +2,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title style="color: white; font-family: baskerville; margin-left:10px">Edit Calendar</ion-title>
+    <ion-buttons slot="start">
+
+      <ion-button style="color: white; margin-bottom:0% !important;" (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -9,7 +14,7 @@
     <ion-input style="font-family: baskerville;" [(ngModel)]="selectedEvent.title" placeholder="Event Title"></ion-input>
     <ion-input style="font-family: baskerville;" [(ngModel)]="selectedEvent.startDate" type="date"></ion-input>
     <ion-textarea style="font-family: baskerville; height:100px;" [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
-    <ion-button style="margin: auto; font-family: baskerville; --background: #4f000b; margin-top:10px;margin-bottom: 10px;" expand="full" (click)="addEvent()">Add Event</ion-button>
+    <ion-button style="margin: auto; font-family: baskerville; --background: #9b2226; margin-top:10px;margin-bottom: 10px;" expand="full" (click)="addEvent()">Add Event</ion-button>
   </ion-card>
 
     <ion-card class="events" style="border: 3px solid white;">
@@ -49,8 +54,5 @@
         </div>
         </ion-card>
   
-        <ion-button style="font-family: baskerville; margin-top: 10px; --background: #9b2226;" expand="full" (click)="closeModal()">Close</ion-button>
-  
-
   </ion-content>
 

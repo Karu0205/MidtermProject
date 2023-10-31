@@ -21,6 +21,7 @@ import { SignupPage } from '../signup/signup.page';
 import { AdmindocuPage } from '../admindocu/admindocu.page';
 import { CompletedPage } from '../completed/completed.page';
 import { ApprovalPage } from '../approval/approval.page';
+import { StorageMenuPage } from '../storage-menu/storage-menu.page';
 
 @Component({
   selector: 'app-adminprofile',
@@ -170,6 +171,14 @@ export class AdminprofilePage implements OnInit {
    
        return await modal.present();
      }
+
+     async openStorageModal() {
+      const modal = await this.modalCtrl.create({
+        component: StorageMenuPage, // Use your form component here
+      });
+  
+      return await modal.present();
+    }
 
      async openApprovalModal() {
       const modal = await this.modalCtrl.create({

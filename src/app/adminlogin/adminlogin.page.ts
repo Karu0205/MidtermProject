@@ -27,10 +27,7 @@ export class AdminloginPage implements OnInit {
         const userName = res.user!.displayName
         const userEmail = res.user!.email
         this.fireService.getDetails({uid:res.user!.uid}).subscribe(res=>{
-          console.log(res);
-          console.log('User ID:', userId);
-          console.log('User Name:', userName);
-          console.log('User Email:', userEmail);
+
           this.router.navigate(['/adminprofile']);
         },err=>{
           console.log(err);

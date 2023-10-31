@@ -6,6 +6,8 @@ import { FirebaseService } from '../service/firebase.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Platform } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AlertController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-completion',
@@ -27,28 +29,59 @@ export class CompletionPage implements OnInit {
   allContents: any[] = [];
   filteredContents: any[] = [];
 
+  showCard = false;
+
   constructor(private router: Router, private fileUploadService: FileUploadService, 
     private firebaseService: FirebaseService, private sanitizer: DomSanitizer,
-    private platform: Platform, private afStorage: AngularFireStorage) { }
+    private platform: Platform, private afStorage: AngularFireStorage, private alertCtrl:AlertController, 
+    private modalCrtl:ModalController) { }
+
+    showCardOnClick() {
+      this.showCard = !this.showCard; // Toggle the value of showCard
+    }
+
+    async refreshModalContent() {
+      // Implement the refresh logic here.
+      // You can update the content of your modal as needed.
+  
+      // For example, you can dismiss and then re-open the modal.
+      await this.modalCrtl.dismiss();
+      const modal = await this.modalCrtl.create({
+        component: CompletionPage,
+      });
+      return await modal.present();
+    }
+
+    async closeModal() {
+      await this.modalCrtl.dismiss();
+    }
+  
+  
 
     refreshPage() {
-      // You can place the code to refresh your page here
-      // For example, you can reload data or perform any other necessary actions
+
       location.reload(); // This will reload the current page
     }
 
     onFileSelected(event: any): void {
       this.selectedFile = event.target.files[0];
     }
-  
-
-    uploadFile(){
+    async uploadFile() {
       this.upload('Completion');
-
-// Upload to the backup folder
+    
+      // Upload to the backup folder
       const currentDate = new Date();
       const backupFolder = `backups/${currentDate.toISOString().split('T')[0]}/`;
       this.upload(backupFolder);
+    
+      // Show an alert after the upload is complete
+      const alert = await this.alertCtrl.create({
+        header: 'File Successfully Uploaded',
+        message: 'Please refresh the page.',
+        buttons: ['OK']
+      });
+    
+      await alert.present();
     }
   
 
@@ -109,6 +142,7 @@ export class CompletionPage implements OnInit {
     this.router.navigate(['/calendar'])
   }
 
+
   filterContents() {
     if (this.searchText.trim() === '') {
       // If search text is empty, reset to the original data
@@ -121,37 +155,39 @@ export class CompletionPage implements OnInit {
     }
   }
 
-  downloadItem(item: any) {
-    const fileUrl = item.url;
-    if (fileUrl) {
-      // Attempt to initiate the download
-      window.open(fileUrl, '_blank');
-    } else {
-      console.error('File URL is invalid or missing.');
-    }
+downloadItem(item: any) {
+  const fileUrl = item.url;
+  if (fileUrl) {
+    // Attempt to initiate the download
+    window.open(fileUrl, '_blank');
+  } else {
+    console.error('File URL is invalid or missing.');
   }
+}
 
-  deleteItem(item: any) {
-    const filePath = `${this.folderPath}/${item.name}`;
-  
-    // Display a confirmation dialog
-    const confirmDelete = window.confirm(`Are you sure you want to delete ${item.name}?`);
-  
-    if (confirmDelete) {
-      // User confirmed deletion, proceed to delete the file
-      this.afStorage.storage.ref(filePath).delete()
-        .then(() => {
-          console.log(`File ${item.name} deleted successfully.`);
-          // After deletion, refresh the list of contents
-          this.getFolderContents();
-        })
-        .catch((error) => {
-          console.error(`Error deleting file ${item.name}:`, error);
-        });
-    } else {
-      // User canceled the deletion
-      console.log('Deletion canceled.');
-    }
+deleteItem(item: any) {
+  const filePath = `${this.folderPath}/${item.name}`;
+
+  // Display a confirmation dialog
+  const confirmDelete = window.confirm(`Are you sure you want to delete ${item.name}?`);
+
+  if (confirmDelete) {
+    // User confirmed deletion, proceed to delete the file
+    this.afStorage.storage.ref(filePath).delete()
+      .then(() => {
+        console.log(`File ${item.name} deleted successfully.`);
+        // After deletion, refresh the list of contents
+        this.getFolderContents();
+      })
+      .catch((error) => {
+        console.error(`Error deleting file ${item.name}:`, error);
+      });
+  } else {
+    // User canceled the deletion
+    console.log('Deletion canceled.');
   }
+}
+
+
 
 }

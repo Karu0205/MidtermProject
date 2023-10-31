@@ -1,72 +1,31 @@
-<ion-header [translucent]="true" class="header-container">
-  <div class="header-content">
-    <p>The Home of Christian Leaders <br> Shining Forward to Fullness</p>
-  </div>
-  <ion-img src="./assets/whitelogo.png"></ion-img>
-</ion-header>
-
-
-<ion-content [fullscreen]="true">
-<ion-header collapse="condense">
-  <ion-toolbar>
-    <ion-title size="large">Blank</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
 
 <div class="class">
 
     <ion-card>
-  
         <div class="button-container">
-          <ion-button expand="full" size="large" (click)="form137()">Form 137</ion-button>
-          <ion-button expand="full" size="large" (click)="ESC()">ESC Certificate</ion-button>
-          <ion-button expand="full" size="large" (click)="goodmoral()">Certificate of Good Moral</ion-button>
+          <ion-button expand="full" size="large" (click)="open137Modal()" class="button-text-wrap">Form 137</ion-button>
+          <ion-button expand="full" size="large" (click)="openESCModal()" class="button-text-wrap">ESC Certificate</ion-button>
+          <ion-button expand="full" size="large" (click)="openGoodMoralModal()" class="button-text-wrap">Certificate of Good Moral</ion-button>
         </div>
+
         <div class="button-container">
-          <ion-button expand="full" size="large" (click)="completion()">Certificate of Completion</ion-button>
-          <ion-button expand="full" size="large" (click)="enrollment()">Certificate of Enrollment</ion-button>
-          <ion-button expand="full" size="large" (click)="ranking()">Certificate of Ranking</ion-button>
+          <ion-button expand="full" size="large" (click)="openCompletionModal()" class="button-text-wrap">Certificate of Completion</ion-button>
+          <ion-button expand="full" size="large" (click)="openEnrollmentModal()" class="button-text-wrap">Certificate of Enrollment</ion-button>
+          <ion-button expand="full" size="large" (click)="openRankingModal()" class="button-text-wrap">Certificate of Ranking</ion-button>
+
         </div>
-        <div class="button-container">
-        <ion-button expand="full" size="large" (click)="cemi()" class="button-text-wrap">Certificate of English as Medium of Instruction</ion-button>
-        </div>
+        <ion-button expand="full" size="large" (click)="openCEMIModal()" class="button-text-wrap">Certificate of English as Medium of Instruction</ion-button>
+
       
     </ion-card>
+
+    <ion-button class="back" style="font-family: baskerville; margin-top:30px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="closeModal()">
+      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+      Return
+    </ion-button>
 
 
 </div>
 
-
-<ion-footer>
-<ion-toolbar>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button (click)="openRegister()">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <ion-label>Manage Students</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button [disabled]="true">
-        <ion-icon name="documents-outline"></ion-icon>
-        <ion-label>Storage</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button (click)="openDocu()">
-        <ion-icon name="documents-outline"></ion-icon>
-        <ion-label>Requests</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button (click)="openCalendar()">
-        <ion-icon name="calendar"></ion-icon>
-        <ion-label>Calendar</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button (click)="logOut()">
-        <ion-icon name="power-outline"></ion-icon>
-        <ion-label>Log Out</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-</ion-toolbar>
-</ion-footer>
 </ion-content>

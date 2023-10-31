@@ -145,6 +145,14 @@ const routes: Routes = [
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
   },
+  {
+    path: 'editstudent',
+    loadChildren: () => import('./editstudent/editstudent.module').then( m => m.EditstudentPageModule)
+  },
+  {
+    path: 'studentmodal',
+    loadChildren: () => import('./studentmodal/studentmodal.module').then( m => m.StudentmodalPageModule)
+  },
 
 
 

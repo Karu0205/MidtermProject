@@ -103,7 +103,19 @@ ion-tab-bar{
 
   @media (max-width: 767px) {
     ion-card{
-      width: 90% !important;
-      margin-top: 50% !important;
+      width: 80% !important;
+      height: 700px !important;
+      margin-top: 10% !important;
     }
   }
+
+
+  .profile-picture {
+    width: 50px; /* Adjust the width and height as needed */
+    height: 50px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image fits within the container */
+    margin-right: 10px; /* Add some margin to separate the image from text */
+  }
+
+
