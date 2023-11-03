@@ -188,6 +188,33 @@ deleteItem(item: any) {
   }
 }
 
+async presentActionSheet(item) {
+  const alert = await this.alertCtrl.create({
+    header: 'Options',
+    buttons: [
+      {
+        text: 'Download',
+        handler: () => {
+          this.downloadItem(item);
+        },
+      },
+      {
+        text: 'Delete Item',
+        handler: () => {
+          this.deleteItem(item);
+        },
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel',
+      },
+    ],
+  });
+
+  await alert.present();
+}
+
+
 
 
 }

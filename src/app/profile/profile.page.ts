@@ -319,8 +319,8 @@ export class ProfilePage implements OnInit {
 
   logOut(){
     this.dataService.logout();
-    this.router.navigate(['/login'])
-
+    this.router.navigate(['/login']);
+    location.reload();
     this.afAuth.signOut().then(() => {
       // Handle successful logout (e.g., navigate to login page).
     }).catch((error) => {

@@ -28,8 +28,10 @@
 
     <ion-item>
       <ion-label style="font-family: baskerville;" position="stacked">Status Update</ion-label>
-      <ion-select style="font-family: baskerville;" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()">
-        <ion-select-option value="Request is accepted at the principal's office">Request Accepted</ion-select-option>
+      <ion-select style="font-family: baskerville; margin-left:49% !important; font-size:small" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()">
+        <ion-select-option [value]="'Accepted at the Principal\'s Office by: ' + userData.displayName">
+          Request Accepted
+        </ion-select-option>
         <ion-select-option value="Request is signed by the principal">Request Signed</ion-select-option>
 
       </ion-select>

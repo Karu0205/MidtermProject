@@ -9,10 +9,10 @@ export class FileUploadService {
   constructor(private storage: AngularFireStorage) {}
 
   uploadFile(file: File, path: string): Observable<string> {
-    const filePath = `${path}/${new Date().getTime()}_${file.name}`;
+    const filePath = `${path}/${file.name}`; // Use only the original file name
     const fileRef = this.storage.ref(filePath);
     const task = fileRef.put(file);
-
+  
     return new Observable((observer) => {
       task.then((snapshot) => {
         snapshot.ref.getDownloadURL().then((downloadURL) => {
@@ -20,7 +20,7 @@ export class FileUploadService {
           observer.complete();
         });
       });
-
+  
       task.catch((error) => {
         observer.error(error);
       });

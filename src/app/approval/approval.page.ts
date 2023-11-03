@@ -52,7 +52,7 @@ export class ApprovalPage implements OnInit {
     })
 
     this.dataService.getRequests().subscribe(req => {
-      this.requests = req.filter(request => request.document_type === 'Form 137');
+      this.requests = req.sort((a, b) => new Date(b.request_date).getTime() - new Date(a.request_date).getTime());
     });
 
    }
@@ -81,18 +81,15 @@ export class ApprovalPage implements OnInit {
   
     this.dataService.getItems().subscribe((requests) => {
       if (!this.searchText) {
-        // If the search text is empty, display all items with "Form 137."
-        this.requests = requests.filter(request => request.document_type === "Form 137");
+        // If the search text is empty, display all items.
+        this.requests = requests;
       } else {
-        // If there is a search text, filter items based on it and "Form 137."
+        // If there is a search text, filter items based on it.
         const filteredRequests = requests.filter((request) => {
           return (
-            request.document_type === "Form 137" &&
-            (
-              request.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-              request.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
-              request.request_date.toLowerCase().includes(this.searchText.toLowerCase())
-            )
+            request.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            request.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            request.request_date.toLowerCase().includes(this.searchText.toLowerCase())
           );
         });
         this.requests = filteredRequests;

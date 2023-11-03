@@ -3,7 +3,7 @@
     
     <ion-card>
   
-      <p align = 'center'>
+      <p align="center">
         <ion-img
          src=".\assets\logo.png" style="width:20%"
         ></ion-img>
@@ -12,25 +12,29 @@
   
       <ion-card-header>
         <ion-card-title>Login</ion-card-title>
-        <ion-card-subtitle align = 'center'>Sto. Nino Formation and Science School</ion-card-subtitle>
+        <ion-card-subtitle align="center">Sto. Nino Formation and Science School</ion-card-subtitle>
       </ion-card-header>
     
       <ion-card-content>
         
         <ion-item>
-          <ion-label position="stacked">Email:</ion-label>
-          <ion-input [(ngModel)]='email'></ion-input>
+          <ion-label style="font-size:large;font-family: baskerville; margin-bottom:5px;" position="stacked">Email:</ion-label>
+          <ion-input style="font-size:large;font-family: baskerville;" [(ngModel)]='email'></ion-input>
         </ion-item>
   
         <ion-item>
-          <ion-label position="stacked">Password:</ion-label>
-          <ion-input type="password" [(ngModel)]='password'></ion-input>
+          <ion-label style="font-size:large;font-family: baskerville;" position="stacked">Password:</ion-label>
+          <ion-input style="font-size:large;font-family: baskerville;" type="password" [(ngModel)]='password'></ion-input>
         </ion-item>
   
-        <ion-button align ='center' (click) ="logIn()">Login</ion-button>
+        <ion-button style="font-size:large;font-family: baskerville;" (click) ="logIn()">Login</ion-button>
   
-        <ion-text color="tertiary" (click)="reset()"> 
-          <h3>Forgot Password</h3>
+        <ion-text color="tertiary" (click)="reset()" style="text-decoration: underline;">
+          <h3 style="font-size: medium; font-family: baskerville;">Forgot Password</h3>
+        </ion-text>
+        
+        <ion-text color="tertiary" style="text-decoration: underline;">
+          <h3 style="font-size: medium; font-family: baskerville;">Request for Account</h3>
         </ion-text>
   
       </ion-card-content>

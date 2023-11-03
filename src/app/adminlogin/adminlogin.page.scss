@@ -1,8 +1,8 @@
 ion-card{
   align-items: center;
   justify-content: center;
-  width: 80% !important;
-  top: 11%;
+  width: 40% !important;
+  top: 16%;
   bottom: 13% !important;
   margin: auto;
   border-radius: 8%;
@@ -49,4 +49,11 @@ ion-content {
   --background: url('/assets/bg.png') no-repeat center center fixed;
   background-size: cover;
   height: 200px;
+}
+
+@media (max-width: 767px) {
+  ion-card{
+    width: 80% !important;
+    height: 45% !important;
+  }
 }

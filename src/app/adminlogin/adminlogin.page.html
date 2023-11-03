@@ -13,26 +13,27 @@
   
       <ion-card-header>
         <ion-card-title> Admin Login</ion-card-title>
-        <ion-card-subtitle align = 'center'>Sto. Nino Formation and Science School</ion-card-subtitle>
+        <ion-card-subtitle align="center">Sto. Nino Formation and Science School</ion-card-subtitle>
       </ion-card-header>
     
       <ion-card-content>
         
         <ion-item>
-          <ion-label position="stacked">Email:</ion-label>
-          <ion-input [(ngModel)]='email'></ion-input>
+          <ion-label style="font-size:large;font-family: baskerville; margin-bottom:5px;" position="stacked">Email:</ion-label>
+          <ion-input style="font-size:large;font-family: baskerville;" [(ngModel)]='email'></ion-input>
         </ion-item>
   
         <ion-item>
-          <ion-label position="stacked">Password:</ion-label>
-          <ion-input type="password" [(ngModel)]='password'></ion-input>
+          <ion-label style="font-size:large;font-family: baskerville;" position="stacked">Password:</ion-label>
+          <ion-input style="font-size:large;font-family: baskerville;" type="password" [(ngModel)]='password'></ion-input>
         </ion-item>
   
-        <ion-button align ='center' (click) ="logIn()">Login</ion-button>
+        <ion-button style="font-size:large;font-family: baskerville;" (click) ="logIn()">Login</ion-button>
   
-        <ion-text color="tertiary">
-          <h3 (click)="resetPass()">Forgot Password</h3>
+        <ion-text color="tertiary" (click)="resetPass()" style="text-decoration: underline;">
+          <h3 style="font-size: medium; font-family: baskerville;">Forgot Password</h3>
         </ion-text>
+        
   
   
   

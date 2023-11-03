@@ -4,6 +4,7 @@ import { Request, FirebaseService } from '../service/firebase.service';
 import { EmailService } from '../email.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Subscription } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 
 @Component({
@@ -20,9 +21,21 @@ export class ModalPage implements OnInit {
   requests: Request[] = []; 
   approval = [] as any;
 
+  @Input() uid: string;
+  user: any;
+
+  userProfile: any = {}; // Initialize an empty object for the user's profile data.
+  userId: any;
+  isLoggedIn: boolean;
+  userName: any;
+  userEmail: any;
+  userData: any;
+  userRequest: any[];
+
   notificationCount2 = 0; // Initialize count
   constructor(private dataService: FirebaseService, private modalCtrl: ModalController, private toastCtrl: ToastController,
-    private alertCtrl: AlertController, private emailService:EmailService, private firestore: AngularFirestore) { 
+    private alertCtrl: AlertController, private emailService:EmailService, private firestore: AngularFirestore,
+    private afAuth: AngularFireAuth) { 
     this.dataService.getRequests().subscribe(req => {
       console.log(req);
       this.requests=req;
@@ -45,11 +58,63 @@ export class ModalPage implements OnInit {
       this.approval = approval;
       console.log(approval)
     });
+
+    this.firestore.collection('users').doc(this.uid).valueChanges()
+    .subscribe((user: any) => {
+      this.user = user;
+    });
+
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userId = user.uid; // Store the current user's UID.
+        this.fetchUserProfile(this.userId);
+      } else {
+        // Handle user not logged in.
+      }
+    });
+
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+
+        this.dataService.getUserDataByUID(user.uid).subscribe(rq => {
+          this.userRequest = rq;
+
+        });
+
+        this.firestore
+        .collection('users')
+        .doc(user.uid)
+        .valueChanges()
+        .subscribe((data) => {
+          this.userData = data;
+        });
+        // User is logged in
+        this.isLoggedIn = true;
+        this.userId = user.uid; // Retrieve the user ID
+        this.userEmail = user.email;
+        this.userName = user.displayName// Retrieve the user name
+        console.log(user.displayName)
+      } else {
+        // User is not logged in
+        this.isLoggedIn = false;
+        this.userId = null;
+        this.userName = null;
+
+      }
+    });
   }
 
   
   async closeModal() {
     await this.modalCtrl.dismiss();
+  }
+
+  
+  fetchUserProfile(userId: string) {
+    const userRef = this.firestore.collection('users').doc(userId);
+    userRef.valueChanges().subscribe((data) => {
+      this.userProfile = data;
+    });
   }
   
 
@@ -66,7 +131,14 @@ export class ModalPage implements OnInit {
 
   async forApproval(){
     await this.dataService.addApproval(this.request!);
-    this.addNotification2()
+    this.addNotification2();
+
+    this.emailService.sendEmail(
+      '90.001.snfss@gmail.com',
+      'There is a new ' + this.request.document_type + ' request to be approved from: ' + this.request.email,
+      this.request.student_name
+    );
+
   }
 
   async updateRequest() {

@@ -33,19 +33,23 @@
 
     <ion-item>
       <ion-label style="font-family: baskerville;" position="stacked">Status Update:</ion-label>
-      <ion-select style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()">
-        <ion-select-option value="Accepted at the Registrar's Office">Accepted at the Registrar's Office</ion-select-option>
-        <ion-select-option value="Request undergoing review">Request undergoing review</ion-select-option>
-        <ion-select-option value="Request to be approved by the principal" *ngIf="request.document_type === 'Form 137'">
+      <ion-select style="font-family: baskerville; white-space: normal; overflow-wrap: break-word; font-size: small; margin-right: 15px; margin-left:49% !important" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()">
+        <ion-select-option [value]="'Accepted at the Registrar\'s Office by: ' + userData.displayName">
+          Accepted at the Registrar's Office
+        </ion-select-option>
+        <ion-select-option [value]="'Request being handled by: ' + userData.displayName" *ngIf="request.document_type !== 'Form 137'">
+          Currently in progress
+        </ion-select-option>
+        <ion-select-option value="Request to be approved by the principal">
           Request to be approved by the principal
         </ion-select-option>
-        
-        <ion-select-option value="Awaiting signature from principal" *ngIf="request.document_type === 'Form 137'">
+        <ion-select-option value="Awaiting signature from principal">
           Awaiting signature from principal
         </ion-select-option>
-        <ion-select-option value="Ready for Pickup at the Registrar's Office">Ready for Pickup at the Registrar's Office</ion-select-option>
+        <ion-select-option value="Ready for Pickup at the Registrar's Office">
+          Ready for Pickup at the Registrar's Office
+        </ion-select-option>
         <ion-select-option value="Completed">Completed</ion-select-option>
-
       </ion-select>
     </ion-item>
   </div>
@@ -55,7 +59,7 @@
     Update
   </ion-button>
 
-  <ion-button style="font-family: baskerville; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" *ngIf="request.document_type === 'Form 137'" expand="block" (click)="forApproval()">
+  <ion-button style="font-family: baskerville; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="forApproval()">
     <ion-icon name="arrow-redo-outline" slot="start"></ion-icon>
     Forward
   </ion-button>
