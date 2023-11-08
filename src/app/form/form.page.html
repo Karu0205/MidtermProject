@@ -1,23 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title style="color: white; font-family: baskerville;">Document Request Form</ion-title>
+    <ion-title style="color: white; font-family: 'Roboto', sans-serif;">Document Request Form</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
   <ion-list>
+    <ion-label style="font-family: 'Roboto', sans-serif;">Student Name:</ion-label>
     <ion-item>
-      <ion-label style="font-family: baskerville;">Student Name:</ion-label>
-      <ion-input style="font-family: baskerville;" [(ngModel)]="formData.student_name" type="text"></ion-input>
+      <ion-input style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.student_name" type="text"></ion-input>
     </ion-item>
     
-
+    <ion-label style="font-family: 'Roboto', sans-serif;">Document Type:</ion-label>
     <ion-item>
-      <ion-label style="font-family: baskerville;">Document Type:</ion-label>
-      <ion-select style="font-family: baskerville;" class="my-select" [(ngModel)]="selectedDocumentType" style="width: 200px;">
-        <ion-select-option style="font-family: baskerville !important;" *ngFor="let type of documentTypes" [value]="type">{{ type }}</ion-select-option>
+      <ion-select style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.document_type">
+        <ion-select-option value="Form 137">Form 137</ion-select-option>
+        <ion-select-option value="ESC Certificate">ESC Certificate</ion-select-option>
+        <ion-select-option value="Enrollment Form">Enrollment Form</ion-select-option>
+        <ion-select-option value="Certificate of Good Moral">Certificate of Good Moral</ion-select-option>
+        <ion-select-option value="Certificate of Completion">Certificate of Completion</ion-select-option>
+        <ion-select-option value="Certifiacte of Ranking">Certifiacte of Ranking</ion-select-option>
+        <ion-select-option value="Certificate of English as Medium of Instruction">Certificate of English as Medium of Instruction</ion-select-option>
       </ion-select>
     </ion-item>
+
 
     <ion-item *ngIf="showStatusInput">
       <ion-label>Status:</ion-label>
@@ -34,23 +41,58 @@
       <ion-input [(ngModel)]="formData.Status" type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label style="font-family: baskerville;">Email:</ion-label>
-      <ion-input style="font-family: baskerville;" [(ngModel)]="formData.email" type="email"></ion-input>
+    <ion-item *ngIf="showStatusInput">
+      <ion-label style="font-family: 'Roboto', sans-serif;">Email:</ion-label>
+      <ion-input style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.email" type="email"></ion-input>
     </ion-item>
 
     <ion-item *ngIf="showStatusInput">
-      <ion-label style="font-family: baskerville;">Request Date:</ion-label>
-      <ion-input style="font-family: baskerville;" [(ngModel)]="formData.request_date" type="date"></ion-input>
+      <ion-label style="font-family: 'Roboto', sans-serif;">Request Date:</ion-label>
+      <ion-input style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.request_date" type="date"></ion-input>
+    </ion-item>
+    <ion-label style="font-family: 'Roboto', sans-serif;">LRN:</ion-label>
+    <ion-item>
+      <ion-input style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.lrn" type="text"></ion-input>
+    </ion-item>
+    <ion-label style="font-family: 'Roboto', sans-serif;">Contact Number:</ion-label>
+    <ion-item>
+    
+      <ion-input style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.contact_no" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="formData.Status !== 'Alumni'">
+      <ion-label style="font-family: 'Roboto', sans-serif;">Year Level:</ion-label>
+      <ion-select style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.year_level">
+        <ion-select-option value="Junior High">Junior High</ion-select-option>
+        <ion-select-option value="Senior High">Senior High</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <!-- Conditionally show the "Strand" input based on the selected "Year Level" -->
+    <ion-item *ngIf="formData.year_level === 'Senior High'">
+      <ion-label style="font-family: 'Roboto', sans-serif;">Strand:</ion-label>
+      <ion-select style="font-family: 'Roboto', sans-serif;" [(ngModel)]="formData.strand">
+        <ion-select-option value="STEM">STEM</ion-select-option>
+        <ion-select-option value="HUMMS">HUMSS</ion-select-option>
+        <ion-select-option value="ABM">ABM</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif;">Quantity:</ion-label>
+      <ion-input style="font-family: 'Roboto', sans-serif; text-align:right" [(ngModel)]="formData.quantity" type="number"></ion-input>
     </ion-item>
   </ion-list>
     <ion-row>
       <ion-col>
-        <ion-button style="font-family: baskerville; margin-top: 10px; --background: #9b2226;" expand="full" (click)="submitForm()">Submit</ion-button>
+        <ion-button style="font-family: 'Roboto', sans-serif; margin-top: 10px; --background: #9b2226;" expand="full" (click)="submitForm()">Submit</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button style="font-family: baskerville; margin-top: 10px; --background: #9b2226;"expand="full" (click)="closeModal()">Close</ion-button>
+        <ion-button style="font-family: 'Roboto', sans-serif; margin-top: 10px; --background: #9b2226;"expand="full" (click)="closeModal()">Close</ion-button>
       </ion-col>
     </ion-row>
+
+    </ion-card>
 
 </ion-content>

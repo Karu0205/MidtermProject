@@ -1,8 +1,15 @@
 ion-content{
-    text-align: center;
+    text-align: left;
 }
 
 .scrollable-container {
     height: 250px !important; /* Adjust the height as needed */
     overflow-y: scroll; /* Enable vertical scrolling */
+  }
+
+
+  @media (max-width: 767px) {
+    ion-toolbar{
+      height: 60px !important;
+    }
   }

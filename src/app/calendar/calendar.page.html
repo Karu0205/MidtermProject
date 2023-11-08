@@ -1,39 +1,36 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-title style="color: white; font-family: baskerville; margin-left:10px">Edit Calendar</ion-title>
+    <ion-title style="color: white; font-family: 'Roboto', sans-serif; margin-left:10px">Edit Calendar</ion-title>
     <ion-buttons slot="start">
 
-      <ion-button style="color: white; margin-bottom:0% !important;" (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      <ion-button style="color: white; margin-bottom:0% !important; margin-right:5px !important; width: 30x !important" (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
 
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-card class="add">
-    <ion-input style="font-family: baskerville;" [(ngModel)]="selectedEvent.title" placeholder="Event Title"></ion-input>
-    <ion-input style="font-family: baskerville;" [(ngModel)]="selectedEvent.startDate" type="date"></ion-input>
-    <ion-textarea style="font-family: baskerville; height:100px;" [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
-    <ion-button style="margin: auto; font-family: baskerville; --background: #9b2226; margin-top:10px;margin-bottom: 10px;" expand="full" (click)="addEvent()">Add Event</ion-button>
+    <ion-input style="font-family: 'Roboto', sans-serif;" [(ngModel)]="selectedEvent.title" placeholder="Event Title"></ion-input>
+    <ion-input style="font-family: 'Roboto', sans-serif;" [(ngModel)]="selectedEvent.startDate" type="date" placeholder="Event Date"></ion-input>
+    <ion-textarea style="font-family: 'Roboto', sans-serif; height:100px;" [(ngModel)]="selectedEvent.description" placeholder="Event Description"></ion-textarea>
+    <ion-button style="margin: auto; font-family: 'Roboto', sans-serif; --background: #9b2226; margin-top:10px;margin-bottom: 10px;" expand="full" (click)="addEvent()">Add Event</ion-button>
   </ion-card>
 
     <ion-card class="events" style="border: 3px solid white; margin-bottom: 20px;">
-      <ion-header style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <ion-toolbar class="event_head">
-        <ion-label style="font-family: baskerville;">Events (Click to Delete)</ion-label>
-        </ion-toolbar>
+      <ion-header style="display: flex; flex-direction: column; align-items: left; justify-content: left; text-align:center;">
   
         <ion-toolbar style="height: 40px; color: white;">
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-label style="font-family: baskerville;">Event</ion-label>
+                <ion-label style="font-family: 'Roboto', sans-serif;">Event</ion-label>
               </ion-col>
               <ion-col>
-                <ion-label style="font-family: baskerville;">Date(Y-M-D)</ion-label>
+                <ion-label style="font-family: 'Roboto', sans-serif;">Date(Y-M-D)</ion-label>
               </ion-col>
               <ion-col>
-                <ion-label style="font-family: baskerville;">Details</ion-label>
+                <ion-label style="font-family: 'Roboto', sans-serif;">Details</ion-label>
               </ion-col>
     
             </ion-row>
@@ -45,9 +42,9 @@
           <div class="scrollable-content2">
           <ion-list>
             <ion-item style="font-size: 11.5px;" *ngFor="let event of events" (click)="deleteEvent(event.id)">
-            <ion-label style="font-family: baskerville;">{{ event.title }}</ion-label>
-            <ion-label style="font-family: baskerville;">{{ event.startDate }}</ion-label>
-            <ion-label style="font-family: baskerville;">{{ event.description }}</ion-label>
+            <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.title }}</ion-label>
+            <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.startDate }}</ion-label>
+            <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.description }}</ion-label>
             </ion-item>
           </ion-list>
         </div>

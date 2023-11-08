@@ -155,12 +155,17 @@ export class PrincipalPage implements OnInit {
             this.emailService.sendEmail(
               this.request.email,
               'Your ' + this.request.document_type + ' request has been updated with this status: ' + this.request.status,
-              'Sto. Nino Formation and Science School'
+              this.userData.displayName
             );
             this.emailService.sendEmail(
               '90.002.snfss@gmail.com',
               'The ' + this.request.document_type + ' request by ' + this.request.student_name +' has been updated with this status: ' + this.request.status,
-              'Sto. Nino Formation and Science School Principal'
+              this.userData.displayName
+            );
+            this.emailService.sendEmail(
+              '90.003.snfss@gmail.com',
+              'The ' + this.request.document_type + ' request by ' + this.request.student_name +' has been updated with this status: ' + this.request.status,
+              this.userData.displayName
             );
             this.addNotification();
           },

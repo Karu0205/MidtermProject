@@ -320,7 +320,6 @@ export class ProfilePage implements OnInit {
   logOut(){
     this.dataService.logout();
     this.router.navigate(['/login']);
-    location.reload();
     this.afAuth.signOut().then(() => {
       // Handle successful logout (e.g., navigate to login page).
     }).catch((error) => {
@@ -338,6 +337,58 @@ export class ProfilePage implements OnInit {
 
   toProfile(){
     this.router.navigate(['/profile'])
+  }
+
+  calculateProgress(status: string): number {
+    if (status.includes('Pending')) {
+      return 15;
+    } else if (status.includes('Request being handled by: ')) {
+      return 30;
+    } else if (status.includes('Accepted at the Registrar\'s Office by: ')) {
+      return 30;
+    } else if (status.includes('Request forwarded to the principal’s office')) {
+      return 47;
+    } else if (status.includes('Accepted at the Principal\'s Office by: ')) {
+      return 63;
+    } else if (status.includes('Request is signed by the principal')) {
+      return 63;
+    } else if (status.includes('Ready for Pickup at the Registrar\'s Office')) {
+      return 100;
+    } else {
+      return 0;
+    }
+  }
+
+  getLabelColor(status: string, labelToHighlight: string, targetProgress: number): string {
+    const progress = this.calculateProgress(status);
+    if (progress >= targetProgress) {
+      return 'green';
+    } else {
+      return 'grey';
+    }
+  }
+  
+
+  // Function to get progress label based on status
+  getProgressLabel(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'Pending';
+      case 'Request being handled by: ' + this.userData.displayName:
+        return 'Being Handled';
+      case 'Accepted at the Registrar\'s Office by: ' + this.userData.displayName:
+        return 'Accepted at Registrar\'s Office';
+      case 'Request forwarded to the principal’s office':
+        return 'Forwarded to Principal’s Office';
+      case 'Accepted at the Principal\'s Office by: ' + this.userData.displayName:
+        return 'Accepted at Principal\'s Office';
+      case 'Request is signed by the principal':
+        return 'Request Signed by Principal';
+      case 'Ready for Pickup at the Registrar\'s Office':
+        return 'Ready for Pickup';
+      default:
+        return '';
+    }
   }
 
 

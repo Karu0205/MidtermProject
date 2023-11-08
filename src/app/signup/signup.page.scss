@@ -6,17 +6,17 @@ ion-toolbar{
 
 ion-title{
     color: white;
-    font-family: baskerville;
+    font-family: 'Roboto', sans-serif;
 }
 
 ion-button{
     --background: #4f000b;
-    font-family: baskerville;
+    font-family: 'Roboto', sans-serif;
 }
 
 .create{
     padding: 20px;
-    font-family: baskerville;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
 }
 
@@ -104,6 +104,6 @@ ion-tab-bar{
   @media (max-width: 767px) {
     ion-card{
       width: 90% !important;
-      margin-top: 50% !important;
+      margin-top: 10% !important;
     }
   }

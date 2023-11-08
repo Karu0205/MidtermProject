@@ -12,32 +12,39 @@
   
       <ion-card-header>
         <ion-card-title>Login</ion-card-title>
+
+        <ion-text color="tertiary" (click)="admin()" style="text-decoration: underline;">
+          <h3 style="font-size: medium; font-family: 'Roboto', sans-serif;">Login as Admin</h3>
+        </ion-text>
         <ion-card-subtitle align="center">Sto. Nino Formation and Science School</ion-card-subtitle>
       </ion-card-header>
     
-      <ion-card-content>
+
         
         <ion-item>
-          <ion-label style="font-size:large;font-family: baskerville; margin-bottom:5px;" position="stacked">Email:</ion-label>
-          <ion-input style="font-size:large;font-family: baskerville;" [(ngModel)]='email'></ion-input>
+          <ion-label style="font-size:large;font-family: 'Roboto', sans-serif; margin-bottom:5px;" position="stacked">Email:</ion-label>
+          <ion-input style="font-size:large;font-family: 'Roboto', sans-serif;" [(ngModel)]='email'></ion-input>
         </ion-item>
   
         <ion-item>
-          <ion-label style="font-size:large;font-family: baskerville;" position="stacked">Password:</ion-label>
-          <ion-input style="font-size:large;font-family: baskerville;" type="password" [(ngModel)]='password'></ion-input>
+          <ion-label style="font-size: large; font-family: 'Roboto', sans-serif;" position="stacked">Password:</ion-label>
+          <ion-input style="font-size: large; font-family: 'Roboto', sans-serif;" type="{{ showPassword ? 'text' : 'password' }}" [(ngModel)]="password"></ion-input>
+          <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
         </ion-item>
   
-        <ion-button style="font-size:large;font-family: baskerville;" (click) ="logIn()">Login</ion-button>
+        <ion-button style="font-size:large;font-family: 'Roboto', sans-serif;" (click) ="logIn()">Login</ion-button>
   
         <ion-text color="tertiary" (click)="reset()" style="text-decoration: underline;">
-          <h3 style="font-size: medium; font-family: baskerville;">Forgot Password</h3>
+          <h3 style="font-size: medium; font-family: 'Roboto', sans-serif;">Forgot Password</h3>
         </ion-text>
         
         <ion-text color="tertiary" style="text-decoration: underline;">
-          <h3 style="font-size: medium; font-family: baskerville;">Request for Account</h3>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfW0hqwpr05Y0D0syPbghw8q0OoBTeDxUvXegPuR1Hh_DAglQ/viewform?usp=sf_link">
+            <h3 style="font-size: medium; font-family: 'Roboto', sans-serif; margin-bottom:20px">Request for Account</h3>
+          </a>
         </ion-text>
   
-      </ion-card-content>
+
     </ion-card>
   </ion-content>
   

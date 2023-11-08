@@ -12,6 +12,9 @@ export class LoginPage implements OnInit {
   public email:any;
   public password:any;
 
+  showPassword: boolean = false;
+
+
 
   constructor(private router: Router, public fireService:FirebaseService) { }
 
@@ -43,6 +46,19 @@ export class LoginPage implements OnInit {
 
   reset(){
     this.router.navigate(['/resetpass'])
+  }
+
+  admin(){
+    this.router.navigate(['/adminlogin'])
+  }
+
+  redirectToForm() {
+    // Use the Angular Router to navigate to the URL
+    this.router.navigate(['https://forms.gle/N6TvP8MwaedhN68F6']);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }

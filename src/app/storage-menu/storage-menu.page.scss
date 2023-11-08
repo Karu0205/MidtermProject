@@ -15,7 +15,7 @@
 p {
   margin: 0; /* Remove default margin for the paragraph */
   float: left;
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
   font-size: 130%;
   color: white;
   text-align: left;
@@ -45,7 +45,7 @@ ion-title{
   color:#f4f4f4;
   padding-top: 10px;
   padding-bottom: 10px;
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
 }
 
 ion-header{
@@ -98,7 +98,7 @@ ion-tab-button {
 
 ion-tab-bar{
   background-color:#9b2226;
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
 }
 
 ion-tab-button ion-icon {
@@ -132,7 +132,7 @@ ion-card{
 
 ion-button {
   margin: auto;
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
   --background: #9b2226;
   margin-top: 10px;
   font-size: small;
@@ -166,7 +166,7 @@ ion-searchbar{
 
 @media (max-width: 768px) {
   ion-card{
-    margin-top: 50% !important;
+    margin-top: 30% !important;
   }
 }
 

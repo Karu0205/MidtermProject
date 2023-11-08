@@ -105,6 +105,9 @@ export class SettingsPage implements OnInit {
       }
     }
   
+    async closeModal() {
+      await this.modalCtrl.dismiss();
+    }
 
   async uploadImage() {
     if (!this.selectedImage || !this.userId) {

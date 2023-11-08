@@ -51,14 +51,14 @@ margin-bottom: 20px;
 
 .header-container {
 display: flex;
-justify-content: center;
-align-items: center;
+justify-content: left;
+align-items: left;
 padding: 10px; /* Optional: Add padding as needed */
 }
 
 .header-content {
 display: flex;
-align-items: center;
+align-items: left;
 }
 
 .delete{
@@ -99,7 +99,7 @@ ion-img{
 background-image: url('/assets/3.png');
 background-size: cover;
 background-repeat: no-repeat;
-background-position: center;
+background-position: left;
 background-size: 100% 100%;
 color: #fff;
 width: 20%;
@@ -117,8 +117,8 @@ height: 250px;
 }
 
 .events{
-justify-content: center;
-align-items: center;
+justify-content: left;
+align-items: left;
 margin: auto;
 width: 90%;
 height: 400px;
@@ -144,19 +144,19 @@ overflow-y: scroll; /* Enable vertical scrolling */
   height: 100vh;
   background-image: url('/assets/panlikod.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: left;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
 }
 ion-content{
-  text-align: center;
+  text-align: left;
   padding: 40px 90px;
   color: #fff;
   position: relative;
 
 ion-label{
-text-align: center;
+text-align: left;
 }
 
 button{
@@ -176,8 +176,8 @@ color:white;
 }
 
 ion-list{
-align-items: center;
-text-align: center;
+align-items: left;
+text-align: left;
 }
 
 ion-item{
@@ -196,16 +196,16 @@ word-wrap: break-word; /* Breaks words that exceed the container width */
   width: 40px;
   height: 40px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
   background-color: #e6e3e3;
   margin: 20px 10px;
 
 }
 .social-icons{
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
 }
 
 .social-icons a:hover{
@@ -249,7 +249,7 @@ font-family: baskerville;
 ion-footer{
   position:fixed;
   bottom: 0;
-  text-align: center;
+  text-align: left;
   --background: #9b2226;
 }
 
@@ -258,9 +258,9 @@ ion-tab-button {
   background-color: #4f000b;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
   color: white;
   font-size: 12px;
   font-weight: bold;

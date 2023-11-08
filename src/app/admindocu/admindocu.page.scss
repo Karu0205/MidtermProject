@@ -4,8 +4,8 @@
 
 .header-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
   padding: 20px; /* Optional: Add padding as needed */
 }
 
@@ -23,25 +23,20 @@ ion-img{
 
 .header-content {
   display: flex;
-  align-items: center;
+  align-items: left;
 }
 
-ion-header{
-  background-image: url('/assets/3.png');
-  background-size: cover;
-  background-color: #9b2226;
-}
 
 
 ion-footer{
   position:fixed;
   bottom: 0;
-  text-align: center;
+  text-align: left;
   --background: #9b2226;
 }
 
 .scrollable-container {
-  height: 250px; /* Adjust the height as needed */
+  height: 2300px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
 }
 
@@ -50,9 +45,9 @@ ion-tab-button {
   background-color: #4f000b;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
   color: white;
   font-size: 12px;
   font-weight: bold;
@@ -97,13 +92,17 @@ p {
   margin-top: 15px;
 }
 
+.green-progress-bar {
+  --progress-background: green;
+}
+
 
 ion-item{
-  text-align: center;
+  text-align: left;
 }
 
 ion-header{
-  text-align: center;
+  text-align: left;
   position: sticky;
 }
 
@@ -124,24 +123,24 @@ ion-card.email {
 }
 
 ion-button{
-  align-items: center;
-  align-self: center;
-  align-content: center;
-  text-align: center;
+  align-items: left;
+  align-self: left;
+  align-content: left;
+  text-align: left;
 }
 
 ion-card.email {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  --background: url('/assets/border.png') no-repeat center center fixed;
+  justify-content: left;
+  align-items: left;
+  --background: url('/assets/border.png') no-repeat left left fixed;
 }
 
 ion-content {
   //--background: #ffe5ec;
   background-size: cover;
-  height: 200px;
+  height: 280px;
 }
 
 ion-item{
@@ -163,6 +162,9 @@ ion-item{
 ion-label {
   white-space: normal; /* Allows text to wrap to the next line */
   word-wrap: break-word; /* Breaks words that exceed the container width */
+  margin-left: 10px !important;
+  margin-right: 5px !important;
+  font-size: 12px;
 }
 .wrapped-text-select {
   white-space: normal;

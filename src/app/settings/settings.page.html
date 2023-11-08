@@ -1,6 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Update Profile Picture</ion-title>
+
+    <ion-buttons slot="start">
+
+      <ion-button style="color: white; margin-bottom:0% !important;" (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -9,13 +15,13 @@
   <ion-card style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <img [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 200px; height:200px; margin-top: 20px">
     <ion-label class="label">      
-      <div *ngIf="userData" style="font-family: baskerville; font-size: 20px; bottom: 30px; margin-top:10px;"> Upload your profile picture</div>
+      <div *ngIf="userData" style="font-family: 'Roboto', sans-serif; font-size: 20px; bottom: 30px; margin-top:10px;"> Upload your profile picture</div>
     </ion-label>
   
-    <input style="margin-top: 5px; font-family:baskerville;" type="file" (change)="onFileSelected($event)" accept="image/*">
+    <input style="margin-top: 5px; font-family: 'Roboto', sans-serif;" type="file" (change)="onFileSelected($event)" accept="image/*">
     <br>
     <br>
-    <ion-button (click)="uploadImage()" style="margin: auto; --background: #9b2226; margin-bottom: 20px !important;  font-family:baskerville;">
+    <ion-button (click)="uploadImage()" style="margin: auto; --background: #9b2226; margin-bottom: 20px !important;  font-family: 'Roboto', sans-serif;">
       Upload
     </ion-button>
   </ion-card>

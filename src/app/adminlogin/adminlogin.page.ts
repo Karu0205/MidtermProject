@@ -13,6 +13,7 @@ export class AdminloginPage implements OnInit {
   public password:any;
   isAdmin= false;
 
+  showPassword: boolean = false;
   constructor(private router: Router, public fireService:FirebaseService,
     ) { }
 
@@ -43,8 +44,16 @@ export class AdminloginPage implements OnInit {
     this.router.navigate(['/admindocu']);
   }
 
+  back(){
+    this.router.navigate(['/login']);
+  }
+
   resetPass(){
     this.router.navigate(['/resetpass']);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }

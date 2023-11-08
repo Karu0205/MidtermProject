@@ -21,22 +21,17 @@
 
 .label-container {
   display: block;
-  height: 100px; /* Set the desired fixed height */
+  height: 110px; /* Set the desired fixed height */
   padding: 10px; /* Add padding for spacing */
   border: 1px solid #ccc; /* Add a border for visualization */
 }
-ion-label {
-  font-family: baskerville;
-}
+
 
 ion-toolbar{
   --background: #9b2226;
 }
 
-ion-title{
-  color: white;
-  font-family: baskerville;
-}
+
 
 img{
   margin-top: 3%;
@@ -66,7 +61,7 @@ ion-button{
   width: 150px;
 
   font-size: 9px;
-  font-family: baskerville;
+  
 }
 
 .header-container {
@@ -90,7 +85,7 @@ ion-button{
 p {
   margin: 0; /* Remove default margin for the paragraph */
   float: left;
-  font-family: baskerville;
+  
   font-size: 130%;
   color: white;
   text-align: left;
@@ -111,7 +106,7 @@ ion-img{
   }
 
 .info {
-  background-image: url('/assets/3.png');
+  --background: #9b2226;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -119,10 +114,10 @@ ion-img{
   color: #fff;
   width: 20%;
   float: inline-start;
-  margin-top: 1.5%;
-  height: 400px;
+  margin-top: 3%;
+  height: 395px;
   margin-left: 40px;
-
+  
 }
 
 .center-content {
@@ -135,7 +130,7 @@ ion-img{
 @media (max-width: 767px) {
   .info{
     width:100%;
-    height: 310px;
+    height: 320px;
     margin-left: 0% !important;
     margin-top: 0% !important;
     
@@ -151,12 +146,14 @@ ion-img{
   ion-label {
     white-space: normal; /* Allows text to wrap to the next line */
     word-wrap: break-word; /* Breaks words that exceed the container width */
-    font-size: 10px;
+    font-size: 6px;
+    margin-left: 0% !important;
+    margin-right: 10px !important;
   }
 
   ion-button{
     float: left;
-    width: 30%;
+    width: 30% !important;
     margin-left: 10px;
     margin-bottom: 10px !important;
   }
@@ -165,7 +162,7 @@ ion-img{
     width: 100% !important;
     margin-top: 10%;
     margin: auto;
-    height: 370px;
+    height: 30px;
     margin-top: 1.5%;
   }
   
@@ -174,7 +171,7 @@ ion-img{
 .request{
   width: 60%;
   margin: auto;
-  height: 370px;
+  height: 430px;
   margin-top: 1.5%;
 }
 
@@ -191,7 +188,7 @@ ion-img{
 }
 
 .scrollable-container {
-  height: 240px; /* Adjust the height as needed */
+  height: 370px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
   
 }
@@ -250,6 +247,7 @@ ion-item{
 ion-label {
   white-space: normal; /* Allows text to wrap to the next line */
   word-wrap: break-word; /* Breaks words that exceed the container width */
+  font-family: 'Roboto', sans-serif !important;
 }
 
 }
@@ -288,23 +286,19 @@ ion-label {
 }
 
   ion-header{
-    background-image: url('/assets/3.png');
+    --background: #9b2226;
     background-size: cover;
     background-color: #9b2226;
   }
 
 p{
   float: left;
-  font-family: baskerville;
+  
   font-size: 150%;
   color: white;
   text-align: left;
   margin-top: 45px;
   padding-left:30px;
-}
-
-ion-text{
- font-family: baskerville;
 }
 
 ion-footer{
@@ -327,7 +321,7 @@ ion-footer{
     font-weight: bold;
     text-transform: uppercase;
     transition: color 0.3s ease;
-    font-family: baskerville;
+    
   }
   
   ion-tab-bar{
@@ -340,6 +334,10 @@ ion-footer{
   
   ion-tab-button.ion-selected {
     color: #333;
+  }
+
+  .green-progress-bar {
+    --progress-background: green;
   }
 
 

@@ -37,6 +37,8 @@ export class EditstudentPage implements OnInit {
   toEmail: string = '';
   subject: string = '';
   message: string = '';
+  
+  filteredAccounts: any[] = [];
 
   copyText(text: string) {
     this.copiedText = text;
@@ -53,12 +55,14 @@ export class EditstudentPage implements OnInit {
       
       this.fromName = 'Sto. Nino Formation and Science School'; // Set this to the default value
       this.initialFromName = this.fromName;
+
+      this.loadAccounts();
     }
 
   ngOnInit() {
     this.fireService.getAccounts().subscribe((accounts) => {
       this.accounts = accounts;
-      console.log(this.accounts)
+
     });
   }
 
@@ -79,22 +83,35 @@ export class EditstudentPage implements OnInit {
     return await modal.present();
   }
 
-  filterList() {
+  loadAccounts() {
+    this.fireService.getAccounts().subscribe((accounts) => {
+      this.accounts = accounts;
+      this.filteredAccounts = [...accounts]; // Create a copy for filtering
+      console.log(this.accounts);
+    });
+  }
+
+  searchItems() {
+    console.log('SearchItems method called');
+    console.log('Search Text:', this.searchTerm);
+  
     if (!this.searchTerm) {
-      // If the search term is empty, display all accounts.
-      this.fireService.getAccounts().subscribe((accounts) => {
-        this.accounts = accounts;
-      });
+      // If the search text is empty, display all items.
+      this.filteredAccounts = [...this.accounts]; // Reset the filtered list
     } else {
-      // If there is a search term, filter accounts based on it.
-      this.fireService.getAccounts().subscribe((accounts) => {
-        this.accounts = accounts.filter((account) => {
-          return (
-            account.displayName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            account.Status.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            account.email.toLowerCase().includes(this.searchTerm.toLowerCase())
-          );
-        });
+      // If there is a search text, filter items based on it.
+      const searchTermLower = this.searchTerm.toLowerCase();
+  
+      this.filteredAccounts = this.accounts.filter((account) => {
+        const displayName = account.displayName ? account.displayName.toLowerCase() : '';
+        const status = account.Status ? account.Status.toLowerCase() : '';
+  
+        const match = (
+          displayName.includes(searchTermLower) ||
+          status.includes(searchTermLower)
+        );
+  
+        return match;
       });
     }
   }

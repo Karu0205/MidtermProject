@@ -26,6 +26,8 @@ export interface Request {
   status: string;
   student_id: string;
   email: string;
+  strand: string;
+  year_level: string;
   request_date: string; // Add the request_date property
 }
 

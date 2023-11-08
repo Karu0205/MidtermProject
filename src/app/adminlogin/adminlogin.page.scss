@@ -6,14 +6,15 @@ ion-card{
   bottom: 13% !important;
   margin: auto;
   border-radius: 8%;
+  height: 450px;
 }
 
 h3{
-  margin: 1%;
+  margin: auto;
 }
 
 ion-card-header{
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
 }
 
 ion-text{
@@ -46,7 +47,7 @@ ion-button {
 
 ion-content {
   //--background: #ffe5ec;
-  --background: url('/assets/bg.png') no-repeat center center fixed;
+  --background: #9b2226;
   background-size: cover;
   height: 200px;
 }
@@ -54,6 +55,13 @@ ion-content {
 @media (max-width: 767px) {
   ion-card{
     width: 80% !important;
-    height: 45% !important;
+    height: 400px !important;
+  }
+
+  ion-content {
+    //--background: #ffe5ec;
+    --background: #9b2226;
+    background-size: cover;
+    height: 100% !important;
   }
 }

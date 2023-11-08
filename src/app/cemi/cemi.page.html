@@ -5,16 +5,16 @@
   </ion-buttons>
 
 
-  <p> Certificate of English as Medium of Instruction </p> 
+  <p> CEMI </p> 
 </ion-header>
 
 <ion-content [fullscreen]="true" style="height: calc(100vh - 56px); overflow-y: auto;">
 
-<ion-button (click)="showCardOnClick()"style="font-family: baskerville; margin-top:5px !important; width:50%; margin:auto;--background: #9b2226;" expand="block">Add Document</ion-button>
+<ion-button (click)="showCardOnClick()"style="font-family: 'Roboto', sans-serif; margin-top:5px !important; width:50%; margin:auto;--background: #9b2226;" expand="block">Add Document</ion-button>
 
 <ion-card *ngIf="showCard">
-  <ion-input style="font-family: baskerville" type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx"></ion-input>
-  <ion-button style="font-family: baskerville; margin-top:5px !important; margin-bottom:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
+  <ion-input style="font-family: 'Roboto', sans-serif" type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx"></ion-input>
+  <ion-button style="font-family: 'Roboto', sans-serif; margin-top:5px !important; margin-bottom:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="uploadFile()" [disabled]="!selectedFile">Upload</ion-button>
   <div *ngIf="uploadProgress !== null">Uploading... {{ uploadProgress }}%</div>
   <div *ngIf="downloadURL">File Successfully Uploaded!: {{ downloadURL }}</div>
 </ion-card>
@@ -26,7 +26,7 @@
 <div class="scrollable-content">
 <ion-list>
   <ion-item (click)="presentActionSheet(item)" *ngFor="let item of filteredContents">
-    <ion-label style="white-space: normal; font-family: baskerville">{{ item.name }}</ion-label>
+    <ion-label style="white-space: normal; font-family: 'Roboto', sans-serif">{{ item.name }}</ion-label>
 
   </ion-item>
 </ion-list>

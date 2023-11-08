@@ -26,6 +26,10 @@ export class ApprovalPage implements OnInit {
   toEmail: string = '';
   subject: string = '';
   message: string = '';
+
+  selectedDocumentTypeFilter: string = '';
+selectedStrandFilter: string = '';
+selectedStatusFilter: string = '';
   
   accounts = [] as any;
   requests: Request[] = []; 
@@ -61,10 +65,7 @@ export class ApprovalPage implements OnInit {
     this.dataService.getItems().subscribe((requests) => {
       console.log("All Requests:", requests);
     
-      this.requests = requests
-        .filter(request => request.document_type === "Form 137");
-    
-      console.log("Filtered Requests:", this.requests);
+      this.requests = requests;
     });
 
     this.dataService.getApproval().subscribe((approval) => {
@@ -85,17 +86,60 @@ export class ApprovalPage implements OnInit {
         this.requests = requests;
       } else {
         // If there is a search text, filter items based on it.
+        const searchTextLower = this.searchText.toLowerCase();
         const filteredRequests = requests.filter((request) => {
           return (
-            request.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.request_date.toLowerCase().includes(this.searchText.toLowerCase())
+            request.student_name.toLowerCase().includes(searchTextLower) ||
+            request.status.toLowerCase().includes(searchTextLower) ||
+            request.request_date.toLowerCase().includes(searchTextLower) ||
+            request.document_type.toLowerCase().includes(searchTextLower)
           );
         });
         this.requests = filteredRequests;
       }
       console.log('Filtered items:', this.requests); // Log the filtered items
     });
+  }
+
+  onSearchTextChange() {
+    this.applySearchFilter();
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.dataService.getItems().subscribe((requests) => {
+      this.requests = requests.filter((request) => {
+        const documentTypeFilterMatch = this.selectedDocumentTypeFilter === '' || request.document_type === this.selectedDocumentTypeFilter;
+        const strandFilterMatch = this.selectedStrandFilter === '' || request.strand === this.selectedStrandFilter;
+        const statusFilterMatch = this.selectedStatusFilter === '' || request.Status === this.selectedStatusFilter;
+  
+        return documentTypeFilterMatch && strandFilterMatch && statusFilterMatch;
+      });
+      this.applySearchFilter();
+    });
+  }
+  
+  filterRequests() {
+    this.requests = this.approval.filter((request) => {
+      const documentTypeFilterMatch = this.selectedDocumentTypeFilter === '' || request.document_type === this.selectedDocumentTypeFilter;
+      const strandFilterMatch = this.selectedStrandFilter === '' || request.strand === this.selectedStrandFilter;
+  
+      return documentTypeFilterMatch && strandFilterMatch;
+    });
+    this.applySearchFilter();
+  }
+  
+  applySearchFilter() {
+    // Apply the search bar filter in the filtered requests
+    if (this.searchText) {
+      const searchTextLower = this.searchText.toLowerCase();
+      this.requests = this.requests.filter((request) =>
+        request.student_name.toLowerCase().includes(searchTextLower) ||
+        request.status.toLowerCase().includes(searchTextLower) ||
+        request.request_date.toLowerCase().includes(searchTextLower) ||
+        request.document_type.toLowerCase().includes(searchTextLower)
+      );
+    }
   }
 
 

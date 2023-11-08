@@ -1,5 +1,5 @@
 
-<ion-header [translucent]="true" class="header-container">
+<ion-header [translucent]="true" class="header-container" style="height: 180px;">
   <div class="header-content">
     <p>The Home of Christian Leaders <br> Shining Forward to Fullness</p>
   </div>
@@ -11,31 +11,47 @@
       <ion-card class="info">
         <img (click)="openSettingsModal()" [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 200px; height:200px;">
           <ion-label class="label">      
-            <div *ngIf="userData" style="font-family: baskerville; font-size: 20px; bottom: 30px"> {{ userData.displayName }}</div>
-            <div *ngIf="userData" style="font-family: baskerville;"> {{ userData.email }}</div>
+            <div *ngIf="userData"  style="font-family: 'Roboto', sans-serif; font-size: 20px; margin-bottom: 10px; margin-top:10px"> {{ userData.displayName }}</div>
+            <ion-text *ngIf="userData?.email === '90.001.snfss@gmail.com'; else otherText" style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 50px; margin-top:10px">
+              Principal
+            </ion-text>
+            
+            <ng-template #otherText>
+              <ion-text style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 10px; margin-top:10px">Registrar</ion-text>
+            </ng-template>
           </ion-label>
 
           <br>
 
-          <div style="text-align: center; margin: auto;">
-            <ion-button (click)="openApprovalModal()">
-              <ion-icon name="mail-outline" slot="start"></ion-icon>
-              For Approval
-              <span style="float: right;" class="notification-count2" *ngIf="notificationCount2 > 0">({{ notificationCount2 }})</span>
+<div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+  <ion-button
+    style="width: 270px; margin-top: 10px; opacity: {{ userData?.email === '90.001.snfss@gmail.com' ? '1' : '0' }}"
+    (click)="openApprovalModal()">
+    <ion-icon name="mail-outline" slot="start" style="margin-right: 10px; font-size: large"></ion-icon>
+    <ion-label style="text-align: left; width: 100%; font-size: 11px">
+      For Approval
+    </ion-label>
+    <span style="float: right;" class="notification-count2" *ngIf="notificationCount2 > 0">[{{ notificationCount2 }}]</span>
+  </ion-button>
+</div>
+
+
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button style="width: 270px;" (click)="openCompletedModal()">
+              <ion-icon name="checkmark-done-outline" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Completed Requests
+              </ion-label>
             </ion-button>
           </div>
 
-          <div style="text-align: center; margin: auto;">
-            <ion-button (click)="openCompletedModal()">
-              <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
-              Completed Requests
-            </ion-button>
-          </div>
-
-          <div style="text-align: center; margin: auto;">
-            <ion-button (click)="logOut()">
-              <ion-icon name="power" slot="start"></ion-icon>
-              Log Out
+          
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button style="width: 2270px;" (click)="logOut()">
+              <ion-icon name="power" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Log Out
+              </ion-label>
             </ion-button>
           </div>
           
@@ -52,8 +68,8 @@
                 <ion-button expand="full" fill="clear" style="padding:10px;width: 100%; height:200px; font-size: 15px;"
                 (click)="openRequestsModal()">
                   <ion-icon name="document" size="large"></ion-icon>
-                  Requests
-                  <span style="float: right;" class="notification-count" *ngIf="notificationCount > 0">({{ notificationCount }})</span>
+                  Requests &nbsp;
+                  <span style="float: right;" class="notification-count" *ngIf="notificationCount > 0">[{{ notificationCount }}]</span>
                 </ion-button>
               </ion-col>
               <ion-col size="6">

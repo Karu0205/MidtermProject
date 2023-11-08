@@ -1,7 +1,7 @@
 
-<ion-header [translucent]="true" class="header-container">
+<ion-header [translucent]="true" class="header-container" style="height: 180px;">
   <div class="header-content">
-    <p>The Home of Christian Leaders <br> Shining Forward to Fullness</p>
+    <p style="font-family: baskerville;">The Home of Christian Leaders <br> Shining Forward to Fullness</p>
   </div>
   <ion-img src="./assets/whitelogo.png"></ion-img>
 </ion-header>
@@ -11,31 +11,36 @@
       <ion-card class="info">
         <img (click)="openSettingsModal()" [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 200px; height:200px;">
           <ion-label class="label">      
-            <div *ngIf="userData" style="font-family: baskerville; font-size: 20px; bottom: 30px"> {{ userData.displayName }}</div>
-            <div *ngIf="userData" style="font-family: baskerville;"> {{ userData.email }}</div>
+            <div *ngIf="userData" style="font-family: 'Roboto', sans-serif; font-size: 20px; bottom: 50px; margin-top:10px"> {{ userData.displayName }}</div>
+            <div *ngIf="userData" style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 50px; margin-top:10px;"> {{ userData.Status }}</div>
           </ion-label>
 
           <br>
 
-          <div style="text-align: center; margin: auto;">
-            <ion-button (click)="openFormModal()">
-              <ion-icon name="document" slot="start"></ion-icon>
-              Request Document
-            </ion-button>
-          </div>
-
-          
-          <div style="text-align: center; margin: auto;">
-            <ion-button style="text-align: left;" (click)="openSchedModal()">
-              <ion-icon name="calendar" slot="start"></ion-icon>
-              Calendar
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button style="width: 270px;" (click)="openFormModal()">
+              <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Request
+              </ion-label>
             </ion-button>
           </div>
           
-          <div style="text-align: center; margin: auto;">
-            <ion-button (click)="logOut()">
-              <ion-icon name="power" slot="start"></ion-icon>
-              Log Out
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button  style="width: 270px; " (click)="openSchedModal()">
+              <ion-icon name="calendar" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Calendar
+              </ion-label>
+            </ion-button>
+          </div>
+          
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button  style="width: 270px;" (click)="logOut()">
+              <ion-icon name="power" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Log Out
+              </ion-label>
             </ion-button>
           </div>
       </ion-card>
@@ -50,7 +55,7 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-label style="font-size:large;font-family: baskerville; color:white; text-align:left">Your Requests:</ion-label>
+                <ion-label style="font-family: 'Roboto', sans-serif; font-size:large; color:white; text-align:left">Your Requests:</ion-label>
               </ion-col>
 
     
@@ -63,22 +68,52 @@
         <div class="scrollable-content">-->
 
           <ion-content>
+            <div class="scrollable-container">
+            <div class="scrollable-content">
             <ion-grid>
               <ion-row>
-                <ion-col size="4" *ngFor="let rq of userRequest">
+                <ion-col size="12" *ngFor="let rq of userRequest">
                   <ion-card>
                     <ion-card-content>
-                      <ion-label class="label-container">
-                        <ion-label style="font-family: baskerville; color: black;">Document Type: {{ rq.document_type }}</ion-label><br>
-                        <ion-label style="font-family: baskerville;">Status: {{ rq.status }}</ion-label><br>
-                        <ion-label style="font-family: baskerville;">Request Date: {{ rq.request_date }}</ion-label>
+                      <ion-label style="text-align: left !important;" class="label-container">
+                        <ion-label style="text-align: left !important; color: black;">Document Type: {{ rq.document_type }}</ion-label><br>
+                        <ion-label style="text-align: left !important;">Status: {{ rq.status }}</ion-label><br>
+                        <ion-label style="text-align: left !important;">Request Date: {{ rq.request_date }}</ion-label>
+          
+                        <!-- Progress Bar with Icon Labels and Text Labels -->
+                        <ion-progress-bar style="margin-bottom: 5px;" class="green-progress-bar" value="{{ calculateProgress(rq.status) / 100 }}"></ion-progress-bar>
+          
+                        <!-- Custom Icon and Text Labels with Spacing -->
+                        <ion-label [style.color]="getLabelColor(rq.status, 'Pending', 15)" class="custom-icon-label" style="margin-left: 70px;">
+                          <ion-icon name="checkmark-circle-outline"></ion-icon>
+                          <ion-label [style.color]="getLabelColor(rq.status, 'Pending', 15)" style="margin-right: 30px; margin-left: 0% !important">Pending</ion-label>
+                        </ion-label>
+                        <ion-label [style.color]="getLabelColor(rq.status, 'Accepted at Registrar', 30)" class="custom-icon-label">
+                          <ion-icon name="business"></ion-icon>
+                          <ion-label [style.color]="getLabelColor(rq.status, 'Accepted at Registrar', 30)" style="margin-right: 30px;">Registrar's office</ion-label>
+                        </ion-label>
+                        <ion-label [style.color]="getLabelColor(rq.status,'Forwarded to Principal’s Office', 45)" class="custom-icon-label">
+                          <ion-icon name="arrow-forward"></ion-icon>
+                          <ion-label [style.color]="getLabelColor(rq.status, 'Forwarded to Principal’s Office', 45)" style="margin-right: 30px;">Forwarded</ion-label>
+                        </ion-label>
+                        <ion-label [style.color]="getLabelColor(rq.status,  'Accepted at Principal’s Office', 60)" class="custom-icon-label">
+                          <ion-icon name="business"></ion-icon>
+                          <ion-label [style.color]="getLabelColor(rq.status, 'Accepted at Principal’s Office', 60)" style="margin-right: 30px;">Principal’s Office</ion-label>
+                        </ion-label>
+                        <ion-label [style.color]="getLabelColor(rq.status, 'Ready for Pickup', 100)" class="custom-icon-label">
+                          <ion-icon name="checkmark-done-circle"></ion-icon>
+                          <ion-label [style.color]="getLabelColor(rq.status, 'Ready for Pickup', 100)" style="margin-right: 30px;">Ready for Pickup</ion-label>
+                        </ion-label>
                       </ion-label>
                     </ion-card-content>
                   </ion-card>
                 </ion-col>
               </ion-row>
             </ion-grid>
+            </div>
+            </div>
           </ion-content>
+          
           
         <!--</div>
         </div>-->

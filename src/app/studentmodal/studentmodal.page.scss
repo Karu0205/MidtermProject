@@ -2,7 +2,7 @@ ion-toolbar{
     text-align: center;
 }
 ion-title{
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
   color:white;
   }
 
@@ -26,5 +26,17 @@ ion-select {
 .right-input {
   display: block;
   width: auto;
-  margin-left: 208px; /* Push the input to the right-most side */
+  margin-left: 200px; /* Push the input to the right-most side */
+}
+
+@media (max-width: 767px) {
+  .right-input {
+    display: block;
+    width: auto;
+    margin-left: 100px !important; /* Push the input to the right-most side */
+  }
+
+  ion-select{
+    margin-left: 175px !important;
+  }
 }

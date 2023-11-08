@@ -6,20 +6,20 @@
   <ion-card class="events" style="border: 3px solid white;">
     <ion-header>
       <ion-toolbar class="event_head">
-      <ion-label style="font-family: baskerville;">Events</ion-label>
+      <ion-label style="font-family: 'Roboto', sans-serif;">Events</ion-label>
       </ion-toolbar>
 
-      <ion-toolbar style="height: 40px; color: white;">
+      <ion-toolbar style="height: 40px; color: white; text-align:center">
         <ion-grid>
           <ion-row>
             <ion-col>
-              <ion-label style="font-family: baskerville;">Event</ion-label>
+              <ion-label style="font-family: 'Roboto', sans-serif;">Event</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label style="font-family: baskerville;">Date (Y-M-D)</ion-label>
+              <ion-label style="font-family: 'Roboto', sans-serif;">Date (Y-M-D)</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label style="font-family: baskerville;">Details</ion-label>
+              <ion-label style="font-family: 'Roboto', sans-serif;">Details</ion-label>
             </ion-col>
   
           </ion-row>
@@ -31,15 +31,15 @@
         <div class="scrollable-content2">
         <ion-list>
           <ion-item style="font-size: 12px;" *ngFor="let event of events">
-          <ion-label style="font-family: baskerville;">{{ event.title }}</ion-label>
-          <ion-label style="font-family: baskerville;">{{ event.startDate }}</ion-label>
-          <ion-label style="font-family: baskerville;">{{ event.description }}</ion-label>
+          <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.title }}</ion-label>
+          <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.startDate }}</ion-label>
+          <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.description }}</ion-label>
           </ion-item>
         </ion-list>
       </div>
       </div>
       </ion-card>
 
-      <ion-button style="font-family: baskerville; margin-top: 10px; --background: #9b2226;" expand="full" (click)="closeModal()">Close</ion-button>
+      <ion-button style="font-family: 'Roboto', sans-serif; margin-top: 10px; --background: #9b2226;" expand="full" (click)="closeModal()">Close</ion-button>
 
 </ion-content>

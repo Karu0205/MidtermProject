@@ -117,6 +117,11 @@ export class CompletedPage implements OnInit {
       }
     });
   }
+
+  onSearchTextChanged() {
+    console.log('Search Text changed:', this.searchText);
+    this.searchItems();
+  }
   
 
   formatTimestamp(timestamp: { seconds: number, nanoseconds: number }): string {

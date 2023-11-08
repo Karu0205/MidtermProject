@@ -26,7 +26,7 @@
   border: 1px solid #ccc; /* Add a border for visualization */
 }
 ion-label {
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
 }
 
 ion-toolbar{
@@ -35,7 +35,7 @@ ion-toolbar{
 
 ion-title{
   color: white;
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
 }
 
 img{
@@ -66,7 +66,7 @@ ion-button{
   width: 150px;
 
   font-size: 9px;
-  font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
 }
 
 .header-container {
@@ -111,7 +111,7 @@ ion-img{
   }
 
 .info {
-  background-image: url('/assets/3.png');
+  --background: #9b2226;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -119,8 +119,8 @@ ion-img{
   color: #fff;
   width: 20%;
   float: inline-start;
-  margin-top: 1.5%;
-  height: 400px;
+  margin-top: 3%;
+  height: 390px;
   margin-left: 40px;
 
 }
@@ -282,7 +282,7 @@ ion-label {
 }
 
   ion-header{
-    background-image: url('/assets/3.png');
+    --background: #9b2226;
     background-size: cover;
     background-color: #9b2226;
   }
@@ -298,7 +298,7 @@ p{
 }
 
 ion-text{
- font-family: baskerville;
+  font-family: 'Roboto', sans-serif;
 }
 
 ion-footer{
@@ -321,7 +321,7 @@ ion-footer{
     font-weight: bold;
     text-transform: uppercase;
     transition: color 0.3s ease;
-    font-family: baskerville;
+    font-family: 'Roboto', sans-serif;
   }
   
   ion-tab-bar{

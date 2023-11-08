@@ -25,11 +25,23 @@ export class AdmindocuPage implements OnInit {
   toEmail: string = '';
   subject: string = '';
   message: string = '';
+
+  selectedDocumentTypeFilter: string = '';
+  selectedStrandFilter: string = '';
+  selectedStatusFilter: string = '';
+
+  documentTypeFilterText: string = '';
+strandFilterText: string = '';
+
+  showPassword: boolean = false;
   
   accounts = [] as any;
   requests: Request[] = []; 
   items: any[];
   searchText: string;
+  progressBarValue: number;
+
+  selectedDocumentType: string = "";
   
   copyText(text: string) {
     this.copiedText = text;
@@ -66,6 +78,10 @@ export class AdmindocuPage implements OnInit {
     });
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
   sendEmail() {
     console.log("Value of this.toEmail before splitting:", this.toEmail);
     const emailAddresses = this.toEmail.split(',');
@@ -96,7 +112,6 @@ export class AdmindocuPage implements OnInit {
 
   searchItems() {
     console.log('SearchItems method called');
-    console.log('Search Text:', this.searchText);
   
     if (!this.searchText) {
       // If the search text is empty, display all items and sort them.
@@ -109,12 +124,12 @@ export class AdmindocuPage implements OnInit {
       // If there is a search text, filter items based on it.
       this.dataService.getItems().subscribe((requests) => {
         const filteredRequests = requests.filter((request) => {
-          const match = (
-            request.student_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.status.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.request_date.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            request.document_type.toLowerCase().includes(this.searchText.toLowerCase())
-          );
+          const searchTextLower = this.searchText.toLowerCase();
+          const match =
+            request.student_name.toLowerCase().includes(searchTextLower) ||
+            request.status.toLowerCase().includes(searchTextLower) ||
+            request.request_date.toLowerCase().includes(searchTextLower) ||
+            request.document_type.toLowerCase().includes(searchTextLower);
           return match;
         });
         this.requests = filteredRequests;
@@ -122,6 +137,39 @@ export class AdmindocuPage implements OnInit {
       });
     }
   }
+  onSearchTextChange() {
+    this.applySearchFilter();
+    this.applyFilters();
+  }
+  
+
+  applyFilters() {
+    // Filter based on dropdown filters (document_type and strand)
+    this.dataService.getItems().subscribe((requests) => {
+      this.requests = requests.filter((request) => {
+        const documentTypeFilterMatch = this.selectedDocumentTypeFilter === '' || request.document_type === this.selectedDocumentTypeFilter;
+        const strandFilterMatch = this.selectedStrandFilter === '' || request.strand === this.selectedStrandFilter;
+        const StatusFilterMatch = this.selectedStatusFilter === '' || request.Status === this.selectedStatusFilter;
+  
+        return documentTypeFilterMatch && strandFilterMatch && StatusFilterMatch;
+      });
+      this.applySearchFilter();
+    });
+  }
+  
+  applySearchFilter() {
+    // Apply the search bar filter in the filtered requests
+    const searchTextLower = this.searchText.toLowerCase();
+    this.requests = this.requests.filter((request) =>
+      request.student_name.toLowerCase().includes(searchTextLower) ||
+      request.request_date.toLowerCase().includes(searchTextLower) ||
+      request.document_type.toLowerCase().includes(searchTextLower) ||
+      request.status.toLowerCase().includes(searchTextLower)
+    );
+    this.sortRequests();
+  }
+  
+  
   
   sortRequests() {
     // Sort the requests by request_date in descending order (newest to oldest).
@@ -260,5 +308,34 @@ export class AdmindocuPage implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
+  calculateProgress(status: string): number {
+    if (status.includes('Pending')) {
+      return 15;
+    } else if (status.includes('Request being handled by: ')) {
+      return 30;
+    } else if (status.includes('Accepted at the Registrar\'s Office by: ')) {
+      return 30;
+    } else if (status.includes('Request forwarded to the principal’s office')) {
+      return 47;
+    } else if (status.includes('Accepted at the Principal\'s Office by: ')) {
+      return 63;
+    } else if (status.includes('Request is signed by the principal')) {
+      return 63;
+    } else if (status.includes('Ready for Pickup at the Registrar\'s Office')) {
+      return 100;
+    } else {
+      return 0;
+    }
+  }
+
+    getLabelColor(status: string, labelToHighlight: string, targetProgress: number): string {
+    const progress = this.calculateProgress(status);
+    if (progress >= targetProgress) {
+      return 'green';
+    } else {
+      return 'grey';
+    }
+  }
+  
 
 }

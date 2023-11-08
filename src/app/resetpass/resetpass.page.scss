@@ -1,5 +1,5 @@
 ion-toolbar{
-    font-family: baskerville;
+    font-family: 'Roboto', sans-serif;
     --background: #9b2226;
   }
 
@@ -10,16 +10,16 @@ ion-title{
 
 ion-back-button{
     color:#f4f4f4;
-    font-family: baskerville;
+    font-family: 'Roboto', sans-serif;
 }
 
 ion-button{
     --background: #9b2226;
-    font-family: baskerville;
+    font-family: 'Roboto', sans-serif;
 
 }
 ion-content{
-    --background: url('/assets/bg.png') no-repeat center center fixed;
+    --background: #9b2226;
     background-size: cover;
     height: 200px;
 }
@@ -29,3 +29,17 @@ ion-card{
     margin: auto;
     margin-top: 250px;
 }
+
+@media (max-width: 767px) {
+    ion-card{
+        width: 300px;
+        margin: auto;
+        margin-top: 250px;
+    }
+
+    ion-content{
+        --background: #9b2226;
+        background-size: cover;
+    }
+    
+  }

@@ -129,18 +129,38 @@ export class ModalPage implements OnInit {
   }
 
 
-  async forApproval(){
-    await this.dataService.addApproval(this.request!);
-    this.addNotification2();
+  async forApproval() {
 
-    this.emailService.sendEmail(
-      '90.001.snfss@gmail.com',
-      'There is a new ' + this.request.document_type + ' request to be approved from: ' + this.request.email,
-      this.request.student_name
-    );
-
+    const confirmationAlert = await this.alertCtrl.create({
+      header: 'Forward Request',
+      message: 'Would you want to forward the request?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            // User canceled the email send
+          },
+        },
+        {
+          text: 'Forward',
+          handler: () => {
+            this.emailService.sendEmail(
+              '90.001.snfss@gmail.com',
+              'There is a new ' + this.request.document_type + ' request to be approved from: ' + this.request.email,
+              this.request.student_name
+            );
+            this.dataService.addApproval(this.request!);
+            this.addNotification2();
+          
+            this.modalCtrl.dismiss();
+          },
+        },
+      ],
+    });
+  
+    await confirmationAlert.present();
   }
-
   async updateRequest() {
     await this.dataService.updateRequest(this.request!);
     const toast = await this.toastCtrl.create({
