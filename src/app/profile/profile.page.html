@@ -18,10 +18,10 @@
           <br>
 
           <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-            <ion-button style="width: 270px;" (click)="openFormModal()">
+            <ion-button style="width: 270px;" (click)="home()">
               <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
               <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
-                Request
+                Home Page
               </ion-label>
             </ion-button>
           </div>
@@ -55,7 +55,7 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-label style="font-family: 'Roboto', sans-serif; font-size:large; color:white; text-align:left">Your Requests:</ion-label>
+                <ion-label style="font-family: 'Roboto', sans-serif; font-size:large; color:white; text-align:left">Track your request:</ion-label>
               </ion-col>
 
     
@@ -68,17 +68,29 @@
         <div class="scrollable-content">-->
 
           <ion-content>
-            <div class="scrollable-container">
-            <div class="scrollable-content">
             <ion-grid>
               <ion-row>
-                <ion-col size="12" *ngFor="let rq of userRequest">
+                <ion-col size="12" style="text-align: left; display: flex; align-items: center; justify-content: flex-start; margin: top 50px;">
+                  <ion-item>
+                  <ion-input style="margin-left: 20px; width: 200px; height: 40px !important;" placeholder="Enter Reference Code" [(ngModel)]="inputRequestId" size="small"></ion-input>
+                </ion-item>
+                <ion-button style="width: 50px; height: 50px;" (click)="askForRequestId()">
+                  <ion-icon name="arrow-forward" size="default"></ion-icon>
+                </ion-button>
+                
+                </ion-col>
+                
+              </ion-row>
+              <ion-row *ngFor="let rq of userRequest">
+                <ion-col size="12" *ngIf="rq.req_id === selectedRequestId">
                   <ion-card>
                     <ion-card-content>
-                      <ion-label style="text-align: left !important;" class="label-container">
+                      <ion-label style="text-align: left !important; height:310px" class="label-container">
                         <ion-label style="text-align: left !important; color: black;">Document Type: {{ rq.document_type }}</ion-label><br>
                         <ion-label style="text-align: left !important;">Status: {{ rq.status }}</ion-label><br>
-                        <ion-label style="text-align: left !important;">Request Date: {{ rq.request_date }}</ion-label>
+                        <ion-label style="text-align: left !important;">Request Date: {{ rq.request_date }}</ion-label><br>
+                        <ion-label style="text-align: left !important;">Payment Status: {{ rq.payment }}</ion-label><br>
+                        <ion-label style="text-align: left !important;">Remark: {{ rq.remarks }}</ion-label><br>
           
                         <!-- Progress Bar with Icon Labels and Text Labels -->
                         <ion-progress-bar style="margin-bottom: 5px;" class="green-progress-bar" value="{{ calculateProgress(rq.status) / 100 }}"></ion-progress-bar>
@@ -104,15 +116,16 @@
                           <ion-icon name="checkmark-done-circle"></ion-icon>
                           <ion-label [style.color]="getLabelColor(rq.status, 'Ready for Pickup', 100)" style="margin-right: 30px;">Ready for Pickup</ion-label>
                         </ion-label>
+                        <!-- Add other custom labels as needed -->
                       </ion-label>
                     </ion-card-content>
                   </ion-card>
                 </ion-col>
               </ion-row>
-            </ion-grid>
-            </div>
-            </div>
+            </ion-grid>            
           </ion-content>
+          
+
           
           
         <!--</div>

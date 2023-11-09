@@ -16,13 +16,13 @@ import { SchedulePage } from '../schedule/schedule.page';
 import { SettingsPage } from '../settings/settings.page';
 import { Subscription } from 'rxjs';
 
-
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-reminders',
+  templateUrl: './reminders.page.html',
+  styleUrls: ['./reminders.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class RemindersPage implements OnInit {
+
 
   private subscription: Subscription;
 
@@ -38,7 +38,6 @@ export class ProfilePage implements OnInit {
   }
 
   progressBarValue: number;
-  inputRequestId: string = '';
 
   selectedImage: File | null = null;
   userProfile: any = {}; // Initialize an empty object for the user's profile data.
@@ -55,9 +54,6 @@ export class ProfilePage implements OnInit {
 
   accounts: Account[] = []; 
   requests: Request[] = []; 
-
-  selectedRequestId: string | null = null;
-  selectedRequest: any | null = null;
 
   
   events: Event[] = [];
@@ -235,6 +231,8 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
 
+    this.openSchedModal()
+
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userId = user.uid; // Store the current user's UID.
@@ -281,16 +279,6 @@ export class ProfilePage implements OnInit {
     this.eventService.getEvents().subscribe((events) => {
       this.events = events;
     });
-  }
-
-  askForRequestId() {
-    const reqId = this.inputRequestId;
-  
-    if (reqId) {
-      // Set the selected request ID and fetch the corresponding request
-      this.selectedRequestId = reqId;
-      this.selectedRequest = this.userRequest.find((rq) => rq.req_id === reqId);
-    }
   }
 
 
@@ -342,11 +330,6 @@ export class ProfilePage implements OnInit {
   logIn(){
     this.router.navigate(['/documents'])
   }
-
-  home(){
-    this.router.navigate(['/reminders'])
-  }
-
 
   openForm(){
     this.router.navigate(['/form'])
@@ -531,6 +514,4 @@ export class ProfilePage implements OnInit {
       });
     }
 
-
-  
 }

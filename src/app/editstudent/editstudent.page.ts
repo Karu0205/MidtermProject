@@ -23,6 +23,8 @@ export class EditstudentPage implements OnInit {
   public Status: any;
   public uid: any;
 
+  selectedStatusFilter: string = '';
+
   searchTerm: string = '';
   accountsToShow: any[] = [];
 
@@ -92,28 +94,32 @@ export class EditstudentPage implements OnInit {
   }
 
   searchItems() {
-    console.log('SearchItems method called');
-    console.log('Search Text:', this.searchTerm);
+    this.applySearchFilter();
+    this.applyFilters();
+  }
   
-    if (!this.searchTerm) {
-      // If the search text is empty, display all items.
-      this.filteredAccounts = [...this.accounts]; // Reset the filtered list
-    } else {
-      // If there is a search text, filter items based on it.
-      const searchTermLower = this.searchTerm.toLowerCase();
+  applyFilters() {
+    // Filter based on the selectedStatusFilter (and any other filters you may add in the future)
+    this.filteredAccounts = this.accounts.filter((account) => {
+      const statusFilterMatch = this.selectedStatusFilter === '' || account.Status === this.selectedStatusFilter;
   
-      this.filteredAccounts = this.accounts.filter((account) => {
-        const displayName = account.displayName ? account.displayName.toLowerCase() : '';
-        const status = account.Status ? account.Status.toLowerCase() : '';
+      return statusFilterMatch;
+    });
   
-        const match = (
-          displayName.includes(searchTermLower) ||
-          status.includes(searchTermLower)
-        );
+    // Apply the search filter on the filtered accounts
+    this.applySearchFilter();
+  }
   
-        return match;
-      });
-    }
+  applySearchFilter() {
+    // Create a copy of the filtered accounts array
+    const filteredAccountsCopy = [...this.filteredAccounts];
+  
+    // Apply the search bar filter on the copied array
+    const searchTermLower = this.searchTerm.toLowerCase();
+    this.filteredAccounts = filteredAccountsCopy.filter((account) =>
+      account.displayName.toLowerCase().includes(searchTermLower) ||
+      account.Status.toLowerCase().includes(searchTermLower)
+    );
   }
 
 

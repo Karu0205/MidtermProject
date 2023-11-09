@@ -1,6 +1,6 @@
 
   <ion-toolbar>
-    <ion-title>Accounts</ion-title>
+    <ion-title>Users</ion-title>
     <ion-buttons slot="start">
 
       <ion-button style="color: white;" (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
@@ -37,6 +37,11 @@
     
     <br>
     
+    <ion-item *ngIf="isAdmin === 'false'">
+      <ion-label position="stacked">LRN</ion-label>
+      <ion-input [(ngModel)]='lrn'></ion-input>
+    </ion-item>
+
     <ion-item *ngIf="isAdmin === 'false'">
       <ion-label position="stacked">Student Status</ion-label>
       <ion-select [(ngModel)]="Status">

@@ -22,6 +22,7 @@ export class SignupPage implements OnInit {
   public isAdmin: any;
   public Status: any;
   public uid: any;
+  public lrn: any;
 
   accounts: Account[] = []; 
   requests: Request[] = []; 
@@ -94,6 +95,7 @@ export class SignupPage implements OnInit {
           password: this.password,
           displayName: this.displayName,
           isAdmin: this.isAdmin,
+          lrn: this.lrn,
           uid: res.user!.uid,
         };
   

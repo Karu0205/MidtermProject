@@ -23,6 +23,7 @@ export class EnrollmentPage implements OnInit {
   folderPath = '/CertificateOfEnrollment'; // Replace with your Firebase Storage folder path
   contents: any[] = [];
   searchText: string = '';
+  filterTerm: string = ''; // Initialize it as an empty string
 
   uploadedDocuments: any[] 
 
@@ -143,16 +144,24 @@ export class EnrollmentPage implements OnInit {
 
 
   filterContents() {
-    if (this.searchText.trim() === '') {
-      // If search text is empty, reset to the original data
+    if (this.searchText.trim() === '' && !this.filterTerm) {
+      // If search text is empty and no filter term is selected, reset to the original data
       this.filteredContents = this.contents.slice(); // Make a copy
     } else {
-      // Filter based on search text
+      // Apply search text filter
       this.filteredContents = this.contents.filter((item) =>
         item.name.toLowerCase().includes(this.searchText.toLowerCase())
       );
     }
+  
+    // Apply additional filter based on the selected option
+    if (this.filterTerm) {
+      this.filteredContents = this.filteredContents.filter((item) =>
+        item.name.toLowerCase().includes(this.filterTerm.toLowerCase())
+      );
+    }
   }
+
 
 downloadItem(item: any) {
   const fileUrl = item.url;

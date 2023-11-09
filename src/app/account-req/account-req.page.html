@@ -1,0 +1,64 @@
+<!-- account-request.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Account Request
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Form to submit account request -->
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Full Name</ion-label>
+        <ion-input [(ngModel)]="fullName" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">LRN</ion-label>
+        <ion-input [(ngModel)]="lrn" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Enrollment Date</ion-label>
+        <ion-input type="date" [(ngModel)]="enrollmentDate" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Graduation Date (Optional)</ion-label>
+        <ion-input type="date" [(ngModel)]="graduationDate"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Selfie with ID</ion-label>
+        <input type="file" (change)="handleImageUpload($event)" accept="image/*">
+      </ion-item>
+
+      <ion-button expand="full" (click)="submitRequest()">Submit Request</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Display submitted requests -->
+  <ion-card *ngFor="let request of accountRequests">
+    <ion-card-header>
+      Request ID: {{ request.id }}
+    </ion-card-header>
+    <ion-card-content>
+      Full Name: {{ request.fullName }}<br>
+      Email: {{ request.email }}<br>
+      LRN: {{ request.lrn }}<br>
+      Enrollment Date: {{ request.enrollmentDate }}<br>
+      Graduation Date: {{ request.graduationDate || 'Not Applicable' }}<br>
+      Account Status: {{ request.accountStatus }}<br>
+      <!-- Display other details as needed -->
+      <img *ngIf="request.imageUrl" [src]="request.imageUrl" alt="Selfie with ID">
+    </ion-card-content>
+  </ion-card>
+</ion-content>

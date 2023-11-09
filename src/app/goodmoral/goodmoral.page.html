@@ -21,6 +21,14 @@
 
 
 <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="filterContents()" placeholder="Enter name or title"></ion-searchbar>
+<ion-item>
+  <ion-label>Filter by Level:</ion-label>
+  <ion-select [(ngModel)]="filterTerm" (ionChange)="filterContents()">
+    <ion-select-option value="">All</ion-select-option>
+    <ion-select-option value="SHS">SHS</ion-select-option>
+    <ion-select-option value="JHS">JHS</ion-select-option>
+  </ion-select>
+</ion-item>
 <ion-card>
 <div class="scrollable-container">
 <div class="scrollable-content">

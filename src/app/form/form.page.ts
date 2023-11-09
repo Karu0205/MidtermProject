@@ -25,10 +25,23 @@ export class FormPage {
     contact_no: '',
     year_level: '',
     strand: '',
-    quantity: 1,
+    doc_status: '',
+    payment: '',
+    remarks: '',
     Status: ''
   };
   showStatusInput: boolean = false;
+  selectedDocumentTypes: string[] = [];
+
+  documentOptions = [
+    { label: 'Form 137', value: 'Form 137', checked: false, quantity: 0 },
+    { label: 'ESC Certificate', value: 'ESC Certificate', checked: false, quantity: 0 },
+    { label: 'Enrollment Form', value: 'Enrollment Form', checked: false, quantity: 0 },
+    { label: 'Certificate of Good Moral', value: 'Certificate of Good Moral', checked: false, quantity: 0 },
+    { label: 'Certificate of Completion', value: 'Certificate of Completion', checked: false, quantity: 0 },
+    { label: 'Certifiacte of Ranking', value: 'Certifiacte of Ranking', checked: false, quantity: 0 },
+    { label: 'Certificate of English as Medium of Instruction', checked: false, value: 'Certificate of English as Medium of Instruction', quantity: 0 },
+  ];
 
   documentTypes: string[] = [
     'Form 137',
@@ -53,8 +66,10 @@ export class FormPage {
       this.formData.contact_no = this.navParams.get('contact_no');
       this.formData.year_level = this.navParams.get('year_level');
       this.formData.strand = this.navParams.get('strand');
-      this.formData.quantity = this.navParams.get('quantity');
       this.formData.document_type = this.navParams.get('document_type');
+      this.formData.doc_status = this.navParams.get('doc_status');
+      this.formData.payment = this.navParams.get('payment');
+      this.formData.remarks = this.navParams.get('remarks');
     }
 
   userName: any;
@@ -68,90 +83,116 @@ export class FormPage {
 
 
   async submitForm() {
-    const alert = await this.alertController.create({
-      header: 'Confirm Request Submission',
-      message: 'Are you sure you want to submit this request? This request is final and cannot be changed.',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            // User canceled the request submission.
-          }
-        },
-        {
-          text: 'Submit',
-          handler: () => {
-            // Create a new Date object
-            const currentDate = new Date();
-            // Format the date as "yyyy-MM-dd"
-            const formattedDate = currentDate.toISOString().slice(0, 10);
-            // Set the request_date field to the formatted date
-            this.formData.request_date = formattedDate;
-            this.formData.status = 'Pending';
+    try {
+      // Filter out the selected document types with non-zero quantity
+      const selectedOptions = this.documentOptions.filter(option => option.checked && option.quantity > 0);
   
-            // Check if year_level is undefined or empty, and set a default value if needed
-            if (!this.formData.year_level) {
-              this.formData.year_level = 'n/a';
+      // Check if any selected option has quantity 0
+      if (selectedOptions.length === 0) {
+        window.alert('Please select at least one document type with a quantity greater than 0.');
+        return; // Prevent further execution
+      }
+  
+      // Set formData.document_type to the selected document types with quantities
+      this.formData.document_type = selectedOptions
+        .map(option => `${option.label} (${option.quantity})`)
+        .join(', ');
+  
+      const alert = await this.alertController.create({
+        header: 'Confirm Request Submission',
+        message: 'Are you sure you want to submit this request? This request is final and cannot be changed.',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              // User canceled the request submission.
             }
+          },
+          {
+            text: 'Submit',
+            handler: async () => {
+              // Try to add the request to the "requests" collection using your data service
+              try {
+                // Validate required fields
+                if (!this.formData.email || !this.formData.student_name || !this.formData.document_type) {
+                  throw new Error('Missing required fields.');
+                }
   
-            // Check if strand is undefined or empty, and set a default value if needed
-            if (!this.formData.strand) {
-              this.formData.strand = 'n/a';
-            }
+                // Additional validation if needed
   
-            // Log the initial value of formData.status
-            console.log('Initial status:', this.formData.status);
+                // Create a new Date object
+                const currentDate = new Date();
+                // Format the date as "yyyy-MM-dd"
+                const formattedDate = currentDate.toISOString().slice(0, 10);
+                // Set the request_date field to the formatted date
+                this.formData.request_date = formattedDate;
+                this.formData.status = 'Pending';
+                this.formData.doc_status = 'New';
+                this.formData.payment = 'Not Paid';
   
-            // Try to add the request to the "requests" collection using your data service
-            this.dataService.addRequest(this.formData)
-              .then(() => {
+                // Check if year_level is undefined or empty, and set a default value if needed
+                if (!this.formData.year_level) {
+                  this.formData.year_level = 'n/a';
+                }
+  
+                // Check if strand is undefined or empty, and set a default value if needed
+                if (!this.formData.strand) {
+                  this.formData.strand = 'n/a';
+                }
+  
+                // Log the initial value of formData.status
+                console.log('Initial status:', this.formData.status);
+  
+                // Add the request to the "requests" collection using your data service
+                await this.dataService.addRequest(this.formData);
+  
                 // Request was added successfully
                 this.modalController.dismiss();
   
                 // Reset the form after successful submission
                 this.formData = {
                   student_name: this.navParams.get('userName'),
-                  document_type: this.navParams.get('document_type'),
+                  document_type: this.selectedDocumentTypes.join(', '),
                   status: 'Pending',
+                  doc_status: 'New',
+                  payment: 'Not Paid',
                   student_id: this.navParams.get('userId'),
                   email: this.navParams.get('userEmail'),
                   Status: this.navParams.get('Status'),
                   lrn: this.navParams.get('lrn'),
                   contact_no: this.navParams.get('contact_no'),
-                  year_level: 'n/a', // Set a default value for year_level
-                  strand: 'n/a', // Set a default value for strand
-                  quantity: this.navParams.get('quantity'),
-                  request_date: formattedDate, // Set the request_date to the formatted date
+                  year_level: 'n/a',
+                  strand: 'n/a',
+                  remarks: this.navParams.get('remarks'),
+                  request_date: formattedDate,
                 };
+  
                 this.addNotification();
-                const emailSubject = `There is a new ${this.selectedDocumentType} request from ${this.userData.email}`;
-                this.emailService.sendEmail('90.002.snfss@gmail.com', emailSubject, this.userData.displayName);
-                this.emailService.sendEmail('90.003.snfss@gmail.com', emailSubject, this.userData.displayName);
+  
+                const emailSubject = `There is a new ${this.formData.document_type} request from ${this.formData.email}`;
+                this.emailService.sendEmail('90.002.snfss@gmail.com', emailSubject, this.formData.email);
+                this.emailService.sendEmail('90.003.snfss@gmail.com', emailSubject, this.formData.email);
+  
                 window.alert('Your request has been sent, kindly await updates and check your emails.');
-              })
-              .catch(error => {
+              } catch (error) {
                 // Request failed to add
                 console.error('Error adding request:', error);
                 window.alert('An error occurred while adding the request.');
-              });
+              }
+            }
           }
-        }
-      ]
-    });
+        ]
+      });
   
-    await alert.present();
-  }
-  increaseQuantity() {
-    this.formData.quantity += 1;
-  }
-
-  // Function to decrease the quantity
-  decreaseQuantity() {
-    if (this.formData.quantity > 1) {
-      this.formData.quantity -= 1;
+      await alert.present();
+    } catch (error) {
+      // Handle unexpected errors
+      console.error('Unexpected error in submitForm:', error);
+      window.alert('An unexpected error occurred. Please try again.');
     }
   }
+
 
   async closeModal() {
     await this.modalController.dismiss();
@@ -184,7 +225,8 @@ export class FormPage {
             this.formData.contact_no = this.userData.contact_no
             this.formData.year_level = this.userData.year_level
             this.formData.strand = this.userData.strand
-            this.formData.quantity = this.userData.quantity
+            this.formData.remarks = this.userData.remarks
+
             this.formData.document_type = this.userData.document_type
           });
         // User is logged in

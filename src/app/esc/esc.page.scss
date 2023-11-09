@@ -1,5 +1,5 @@
 ion-content {
-  font-family: 'Roboto', sans-serif;
+  font-family: baskerville !important;
 }
 
 ion-header{
@@ -12,12 +12,12 @@ ion-header{
 }
 
 .scrollable-container {
-  height: 250px; /* Adjust the height as needed */
+  height: 200px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
 }
 
 p{
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 250%;
     color: white;
     text-align: center;

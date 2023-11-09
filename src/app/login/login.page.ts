@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
           console.log('User ID:', userId);
           console.log('User Name:', userName);
           console.log('User Email:', userEmail);
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/reminders']);
         },err=>{
           console.log(err);
         });

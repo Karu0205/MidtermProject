@@ -3,7 +3,7 @@
 <ion-content [fullscreen]="true">
 
 
-<ion-card style="height: 400px;">
+<ion-card style="height: 400px;" class="body">
 
   <ion-header>
 
@@ -50,9 +50,11 @@
                 <ion-card-content>
                   <ion-label style="text-align: left !important;" class="label-container">
                     <ion-label style="margin-right:0% !important; text-align: left !important; color: black;"> {{ request.document_type }}</ion-label><br>
-                    <ion-label style="text-align: left !important;">From: {{ request.student_name }}</ion-label><br>
+                    <ion-label style="text-align: left !important;">From: {{ request.lrn }}</ion-label><br>
                     <ion-label style="text-align: left !important;">Status: {{ request.status }}</ion-label><br>
                     <ion-label style="text-align: left !important;">Request Date: {{ request.request_date }}</ion-label>
+                    <ion-label style="text-align: left !important;">Quantity: {{ request.quantity }}</ion-label>
+                    <ion-label style="text-align: left !important;">Tracking ID: {{ request.req_id }}</ion-label>
     
                     <!-- Progress Bar with Icon Labels and Text Labels -->
                     <ion-progress-bar style="margin-bottom: 5px;" class="green-progress-bar" value="{{ calculateProgress(request.status) / 100 }}"></ion-progress-bar>

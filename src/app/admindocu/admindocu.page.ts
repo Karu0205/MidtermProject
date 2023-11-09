@@ -163,7 +163,9 @@ strandFilterText: string = '';
     this.requests = this.requests.filter((request) =>
       request.student_name.toLowerCase().includes(searchTextLower) ||
       request.request_date.toLowerCase().includes(searchTextLower) ||
+      request.lrn.toLowerCase().includes(searchTextLower) ||
       request.document_type.toLowerCase().includes(searchTextLower) ||
+      request.req_id?.toLowerCase().includes(searchTextLower) ||
       request.status.toLowerCase().includes(searchTextLower)
     );
     this.sortRequests();

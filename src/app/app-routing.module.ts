@@ -133,7 +133,8 @@ const routes: Routes = [
   {
     path: 'requests',
     loadChildren: () => import('./requests/requests.module').then( m => m.RequestsPageModule)
-  },  {
+  },
+  {
     path: 'approval',
     loadChildren: () => import('./approval/approval.module').then( m => m.ApprovalPageModule)
   },
@@ -153,6 +154,15 @@ const routes: Routes = [
     path: 'studentmodal',
     loadChildren: () => import('./studentmodal/studentmodal.module').then( m => m.StudentmodalPageModule)
   },
+  {
+    path: 'reminders',
+    loadChildren: () => import('./reminders/reminders.module').then( m => m.RemindersPageModule),
+    canActivate: [AuthGuard] // Use a guard to protect student routes
+  },  {
+    path: 'account-req',
+    loadChildren: () => import('./account-req/account-req.module').then( m => m.AccountReqPageModule)
+  },
+
 
 
 

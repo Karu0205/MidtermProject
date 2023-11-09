@@ -1,0 +1,133 @@
+
+<ion-header [translucent]="true" class="header-container" style="height: 180px;">
+  <div class="header-content">
+    <p style="font-family: baskerville;">The Home of Christian Leaders <br> Shining Forward to Fullness</p>
+  </div>
+  <ion-img src="./assets/whitelogo.png"></ion-img>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+      
+      <ion-card class="info">
+        <img (click)="openSettingsModal()" [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 200px; height:200px;">
+          <ion-label class="label">      
+            <div *ngIf="userData" style="font-family: 'Roboto', sans-serif; font-size: 20px; bottom: 50px; margin-top:10px"> {{ userData.displayName }}</div>
+            <div *ngIf="userData" style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 50px; margin-top:10px;"> {{ userData.Status }}</div>
+          </ion-label>
+
+          <br>
+
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button style="width: 270px;" (click)="toProfile()">
+              <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Your Requests
+              </ion-label>
+            </ion-button>
+          </div>
+          
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button  style="width: 270px; " (click)="openSchedModal()">
+              <ion-icon name="calendar" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Calendar
+              </ion-label>
+            </ion-button>
+          </div>
+          
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button  style="width: 270px;" (click)="logOut()">
+              <ion-icon name="power" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                Log Out
+              </ion-label>
+            </ion-button>
+          </div>
+      </ion-card>
+
+     
+
+
+      <ion-card class="request">
+        <ion-header class="centered-header">
+          <ion-text style="color: white; font-size: large;">
+            Reminders:
+          </ion-text>
+        </ion-header>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-card style="height: 150px;">
+              <ion-item style="font-size: small; margin-top: 10px; margin-bottom: 10px">
+                <div class="numbered-list">
+                  <div class="list-item">You can only send one request at a time for each document type.</div>
+                  <div class="list-item">Kindly double-check information before sending the form.</div>
+                  <div class="list-item">Once request is out, emails will be sent to update you of your request.</div>
+                  <div class="list-item">If you need to update status to Alumni, send an email.</div>
+                </div>
+              </ion-item>
+              
+            </ion-card>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card style="height: 150px;">
+              <ion-item style="font-size: small; margin-top: 10px; margin-bottom: 10px;">
+                <div>
+                  <div class="item">Office Hours: 7:00 am - 4:00 pm</div>
+                  <div class="item">Address: R6X3+HM5, Batangas - Quezon Rd, Rosario, 4228 Batangas
+                  </div>
+                  <div class="item">Email: kalatasservices@gmail.com</div>
+                  <div class="item">Contact Number: (043) 740 0141</div>
+                </div>
+              </ion-item>
+              
+            </ion-card>
+          </ion-col>
+          <ion-col size="12">
+            <ion-card class="documents" style="height: 300px;">
+              <ion-header class="centered-header">
+                <ion-text style="color: white; font-size: large;">
+                  Documents:
+                </ion-text>
+              </ion-header>
+              <ion-item style="font-size: small; margin-top: 10px; margin-bottom: 20px">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4">
+                      <div class="numbered-list">
+                        <div class="item">Form 137 (150 php)</div>
+                        <div class="item">ESC Certificate  (100 php)</div>
+                        <div class="item">Certificate of Good Moral  (150 php)</div>
+                      </div>
+                    </ion-col>
+                    <ion-col size="4">
+                      <div class="numbered-list">
+                        <div class="item">Certificate of Completion  (100 php)</div>
+                        <div class="item">Certificate of Enrollment  (100 php)</div>
+                        <div class="item">Certificate of Ranking  (100 php)</div>
+                      </div>
+                    </ion-col>
+                    <ion-col size="4">
+                      <div class="numbered-list">
+                        <div class="item">Certificate of English as Medium of Instruction  (100 php)</div>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+                <ion-button style="width: 270px;" (click)="openFormModal()">
+                  <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+                  <ion-label style="text-align: center; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+                    Request a document
+                  </ion-label>
+                </ion-button>
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+
+
+</ion-content>

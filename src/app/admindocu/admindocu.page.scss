@@ -36,7 +36,7 @@ ion-footer{
 }
 
 .scrollable-container {
-  height: 2300px; /* Adjust the height as needed */
+  height: 230px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
 }
 
@@ -182,6 +182,23 @@ ion-label {
   .button-container {
     flex-direction: column;
     align-items: flex-start; /* Optional: Adjust alignment if needed */
+  }
+
+  ion-label{
+    font-size: 10px !important;
+    white-space: normal !important; /* Allows text to wrap to the next line */
+    word-wrap: break-word !important;
+  }
+
+  ion-select{
+    font-size:small !important;
+    white-space: normal !important; /* Allows text to wrap to the next line */
+    word-wrap: break-word !important; /* Breaks words that exceed the container width */
+  }
+
+  .scrollable-container {
+    height: 700px !important; /* Adjust the height as needed */
+    overflow-y: scroll; /* Enable vertical scrolling */
   }
 }
 
