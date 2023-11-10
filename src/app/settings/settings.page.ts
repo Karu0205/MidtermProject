@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Account, FirebaseService, Request } from '../service/firebase.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -30,8 +30,9 @@ export class SettingsPage implements OnInit {
     userProfile: any = {}; // Initialize an empty object for the user's profile data.
     desiredImageWidth = 200; // Adjust this to your desired width.
     desiredImageHeight = 200; // Adjust this to your desired height.
-  
-  
+    
+    @Input() uid: string;
+    user: any;
     userId: any;
     isLoggedIn: boolean;
     userName: any;
@@ -85,6 +86,11 @@ export class SettingsPage implements OnInit {
           this.userName = null;
   
         }
+      });
+
+      this.firestore.collection('users').doc(this.uid).valueChanges()
+      .subscribe((user: any) => {
+        this.user = user;
       });
     }
 

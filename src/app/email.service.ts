@@ -5,7 +5,7 @@ import * as emailjs from 'emailjs-com';
   providedIn: 'root',
 })
 export class EmailService {
-  private userID = 'v0Ifj4B7lWB4x7sj2'; // Replace with your Email.js User ID
+  private userID = '4sbibvj3jkPmnbpPh'; // Replace with your Email.js User ID
 
   constructor() {
     emailjs.init(this.userID);
@@ -23,7 +23,7 @@ export class EmailService {
     };
 
     return emailjs
-      .send('service_kalatas', 'template_tp0cneh', emailParams)
+      .send('service_37dskd6', 'template_w5s2i4c', emailParams)
       .then((response) => {
         console.log('Email sent: ', response);
         return response;
@@ -46,7 +46,7 @@ export class EmailService {
     };
 
     return emailjs
-      .send('service_kalatas', 'template_tms145d', emailParams)
+      .send('service_37dskd6', 'template_rlda7k7', emailParams)
       .then((response) => {
         console.log('Email sent: ', response);
         return response;

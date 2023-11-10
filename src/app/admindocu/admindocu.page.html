@@ -13,16 +13,10 @@
     <ion-col size="6">
       <ion-item>
         <ion-label>Document Type</ion-label>
-        <ion-select [(ngModel)]="selectedDocumentTypeFilter" (ionChange)="applyFilters()">
+        <ion-select [(ngModel)]="selectedNewFilter" (ionChange)="applyFilters()">
           <ion-select-option value="">All</ion-select-option>
-          <ion-select-option value="Form 137">Form 137</ion-select-option>
-          <ion-select-option value="ESC Certificate">ESC Certificate</ion-select-option>
-          <ion-select-option value="Enrollment Form">Enrollment Form</ion-select-option>
-          <ion-select-option value="Certificate of Good Moral">Certificate of Good Moral</ion-select-option>
-          <ion-select-option value="Certificate of Completion">Certificate of Completion</ion-select-option>
-          <ion-select-option value="Certifiacte of Ranking">Certifiacte of Ranking</ion-select-option>
-          <ion-select-option value="Certificate of English as Medium of Instruction">Certificate of English as Medium of Instruction</ion-select-option>
-          <!-- Add options for each document type -->
+          <ion-select-option value="New">New</ion-select-option>
+
         </ion-select>
       </ion-item>
     </ion-col>
@@ -53,9 +47,11 @@
                     <ion-label style="text-align: left !important;">From: {{ request.lrn }}</ion-label><br>
                     <ion-label style="text-align: left !important;">Status: {{ request.status }}</ion-label><br>
                     <ion-label style="text-align: left !important;">Request Date: {{ request.request_date }}</ion-label>
-                    <ion-label style="text-align: left !important;">Quantity: {{ request.quantity }}</ion-label>
                     <ion-label style="text-align: left !important;">Tracking ID: {{ request.req_id }}</ion-label>
-    
+                    <ion-label style="text-align: right; position: absolute; top: 10px; right: 10px; font-weight: bold; font-size:medium; color:green">
+                      {{ request.doc_status }}
+                    </ion-label>
+                
                     <!-- Progress Bar with Icon Labels and Text Labels -->
                     <ion-progress-bar style="margin-bottom: 5px;" class="green-progress-bar" value="{{ calculateProgress(request.status) / 100 }}"></ion-progress-bar>
     

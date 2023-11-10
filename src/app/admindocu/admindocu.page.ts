@@ -29,6 +29,7 @@ export class AdmindocuPage implements OnInit {
   selectedDocumentTypeFilter: string = '';
   selectedStrandFilter: string = '';
   selectedStatusFilter: string = '';
+  selectedNewFilter: string = '';
 
   documentTypeFilterText: string = '';
 strandFilterText: string = '';
@@ -68,14 +69,14 @@ strandFilterText: string = '';
    }
 
   ngOnInit() {
-    this.dataService.getItems().subscribe(requests => {
-      this.requests = requests.sort((a, b) => {
-        const dateA = new Date(a.request_date).getTime();
-        const dateB = new Date(b.request_date).getTime();
+    //this.dataService.getItems().subscribe(requests => {
+      //this.requests = requests.sort((a, b) => {
+        //const dateA = new Date(a.request_date).getTime();
+        //const dateB = new Date(b.request_date).getTime();
     
-        return dateB - dateA; // Sort from newest to oldest, for oldest to newest, swap dateA and dateB.
-      });
-    });
+        //return dateB - dateA; // Sort from newest to oldest, for oldest to newest, swap dateA and dateB.
+      //});
+    //}); 
   }
 
   togglePasswordVisibility() {
@@ -150,8 +151,9 @@ strandFilterText: string = '';
         const documentTypeFilterMatch = this.selectedDocumentTypeFilter === '' || request.document_type === this.selectedDocumentTypeFilter;
         const strandFilterMatch = this.selectedStrandFilter === '' || request.strand === this.selectedStrandFilter;
         const StatusFilterMatch = this.selectedStatusFilter === '' || request.Status === this.selectedStatusFilter;
+        const StatusNewMatch = this.selectedNewFilter === '' || request.doc_status === this.selectedNewFilter;
   
-        return documentTypeFilterMatch && strandFilterMatch && StatusFilterMatch;
+        return documentTypeFilterMatch && strandFilterMatch && StatusFilterMatch && StatusNewMatch;
       });
       this.applySearchFilter();
     });
@@ -311,6 +313,10 @@ strandFilterText: string = '';
   }
 
   calculateProgress(status: string): number {
+    if (!status) {
+      return 0; // or some default value if status is undefined
+    }
+  
     if (status.includes('Pending')) {
       return 15;
     } else if (status.includes('Request being handled by: ')) {
@@ -329,6 +335,7 @@ strandFilterText: string = '';
       return 0;
     }
   }
+  
 
     getLabelColor(status: string, labelToHighlight: string, targetProgress: number): string {
     const progress = this.calculateProgress(status);

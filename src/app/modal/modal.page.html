@@ -5,42 +5,60 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
   <div *ngIf="request">
+    <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Student Name:</ion-label>
     <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Student Name:</ion-label>
+
       <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.student_name }}</ion-label>
     </ion-item>
-
+    <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Contact Number:</ion-label>
     <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Contact Number:</ion-label>
+
       <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.contact_no }}</ion-label>
     </ion-item>
-
+    <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Student Status:</ion-label>
     <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Student Status:</ion-label>
+      
       <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.Status }}</ion-label>
     </ion-item>
-
+    <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Year Level:</ion-label>
     <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Year Level:</ion-label>
+      
       <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.year_level }}</ion-label>
+    </ion-item>
+    <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Strand:</ion-label>
+    <ion-item>
+
+      <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.strand }}</ion-label>
+    </ion-item>
+    <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Reason for Request:</ion-label>
+    <ion-item>
+      <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px; height:55px">{{ request.remarks }}</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Strand:</ion-label>
-      <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.strand }}</ion-label>
+      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Payment Status:</ion-label>
+      <ion-select style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size: small; margin-right: 15px; margin-left:48.5% !important" [(ngModel)]="request.payment">
+        <ion-select-option value="Paid">
+          Paid
+        </ion-select-option>
+        <ion-select-option value="Not Paid">
+          Awaiting Payment
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Status Update:</ion-label>
-      <ion-select style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size: small; margin-right: 15px; margin-left:48.5% !important" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()">
+      <ion-select style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size: small; margin-right: 15px; margin-left:48.5% !important" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()" (ionChange)="onStatusSelectChange()">
         <ion-select-option [value]="'Accepted at the Registrar\'s Office by: ' + userData.displayName">
           Accepted
         </ion-select-option>
         <ion-select-option [value]="'Request being handled by: ' + userData.displayName" *ngIf="request.document_type !== 'Form 137'">
           In progress
         </ion-select-option>
-        <ion-select-option [value]="'Request forwarded to the principal’s office by: ' + userData.displayName">
+        <ion-select-option value="Request forwarded to the principal’s office">
           Forwarded
         </ion-select-option>
         <ion-select-option value="Ready for Pickup at the Registrar's Office">
@@ -52,19 +70,16 @@
   </div>
 
   <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block"(click)="updateRequest()">
-    <ion-icon name="save" slot="start"></ion-icon>
+    <ion-icon name="save" slot="stat"></ion-icon>
     Update
   </ion-button>
-
-  <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="forApproval()">
-    <ion-icon name="arrow-redo-outline" slot="start"></ion-icon>
-    Forward
-  </ion-button>
   
-  <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="closeModal()">
+  <ion-button style="font-family: 'Roboto', sans-serif; margin-bottom:10px !important; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="closeModal()">
     <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
     Return
   </ion-button>
+
+  </ion-card>
   
   
 

@@ -28,7 +28,8 @@ export class FormPage {
     doc_status: '',
     payment: '',
     remarks: '',
-    Status: ''
+    Status: '',
+    comment: ''
   };
   showStatusInput: boolean = false;
   selectedDocumentTypes: string[] = [];
@@ -70,6 +71,7 @@ export class FormPage {
       this.formData.doc_status = this.navParams.get('doc_status');
       this.formData.payment = this.navParams.get('payment');
       this.formData.remarks = this.navParams.get('remarks');
+      this.formData.comment = this.navParams.get('comment');
     }
 
   userName: any;
@@ -130,6 +132,7 @@ export class FormPage {
                 this.formData.status = 'Pending';
                 this.formData.doc_status = 'New';
                 this.formData.payment = 'Not Paid';
+                this.formData.comment = ' ';
   
                 // Check if year_level is undefined or empty, and set a default value if needed
                 if (!this.formData.year_level) {
@@ -166,13 +169,14 @@ export class FormPage {
                   strand: 'n/a',
                   remarks: this.navParams.get('remarks'),
                   request_date: formattedDate,
+                  comment: ' ',
                 };
   
                 this.addNotification();
   
-                const emailSubject = `There is a new ${this.formData.document_type} request from ${this.formData.email}`;
-                this.emailService.sendEmail('90.002.snfss@gmail.com', emailSubject, this.formData.email);
-                this.emailService.sendEmail('90.003.snfss@gmail.com', emailSubject, this.formData.email);
+                //const emailSubject = `There is a new ${this.formData.document_type} request from ${this.formData.email}`;
+                //this.emailService.sendEmail('90.002.snfss@gmail.com', emailSubject, this.formData.email);
+                //this.emailService.sendEmail('90.003.snfss@gmail.com', emailSubject, this.formData.email);
   
                 window.alert('Your request has been sent, kindly await updates and check your emails.');
               } catch (error) {
@@ -225,7 +229,8 @@ export class FormPage {
             this.formData.contact_no = this.userData.contact_no
             this.formData.year_level = this.userData.year_level
             this.formData.strand = this.userData.strand
-            this.formData.remarks = this.userData.remarks
+            this.formData.remarks = this.userData.
+            this.formData.comment = this.userData.comment
 
             this.formData.document_type = this.userData.document_type
           });

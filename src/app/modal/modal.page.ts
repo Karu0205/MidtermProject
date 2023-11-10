@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { Request, FirebaseService } from '../service/firebase.service';
 import { EmailService } from '../email.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { IonSelect } from '@ionic/angular';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class ModalPage implements OnInit {
 
   private subscription: Subscription;
   @Input() id: string;
+  @ViewChild('statusSelect') statusSelect: IonSelect;
+
   request: Request = null!;
   requests: Request[] = []; 
   approval = [] as any;
@@ -51,8 +54,10 @@ export class ModalPage implements OnInit {
   ngOnInit() {
     this.dataService.getRequestById(this.id).subscribe(req => {
       this.request = req;
+      this.updateDocStatusOnInit(); // Call the method to update doc_status
       console.log(req);
     });
+
 
     this.dataService.getApproval().subscribe((approval) => {
       this.approval = approval;
@@ -109,6 +114,23 @@ export class ModalPage implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
+  updateDocStatusOnInit() {
+    if (this.request && this.request.id) {
+      // Assuming 'doc_status' is the field you want to update
+      const updatedData = { doc_status: '' };
+
+      // Update the document in the Firestore collection
+      this.firestore.collection('requests').doc(this.request.id).update(updatedData)
+        .then(() => {
+          console.log('Document successfully updated!');
+        })
+        .catch((error) => {
+          console.error('Error updating document: ', error);
+        });
+    }
+  }
+
+
   
   fetchUserProfile(userId: string) {
     const userRef = this.firestore.collection('users').doc(userId);
@@ -130,7 +152,6 @@ export class ModalPage implements OnInit {
 
 
   async forApproval() {
-
     const confirmationAlert = await this.alertCtrl.create({
       header: 'Forward Request',
       message: 'Would you want to forward the request?',
@@ -144,15 +165,20 @@ export class ModalPage implements OnInit {
         },
         {
           text: 'Forward',
-          handler: () => {
+          handler: async () => {
+            // Update the status before forwarding
+            this.request.status = 'Request forwarded to the principal’s office';
+            await this.dataService.updateRequest(this.request); // Update the status in the database
+  
+            // Send the email and add approval
             this.emailService.sendEmail(
               '90.001.snfss@gmail.com',
               'There is a new ' + this.request.document_type + ' request to be approved from: ' + this.request.email,
-              this.request.student_name
+              this.request.lrn
             );
             this.dataService.addApproval(this.request!);
             this.addNotification2();
-          
+            
             this.modalCtrl.dismiss();
           },
         },
@@ -161,6 +187,7 @@ export class ModalPage implements OnInit {
   
     await confirmationAlert.present();
   }
+  
   async updateRequest() {
     await this.dataService.updateRequest(this.request!);
     const toast = await this.toastCtrl.create({
@@ -193,6 +220,18 @@ export class ModalPage implements OnInit {
     });
   
     await alert.present();
+  }
+
+  onStatusSelectChange() {
+    // Check if the selected status is "Forwarded"
+    if (this.request.status === 'Request forwarded to the principal’s office') {
+      // Call the forApproval() method
+      this.forApproval();
+      
+      // If you want to reset the selected status after triggering forApproval()
+      // you can uncomment the following line
+      // this.statusSelect.value = null;
+    }
   }
 
   async onStatusChange() {

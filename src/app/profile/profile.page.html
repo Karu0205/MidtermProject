@@ -86,14 +86,17 @@
                   <ion-card>
                     <ion-card-content>
                       <ion-label style="text-align: left !important; height:310px" class="label-container">
-                        <ion-label style="text-align: left !important; color: black;">Document Type: {{ rq.document_type }}</ion-label><br>
+                        <ion-label style="text-align: left !important; color: black; height:70px">Document Type: {{ rq.document_type }}</ion-label><br>
                         <ion-label style="text-align: left !important;">Status: {{ rq.status }}</ion-label><br>
                         <ion-label style="text-align: left !important;">Request Date: {{ rq.request_date }}</ion-label><br>
                         <ion-label style="text-align: left !important;">Payment Status: {{ rq.payment }}</ion-label><br>
-                        <ion-label style="text-align: left !important;">Remark: {{ rq.remarks }}</ion-label><br>
+                        <ion-label style="text-align: left !important;">Remarks:</ion-label><br>
+                        <ion-item>
+                          <ion-text style="font-family: 'Roboto', sans-serif; height: 80px; white-space: pre-wrap; font-size:medium; --background: #1111; ">{{ rq.comment }}</ion-text>
+                        </ion-item>
           
                         <!-- Progress Bar with Icon Labels and Text Labels -->
-                        <ion-progress-bar style="margin-bottom: 5px;" class="green-progress-bar" value="{{ calculateProgress(rq.status) / 100 }}"></ion-progress-bar>
+                        <ion-progress-bar style="margin-bottom: 5px; margin-top: 30px;" class="green-progress-bar" value="{{ calculateProgress(rq.status) / 100 }}"></ion-progress-bar>
           
                         <!-- Custom Icon and Text Labels with Spacing -->
                         <ion-label [style.color]="getLabelColor(rq.status, 'Pending', 15)" class="custom-icon-label" style="margin-left: 70px;">
