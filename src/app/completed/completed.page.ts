@@ -100,7 +100,7 @@ export class CompletedPage implements OnInit {
         const filteredCompletedItems = completedItems.filter((completed) => {
           const searchText = this.searchText.toLowerCase();
           const match =
-            completed.student_name.toLowerCase().includes(searchText) ||
+            completed.lrn.toLowerCase().includes(searchText) ||
             completed.document_type.toLowerCase().includes(searchText) ||
             completed.request_date.toLowerCase().includes(searchText) ||
             this.formatTimestamp(completed.completedDateTime).toLowerCase().includes(searchText);
@@ -148,7 +148,7 @@ export class CompletedPage implements OnInit {
     } else {
       this.filteredRequests = this.requests.filter(request => {
         return (
-          request.student_name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          request.lrn.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
           request.request_date.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
           request.document_type.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
@@ -166,9 +166,9 @@ export class CompletedPage implements OnInit {
     }
   
     this.requests = this.requests.filter((currentReq) => {
-      if (currentReq.student_name && searchTerm) {
+      if (currentReq.lrn && searchTerm) {
         return (
-          currentReq.student_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
+          currentReq.lrn.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
           currentReq.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
           currentReq.document_type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
         );

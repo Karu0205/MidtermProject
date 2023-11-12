@@ -18,10 +18,24 @@
   box-sizing: border-box; /* Include the border in the box dimensions */
   border: 1px solid #ccc; /* Add a border around each box */
 }
+ion-header{
+  background-color: #9b2226;
+}
+
+.request{
+  border: 2px solid #9b2226 !important; /* Set the border width and color */
+  border-radius: 10px !important; /* Optional: Add border radius for rounded corners */
+
+}
+
+.inner{
+  border: 1px solid rgb(207, 199, 199) !important; /* Set the border width and color */
+  border-radius: 10px !important; /* Optional: Add border radius for rounded corners */
+}
 
 .label-container {
   display: block;
-  height: 100px; /* Set the desired fixed height */
+  height: 200px; /* Set the desired fixed height */
   padding: 10px; /* Add padding for spacing */
   border: 1px solid #ccc; /* Add a border for visualization */
 }
@@ -110,6 +124,18 @@ ion-img{
     margin-bottom: 25px;
   }
 
+  .custom-popover {
+  position: absolute;
+  top: 50%;
+  right: 0; /* Adjust as needed */
+  transform: translate(0, -50%);
+  background-color: white;
+  width: 250px; /* Adjust as needed */
+  padding: 10px; /* Adjust as needed */
+  border: 1px solid #ccc; /* Optional: Add border for styling */
+}
+
+
 .info {
   --background: #9b2226;
   background-size: cover;
@@ -120,8 +146,9 @@ ion-img{
   width: 20%;
   float: inline-start;
   margin-top: 3%;
-  height: 380px;
+  height: 410px;
   margin-left: 40px;
+  border-radius: 10px !important;
 
 }
 
@@ -169,7 +196,12 @@ ion-img{
 .request{
   width: 60%;
   margin: auto;
+  height: 430px;
   margin-top: 1.5%;
+}
+
+.green-progress-bar {
+  --progress-background: green;
 }
 
 .events{

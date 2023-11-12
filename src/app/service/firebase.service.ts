@@ -33,6 +33,7 @@ export interface Request {
   req_id?: string;
   payment: string;
   comment: string;
+  comments: string;
   doc_status: string;
   request_date: string; // Add the request_date property
 }
@@ -186,7 +187,7 @@ export class FirebaseService implements OnInit {
 
   updateRequest(request: Request){
     const noteDocRef = doc(this.firestore, `requests/${request.id}`);
-    return updateDoc(noteDocRef, {student_name: request.student_name, document_type: request.document_type, status: request.status, student_id: request.student_id, payment: request.payment, comment: request.comment });
+    return updateDoc(noteDocRef, {student_name: request.student_name, document_type: request.document_type, status: request.status, student_id: request.student_id, payment: request.payment, comment: request.comment, comments: request.comments });
   }
 
   getUserDataByUID(uid: string): Observable<any[]> {

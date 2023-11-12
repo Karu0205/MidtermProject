@@ -9,7 +9,16 @@ export class FileUploadService {
   constructor(private storage: AngularFireStorage) {}
 
   uploadFile(file: File, path: string): Observable<string> {
-    const filePath = `${path}/${file.name}`; // Use only the original file name
+    const maxSize = 10485760; // 10 MB in bytes
+  
+    if (file.size > maxSize) {
+      const errorMessage = `File size exceeds the limit of ${maxSize} bytes.`;
+      return new Observable((observer) => {
+        observer.error(errorMessage);
+      });
+    }
+  
+    const filePath = `${path}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = fileRef.put(file);
   

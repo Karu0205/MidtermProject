@@ -22,6 +22,16 @@ import { AdmindocuPage } from '../admindocu/admindocu.page';
 import { CompletedPage } from '../completed/completed.page';
 import { ApprovalPage } from '../approval/approval.page';
 import { StorageMenuPage } from '../storage-menu/storage-menu.page';
+import { ModalPage } from '../modal/modal.page';
+import { PrincipalPage } from '../principal/principal.page';
+import { StoragePage } from '../storage/storage.page';
+import { EscPage } from '../esc/esc.page';
+import { GoodmoralPage } from '../goodmoral/goodmoral.page';
+import { CompletionPage } from '../completion/completion.page';
+import { EnrollmentPage } from '../enrollment/enrollment.page';
+import { RankingPage } from '../ranking/ranking.page';
+import { CemiPage } from '../cemi/cemi.page';
+
 
 @Component({
   selector: 'app-adminprofile',
@@ -54,6 +64,27 @@ export class AdminprofilePage implements OnInit {
 
   notificationCount2 = 0; // Initialize count
 
+  fromName: string;
+  initialFromName: string;
+
+  toEmail: string = '';
+  subject: string = '';
+  message: string = '';
+
+  selectedDocumentTypeFilter: string = '';
+  selectedStrandFilter: string = '';
+  selectedStatusFilter: string = '';
+  selectedNewFilter: string = '';
+
+  documentTypeFilterText: string = '';
+strandFilterText: string = '';
+
+  showPassword: boolean = false;
+  items: any[];
+  searchText: string;
+
+  selectedDocumentType: string = "";
+
 
   userId: any;
   isLoggedIn: boolean;
@@ -72,15 +103,33 @@ export class AdminprofilePage implements OnInit {
   constructor(private dataService: FirebaseService, private alertCtrl: AlertController, 
     private router: Router, private modalCtrl: ModalController, private afAuth: AngularFireAuth,
     private firestore: AngularFirestore, private userService: UserService, private eventService: EventService,
-    private storage: AngularFireStorage, private emailService:EmailService, private notificationService: NotificationService ) { 
+    private storage: AngularFireStorage, private emailService:EmailService, private notificationService: NotificationService ) {
+      
+      this.fromName = 'Sto. Nino Formation and Science School'; // Set this to the default value
+      this.initialFromName = this.fromName;
+
       this.dataService.getAccounts().subscribe(res => {
 
         this.accounts=res;
       })
       this.dataService.getRequests().subscribe(req => {
-
-        this.requests=req;
-      })
+        this.requests = req.sort((a, b) => {
+          // Sorting based on docu_status
+          if (a.doc_status === 'Signed' && b.doc_status !== 'Signed') {
+            return -1; // "Signed" comes first
+          } else if (a.doc_status !== 'Signed' && b.doc_status === 'Signed') {
+            return 1; // "Signed" comes after others
+          } else if (a.doc_status === 'New' && b.doc_status !== 'New') {
+            return -1; // "New" comes next
+          } else if (a.doc_status !== 'New' && b.doc_status === 'New') {
+            return 1; // "New" comes after others
+          } else {
+            // If docu_status is the same or both are not "New" or "Signed", sort by request_date
+            return new Date(b.request_date).getTime() - new Date(a.request_date).getTime();
+          }
+        });
+      });
+      
 
       this.notificationsCollection = this.firestore.collection('notifications');
 
@@ -198,6 +247,96 @@ export class AdminprofilePage implements OnInit {
       return await modal.present();
     }
 
+    
+  async openRequest(request: Request){
+    const modal = await this.modalCtrl.create({
+      component: ModalPage,
+      componentProps: { id: request.id },
+    });
+    modal.present();
+  }
+
+  async openPrincipal(request){
+    const modal = await this.modalCtrl.create({
+      component: PrincipalPage,
+      componentProps: { id: request.id },
+    });
+    modal.present();
+  }
+
+  showDropdown: boolean = false;
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  handleItemClick(buttonLabel: string) {
+    // Handle the click event for each button in the dropdown
+    console.log(`Clicked on ${buttonLabel}`);
+    // Add your logic here, if needed
+  }
+
+  async closeModal() {
+    await this.modalCtrl.dismiss();
+  }
+
+  async open137Modal() {
+    const modal = await this.modalCtrl.create({
+      component: StoragePage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openESCModal() {
+    const modal = await this.modalCtrl.create({
+      component: EscPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openGoodMoralModal() {
+    const modal = await this.modalCtrl.create({
+      component: GoodmoralPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openCompletionModal() {
+    const modal = await this.modalCtrl.create({
+      component: CompletionPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openEnrollmentModal() {
+    const modal = await this.modalCtrl.create({
+      component: EnrollmentPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openRankingModal() {
+    const modal = await this.modalCtrl.create({
+      component: RankingPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+  async openCEMIModal() {
+    const modal = await this.modalCtrl.create({
+      component: CemiPage, // Use your form component here
+    });
+
+    return await modal.present();
+  }
+
+
     async openCompletedModal() {
       const modal = await this.modalCtrl.create({
         component: CompletedPage, // Use your form component here
@@ -299,12 +438,119 @@ export class AdminprofilePage implements OnInit {
        }
      });
    }
+
+   searchItems() {
+    console.log('SearchItems method called');
+  
+    if (!this.searchText) {
+      // If the search text is empty, display all items and sort them.
+      this.dataService.getItems().subscribe((requests) => {
+        this.requests = requests;
+        this.sortRequests();
+        console.log('All items sorted:', this.requests); // Log the items retrieved
+      });
+    } else {
+      // If there is a search text, filter items based on it.
+      this.dataService.getItems().subscribe((requests) => {
+        const filteredRequests = requests.filter((request) => {
+          const searchTextLower = this.searchText.toLowerCase();
+          const match =
+            request.student_name.toLowerCase().includes(searchTextLower) ||
+            request.status.toLowerCase().includes(searchTextLower) ||
+            request.request_date.toLowerCase().includes(searchTextLower) ||
+            request.document_type.toLowerCase().includes(searchTextLower);
+          return match;
+        });
+        this.requests = filteredRequests;
+        console.log('Filtered items:', this.requests); // Log the filtered items
+      });
+    }
+  }
+  onSearchTextChange() {
+    this.applySearchFilter();
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    // Filter based on dropdown filters (document_type and strand)
+    this.dataService.getItems().subscribe((requests) => {
+      this.requests = requests.filter((request) => {
+        const documentTypeFilterMatch = this.selectedDocumentTypeFilter === '' || request.document_type === this.selectedDocumentTypeFilter;
+        const strandFilterMatch = this.selectedStrandFilter === '' || request.strand === this.selectedStrandFilter;
+        const StatusFilterMatch = this.selectedStatusFilter === '' || request.Status === this.selectedStatusFilter;
+        const StatusNewMatch = this.selectedNewFilter === '' || request.doc_status === this.selectedNewFilter;
+  
+        return documentTypeFilterMatch && strandFilterMatch && StatusFilterMatch && StatusNewMatch;
+      });
+      this.applySearchFilter();
+    });
+  }
+  
+  applySearchFilter() {
+    // Apply the search bar filter in the filtered requests
+    const searchTextLower = this.searchText.toLowerCase();
+    this.requests = this.requests.filter((request) =>
+      request.student_name.toLowerCase().includes(searchTextLower) ||
+      request.request_date.toLowerCase().includes(searchTextLower) ||
+      request.lrn.toLowerCase().includes(searchTextLower) ||
+      request.document_type.toLowerCase().includes(searchTextLower) ||
+      request.req_id?.toLowerCase().includes(searchTextLower) ||
+      request.status.toLowerCase().includes(searchTextLower)
+    );
+    this.sortRequests();
+  }
+  
+  
+  
+  sortRequests() {
+    // Sort the requests by request_date in descending order (newest to oldest).
+    this.requests = this.requests.sort((a, b) => {
+      const dateA = new Date(a.request_date).getTime();
+      const dateB = new Date(b.request_date).getTime();
+      return dateB - dateA;
+    });
+  }
+  
  
    loadEvents() {
      this.eventService.getEvents().subscribe((events) => {
        this.events = events;
      });
    }
+
+  calculateProgress(status: string): number {
+    if (!status) {
+      return 0; // or some default value if status is undefined
+    }
+  
+    if (status.includes('Pending')) {
+      return 15;
+    } else if (status.includes('Request being handled by: ')) {
+      return 30;
+    } else if (status.includes('Accepted at the Registrar\'s Office by: ')) {
+      return 30;
+    } else if (status.includes('Request forwarded to the principal’s office')) {
+      return 47;
+    } else if (status.includes('Accepted at the Principal\'s Office by: ')) {
+      return 63;
+    } else if (status.includes('Request is signed by the principal')) {
+      return 63;
+    } else if (status.includes('Ready for Pickup at the Registrar\'s Office')) {
+      return 100;
+    } else {
+      return 0;
+    }
+  }
+  
+
+    getLabelColor(status: string, labelToHighlight: string, targetProgress: number): string {
+    const progress = this.calculateProgress(status);
+    if (progress >= targetProgress) {
+      return 'green';
+    } else {
+      return 'grey';
+    }
+  }
  
  
   async initializeItems(): Promise<any> {
@@ -359,110 +605,6 @@ export class AdminprofilePage implements OnInit {
   openCalendar(){
     this.router.navigate(['/calendar'])
   }
- 
- 
-   async deleteAccount() {
-     const confirmDelete = window.confirm('Are you sure you want to delete your account?');
-     
-     if (confirmDelete) {
-       try {
-         const user = await this.afAuth.currentUser;
-         if (user) {
-           // Prompt the user to log in again to confirm their identity
-           const email = prompt('Please enter your email:');
-           const password = prompt('Please enter your password:');
-   
-           if (email && password) {
-             try {
-               // Sign in the user with email and password for confirmation
-               await this.afAuth.signInWithEmailAndPassword(email, password);
-   
-               // Delete the user's Firestore document
-               await this.dataService.deleteUser(user.uid);
-   
-               // Delete the user's Firebase Authentication account
-               await user.delete();
-   
-               // Sign out the user
-               await this.afAuth.signOut();
-   
-               this.router.navigate(['/login']);
-             } catch (error) {
-               console.error('Error confirming account deletion:', error);
-             }
-           } else {
-             // User canceled email or password entry
-             console.log('Account deletion canceled.');
-           }
-         }
-       } catch (error) {
-         console.error('Error deleting account:', error);
-       }
-     }
-   }
- 
-   async addRequest() {
-     const currentDate = new Date();
-     const formattedDate = currentDate.toLocaleDateString();
-   
-     const alert = await this.alertCtrl.create({
-       header: 'Confirm Request?',
-       inputs: [
-         {
-           name: 'student_name',
-           value: this.userData.displayName,
-           type: 'text',
-           disabled: true
-         },
-         {
-           name: 'document_type',
-           value: 'Form 137',
-           type: 'text',
-           disabled: true
-         },
-         {
-           name: 'email',
-           value: this.userData.email,
-           type: 'text',
-           disabled: true
-         },
-         {
-           name: 'status',
-           value: 'Pending',
-           type: 'text',
-           disabled: true
-         },
-         {
-           name: 'student_id',
-           value: this.userData.uid,
-           type: 'text',
-           disabled: true,
-           cssClass: 'invisible-input',
-         },
-         {
-           name: 'request_date',
-           value: formattedDate,
-           type: 'text',
-           disabled: true
-         }
-       ],
-       buttons: [
-         {
-           text: 'Cancel',
-           role: 'cancel'
-         },
-         {
-           text: 'Add',
-           handler: (req) => {
-             this.dataService.addRequest(req); // Include the entire request object
-             this.setOpen(true);
-             this.emailService.sendEmail('kalatasservices@gmail.com', 'There is a new Form 137 request', this.userData.displayName);
-           }
-         }
-       ]
-     });
-     await alert.present();
-   }
 
        // Create a reference to your Firestore collection
        notificationsCollection = this.firestore.collection('notifications');

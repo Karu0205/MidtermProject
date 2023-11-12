@@ -28,6 +28,7 @@ export class FormPage {
     doc_status: '',
     payment: '',
     remarks: '',
+    comments: '',
     Status: '',
     comment: ''
   };
@@ -133,6 +134,7 @@ export class FormPage {
                 this.formData.doc_status = 'New';
                 this.formData.payment = 'Not Paid';
                 this.formData.comment = ' ';
+                this.formData.comments = ' ';
   
                 // Check if year_level is undefined or empty, and set a default value if needed
                 if (!this.formData.year_level) {
@@ -170,6 +172,7 @@ export class FormPage {
                   remarks: this.navParams.get('remarks'),
                   request_date: formattedDate,
                   comment: ' ',
+                  comments: ' ',
                 };
   
                 this.addNotification();
@@ -231,6 +234,7 @@ export class FormPage {
             this.formData.strand = this.userData.strand
             this.formData.remarks = this.userData.
             this.formData.comment = this.userData.comment
+            this.formData.comments = this.userData.comments
 
             this.formData.document_type = this.userData.document_type
           });

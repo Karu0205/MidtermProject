@@ -10,7 +10,7 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <ion-label style="font-family: 'Roboto', sans-serif;">Name</ion-label>
+              <ion-label style="font-family: 'Roboto', sans-serif;">LRN</ion-label>
             </ion-col>
             <ion-col>
               <ion-label style="font-family: 'Roboto', sans-serif; margin: auto;">Document type</ion-label>
@@ -35,7 +35,7 @@
       <div class="scrollable-content">
       <ion-item *ngFor="let completed of completed">
   
-        <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small; text-align:left;">{{ completed.student_name }}</ion-label>
+        <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small; text-align:left;">{{ completed.lrn }}</ion-label>
         <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:12px; text-align:left;">{{ completed.document_type }}</ion-label>
         <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:12px; text-align:left;" > {{ completed.request_date }}</ion-label>
         <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:12px; text-align:left;">{{ formatTimestamp(completed.completedDateTime) }}</ion-label>

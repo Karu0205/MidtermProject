@@ -51,6 +51,20 @@ export class PrincipalPage implements OnInit {
     });
   }
 
+  updateDocStatus(status: string) {
+    if (this.request && this.request.id) {
+      const updatedData = { doc_status: status };
+
+      this.firestore.collection('requests').doc(this.request.id).update(updatedData)
+        .then(() => {
+          console.log('Document successfully updated!');
+        })
+        .catch((error) => {
+          console.error('Error updating document: ', error);
+        });
+    }
+  }
+
   ngOnInit() {
     this.dataService.getRequestById(this.id).subscribe(req => {
       this.request = req;
@@ -132,6 +146,7 @@ export class PrincipalPage implements OnInit {
   }
 
   async updateRequest() {
+    this.updateDocStatus("Signed");
     await this.dataService.updateRequest(this.request!);
     const toast = await this.toastCtrl.create({
       message: 'Status updated!.',
@@ -172,6 +187,17 @@ export class PrincipalPage implements OnInit {
         },
       ],
     });
+
+    if (this.request.status === 'Rejected') {
+      this.emailService.sendEmail(
+        this.request.email,
+        'Your ' + this.request.document_type + ' request has been rejected by the principal: ' + this.request.comments,
+        'Sto. Nino Formation and Science School'
+      );
+      await this.dataService.deleteRequest(this.request);
+      // Remove the request from the local array (if needed)
+      this.requests = this.requests.filter(req => req.id !== this.request.id);
+    } 
   
     await alert.present();
   }

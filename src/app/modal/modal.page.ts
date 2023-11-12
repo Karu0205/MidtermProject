@@ -218,6 +218,17 @@ export class ModalPage implements OnInit {
         },
       ],
     });
+
+    if (this.request.status === 'Rejected') {
+      this.emailService.sendEmail(
+        this.request.email,
+        'Your ' + this.request.document_type + ' request has been rejected: ' + this.request.comment,
+        'Sto. Nino Formation and Science School'
+      );
+      await this.dataService.deleteRequest(this.request);
+      // Remove the request from the local array (if needed)
+      this.requests = this.requests.filter(req => req.id !== this.request.id);
+    } 
   
     await alert.present();
   }
@@ -225,6 +236,15 @@ export class ModalPage implements OnInit {
   onStatusSelectChange() {
     // Check if the selected status is "Forwarded"
     if (this.request.status === 'Request forwarded to the principal’s office') {
+      // Call the forApproval() method
+      this.forApproval();
+      
+      // If you want to reset the selected status after triggering forApproval()
+      // you can uncomment the following line
+      // this.statusSelect.value = null;
+    }
+
+    if (this.request.status === 'Rejecred') {
       // Call the forApproval() method
       this.forApproval();
       

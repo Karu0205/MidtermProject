@@ -9,38 +9,124 @@
 <ion-content [fullscreen]="true">
       
       <ion-card class="info">
-        <img (click)="openSettingsModal()" [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 200px; height:200px;">
+        <img (click)="openSettingsModal()" [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 155px; height:155px;">
           <ion-label class="label">      
-            <div *ngIf="userData"  style="font-family: 'Roboto', sans-serif; font-size: 20px; margin-bottom: 10px; margin-top:10px"> {{ userData.displayName }}</div>
-            <ion-text *ngIf="userData?.email === '90.001.snfss@gmail.com'; else otherText" style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 50px; margin-top:10px">
-              Principal
+            <div *ngIf="userData"  style="font-family: 'Roboto', sans-serif; font-size: 20px; margin-bottom:10px; margin-top:10px"> {{ userData.displayName }}</div>
+            <ion-text *ngIf="userData?.email === '90.001.snfss@gmail.com'; else otherText" style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 40px; margin-top:10px">
+              Storage
             </ion-text>
             
             <ng-template #otherText>
-              <ion-text style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 10px; margin-top:10px">Registrar</ion-text>
+              <ion-text style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 10px; margin-top:50px">Registrar</ion-text>
             </ng-template>
           </ion-label>
 
           <br>
 
-<div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-  <ion-button
-    style="width: 270px; opacity: {{ userData?.email === '90.001.snfss@gmail.com' ? '1' : '0' }}"
-    (click)="openApprovalModal()">
-    <ion-icon name="mail-outline" slot="start" style="margin-right: 10px; font-size: large"></ion-icon>
-    <ion-label style="text-align: left; width: 100%; font-size: 11px">
-      For Approval
-    </ion-label>
-    <span style="float: right;" class="notification-count2" *ngIf="notificationCount2 > 0">[{{ notificationCount2 }}]</span>
-  </ion-button>
-</div>
-          
-
           <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-            <ion-button style="width: 270px;" (click)="openCompletedModal()">
-              <ion-icon name="checkmark-done-outline" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
-              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
-                Completed Requests
+            <ion-button style="width: 270px;" id="click-trigger">
+              <ion-icon name="cube" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>      
+              <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+              Storage
+            </ion-label>
+            </ion-button>
+  <ion-popover trigger="click-trigger" triggerAction="click">
+    <ng-template>
+      <ion-content style="max-height: 140px; overflow-y: auto;">
+      <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="open137Modal()">
+        <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+        <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+          Form 137
+        </ion-label>
+      </ion-button>
+      
+      <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openESCModal()">
+          <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+          <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+            ESC Certificate
+          </ion-label>
+        </ion-button>
+      </div>
+
+      <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openGoodMoralModal()">
+          <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+          <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+            Certificate of Goodmoral
+          </ion-label>
+        </ion-button>
+      </div>
+  
+
+      <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openCompletionModal()">
+          <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+          <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+            Certificate of Completion
+          </ion-label>
+        </ion-button>
+      </div>
+
+      <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openEnrollmentModal()">
+          <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+          <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+            Enrollment
+          </ion-label>
+        </ion-button>
+      </div>
+
+      <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openRankingModal()">
+          <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+          <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+            Ranking
+          </ion-label>
+        </ion-button>
+      </div>
+
+      <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openCEMIModal()">
+          <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+          <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+            Certificate of English as Medium of Instruction
+          </ion-label>
+        </ion-button>
+      </div>
+
+  
+  
+      </ion-content>
+    </ng-template>
+    
+  </ion-popover>
+  </div>
+
+
+  <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+    <ion-button style="width: 270px;" (click)="openCompletedModal()">
+      <ion-icon name="checkmark-done-outline" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+      <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+        Completed Requests
+      </ion-label>
+    </ion-button>
+  </div>
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button style="width: 270px;" (click)="openAccountsModal()">
+              <ion-icon name="Person" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+                Accounts
+              </ion-label>
+            </ion-button>
+          </div>
+
+          
+          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+            <ion-button style="width: 270px;" (click)="openCalendarModal()">
+              <ion-icon name="calendar" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+              <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+                Calendar
               </ion-label>
             </ion-button>
           </div>
@@ -49,7 +135,7 @@
           <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
             <ion-button style="width: 2270px;" (click)="logOut()">
               <ion-icon name="power" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
-              <ion-label style="text-align: left; width: 100%; font-size:11px"> <!-- Add width: 100% to make the label take the full width -->
+              <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
                 Log Out
               </ion-label>
             </ion-button>
@@ -61,43 +147,92 @@
 
 
       <ion-card class="request">
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="6">
-                <ion-button expand="full" fill="clear" style="padding:10px;width: 100%; height:200px; font-size: 15px;"
-                (click)="openRequestsModal()">
-                  <ion-icon name="document" size="large"></ion-icon>
-                  Requests &nbsp;
-                  <span style="float: right;" class="notification-count" *ngIf="notificationCount > 0">[{{ notificationCount }}]</span>
-                </ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button expand="full" fill="clear" style="padding:10px;width: 100%; height:200px; font-size: 15px;"
-                (click)="openStorageModal()">
-                  <ion-icon name="cube" size="large"></ion-icon>
-                  Storage
-                </ion-button>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="6">
-                <ion-button expand="full" fill="clear" style="padding:10px;width: 100%; height:200px; font-size: 15px;"
-                (click)="openCalendarModal()">
-                  <ion-icon name="calendar" size="large"></ion-icon>
-                  Calendar
-                </ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button expand="full" fill="clear" style="padding:10px;width: 100%; height:200px; font-size: 15px;"
-                (click)="openAccountsModal()">
-                  <ion-icon name="person" size="large"></ion-icon>
-                  Users
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
+        <ion-header>
+        
+          <ion-row>
+
+            <ion-col size="8">
+              <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="onSearchTextChange()"></ion-searchbar>
+
+            </ion-col>
+
+            <ion-col size="2">
+              <ion-item style="  --background: #9b2226; color:white;">
+                <ion-label style="font-size: 12px;">Recency</ion-label>
+                <ion-select style="font-size: 12px;" [(ngModel)]="selectedNewFilter" (ionChange)="applyFilters()">
+                  <ion-select-option value="">All</ion-select-option>
+                  <ion-select-option value="New">New</ion-select-option>
+                  <ion-select-option value="Signed">Signed</ion-select-option>
+        
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          
+            <ion-col size="2">
+              <ion-item style="  --background: #9b2226; color:white;">
+                <ion-label style="font-size: 12px;">Enrollment</ion-label>
+                <ion-select style="font-size: 12px;" [(ngModel)]="selectedStatusFilter" (ionChange)="applyFilters()">
+                  <ion-select-option value="">All</ion-select-option>
+                  <ion-select-option value="Currently Enrolled">Enrolled</ion-select-option>
+                  <ion-select-option value="Alumni">Alumni</ion-select-option>
+                  <!-- Add options for each strand -->
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          </ion-header>
+        
+          <ion-content style="height: 340px;">
+            <ion-card class="inner" style="width: 95%; margin:auto; margin-top: 20px">
+        
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="12" *ngFor="let request of requests">
+                      <ion-card *ngIf="(userData?.email === '90.001.snfss@gmail.com' && request.status === 'Request forwarded to the principal’s office') || userData?.email !== '90.001.snfss@gmail.com'" (click)="userData?.email === '90.001.snfss@gmail.com' ? openPrincipal(request) : openRequest(request)" style="height: 170px;">
+                        <ion-card-content>
+                          <ion-label style="text-align: left !important;" class="label-container">
+                            <ion-label style="margin-right:0% !important; text-align: left !important; color: black;"> {{ request.document_type }}</ion-label><br>
+                            <ion-label style="text-align: left !important;">From: {{ request.lrn }}</ion-label><br>
+                            <ion-label style="text-align: left !important;">Status: {{ request.status }}</ion-label><br>
+                            <ion-label style="text-align: left !important;">Request Date: {{ request.request_date }}</ion-label><br>
+                            <ion-label style="text-align: left !important;">Tracking ID: {{ request.req_id }}</ion-label>
+                            <ion-label style="text-align: right; position: absolute; top: 10px; right: 10px; font-weight: bold; font-size:medium; color:green">
+                              {{ request.doc_status }}
+                            </ion-label>
+                        
+                            <!-- Progress Bar with Icon Labels and Text Labels -->
+                            <ion-progress-bar style="margin-bottom: 10px; margin-top: 10px;" class="green-progress-bar" value="{{ calculateProgress(request.status) / 100 }}"></ion-progress-bar>
+            
+                            <!-- Custom Icon and Text Labels with Spacing -->
+                            <ion-label [style.color]="getLabelColor(request.status, 'Pending', 15)" class="custom-icon-label" style="margin-left: 70px;">
+                              <ion-icon name="checkmark-circle-outline"></ion-icon>
+                              <ion-label [style.color]="getLabelColor(request.status, 'Pending', 15)" style="margin-right: 40px; margin-left: 0% !important">Pending</ion-label>
+                            </ion-label>
+                            <ion-label [style.color]="getLabelColor(request.status, 'Accepted at Registrar', 30)" class="custom-icon-label">
+                              <ion-icon name="business"></ion-icon>
+                              <ion-label [style.color]="getLabelColor(request.status, 'Accepted at Registrar', 30)" style="margin-right: 40px;">Registrar</ion-label>
+                            </ion-label>
+                            <ion-label [style.color]="getLabelColor(request.status,'Forwarded to Principal’s Office', 45)" class="custom-icon-label">
+                              <ion-icon name="arrow-forward"></ion-icon>
+                              <ion-label [style.color]="getLabelColor(request.status, 'Forwarded to Principal’s Office', 45)" style="margin-right: 40px;">Forwarded</ion-label>
+                            </ion-label>
+                            <ion-label [style.color]="getLabelColor(request.status,  'Accepted at Principal’s Office', 60)" class="custom-icon-label">
+                              <ion-icon name="business"></ion-icon>
+                              <ion-label [style.color]="getLabelColor(request.status, 'Accepted at Principal’s Office', 60)" style="margin-right: 40px;">Principal</ion-label>
+                            </ion-label>
+                            <ion-label [style.color]="getLabelColor(request.status, 'Ready for Pickup', 100)" class="custom-icon-label">
+                              <ion-icon name="checkmark-done-circle"></ion-icon>
+                              <ion-label [style.color]="getLabelColor(request.status, 'Ready for Pickup', 100)" style="margin-right: 40px;">Ready for Pickup</ion-label>
+                            </ion-label>
+                          </ion-label>
+                        </ion-card-content>
+                      </ion-card>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card>
+          </ion-content>
+        
       </ion-card>
 
 
