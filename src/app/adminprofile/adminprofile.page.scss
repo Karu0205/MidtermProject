@@ -23,8 +23,8 @@ ion-header{
 }
 
 .request{
-  border: 2px solid #9b2226 !important; /* Set the border width and color */
-  border-radius: 10px !important; /* Optional: Add border radius for rounded corners */
+  border: 2px solid #9b2226 !important;
+  border-radius: 10px !important;
 
 }
 
@@ -217,7 +217,7 @@ ion-img{
 }
 
 .scrollable-container {
-  height: 240px; /* Adjust the height as needed */
+  height: 250px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
   
 }

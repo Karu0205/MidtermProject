@@ -1,17 +1,23 @@
+<ion-header [translucent]="true" class="header-container" style="height: 180px;">
+  <div class="header-content">
+    <p>The Home of Christian Leaders <br> Shining Forward to Fullness</p>
+  </div>
+  <ion-img src="./assets/whitelogo.png"></ion-img>
+</ion-header>
 
-  <ion-toolbar>
-    <ion-title>Users</ion-title>
-    <ion-buttons slot="start">
-
-      <ion-button style="color: white;" (click)="closeModal()" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
-
-    </ion-buttons>
-  </ion-toolbar>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="danger" (click)="Home()">
+    <ion-icon style="color: white;" name="home"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 <ion-content class="ion-padding">
 
 
-    <ion-card style="margin:auto; width:500px">
+    <ion-card style="margin:auto; width:420px; float: left; margin-left:50px; margin-top:10px; height:430px;   border: 2px solid #9b2226 !important;
+    border-radius: 10px !important;
+   ">
+    <ion-card>
 
     <ion-item>
       <ion-label position="stacked">User Name</ion-label>
@@ -24,9 +30,12 @@
     <br>
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
-      <ion-input type="password" [(ngModel)]='password'></ion-input>
+      <ion-input type="password" [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+      <ion-buttons slot="end">
+        <ion-button (click)="generatePassword()" fill="clear" color="primary">Generate</ion-button>
+      </ion-buttons>
     </ion-item>
-
+    
     <ion-item>
       <ion-label position="stacked">Is Admin?</ion-label>
       <ion-select [(ngModel)]="isAdmin">
@@ -34,8 +43,6 @@
         <ion-select-option value="false">No</ion-select-option>
       </ion-select>
     </ion-item>
-    
-    <br>
     
     <ion-item *ngIf="isAdmin === 'false'">
       <ion-label position="stacked">LRN</ion-label>
@@ -50,12 +57,10 @@
       </ion-select>
     </ion-item>
 
+    
+    <ion-button (click)='signup()' style="font-family: 'Roboto', sans-serif; margin-top:10px !important; margin-bottom:10px !important; width:50%; margin:auto;--background: #9b2226;" expand='block'>Signup</ion-button>
+    </ion-card>
   </ion-card>
-
-    <ion-button (click)='signup()' style="font-family: 'Roboto', sans-serif; margin-top:30px !important; width:50%; margin:auto;--background: #9b2226;" expand='block'>Signup</ion-button>
-    <ion-button (click)='openAccountsModal()' style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand='block'>Accounts</ion-button>
-
-
 
 <!--  <ion-card style="width:500px; height:350px;margin:auto">
 
@@ -86,5 +91,30 @@
     </div>
 
   </ion-card>-->
+
+  <ion-card style="height:420px; width: 300%; float: right; width: calc(100% - 520px); overflow-y: auto;   border: 2px solid #9b2226 !important;
+  border-radius: 10px !important;
+">
+    <ion-toolbar>
+      <ion-title>Requests</ion-title>
+    </ion-toolbar>
+
+  <ion-card style="height: 300px; float: right; width: 380px" *ngFor="let request of accountRequests" (click)="presentAlert(request)">
+    <ion-card-header>
+      <img *ngIf="request.imageUrl" [src]="request.imageUrl" alt="Selfie with ID" style="width: 155px; height:155px; margin:auto;">
+    </ion-card-header>
+    <ion-card-content>
+      Full Name: {{ request.fullName }}<br>
+      Email: {{ request.email }}<br>
+      LRN: {{ request.lrn }}<br>
+      Enrollment Date: {{ request.enrollmentDate }}<br>
+      Graduation Date: {{ request.graduationDate || 'Not Applicable' }}<br>
+      <!-- Display other details as needed -->
+    </ion-card-content>
+  </ion-card>
+</ion-card>
+
+
+  
   
 </ion-content>

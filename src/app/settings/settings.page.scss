@@ -10,8 +10,12 @@ ion-toolbar{
   --background: #9b2226;
 }
 
+.form{
+  width: 500px !important;
+}
+
 ion-card{
-    width: 70% !important;
     margin: auto;
     margin-top: 20px !important;
+    width: 500px;
 }

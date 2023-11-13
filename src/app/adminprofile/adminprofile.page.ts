@@ -216,6 +216,8 @@ strandFilterText: string = '';
      async openAccountsModal() {
        const modal = await this.modalCtrl.create({
          component: SignupPage, // Use your form component here
+         cssClass: 'my-custom-modal-css'
+
        });
    
        return await modal.present();
@@ -595,6 +597,7 @@ strandFilterText: string = '';
   }
 
   openRegister(){
+    this.clearNotifications();
     this.router.navigate(['/signup'])
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../service/firebase.service'; 
+import { ModalController } from '@ionic/angular';
+import { AccountReqPage } from '../account-req/account-req.page';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +18,18 @@ export class LoginPage implements OnInit {
 
 
 
-  constructor(private router: Router, public fireService:FirebaseService) { }
+  constructor(private router: Router, public fireService:FirebaseService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
+  }
+
+
+  async openAccountsModal() {
+    const modal = await this.modalCtrl.create({
+      component: AccountReqPage, // Use your form component here
+    });
+
+    return await modal.present();
   }
 
     logIn(){

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Update Profile Picture</ion-title>
+    <ion-title>Update Profile</ion-title>
 
     <ion-buttons slot="start">
 
@@ -10,21 +10,58 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content style="align-items: center; text-align:center">
 
-  <ion-card style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+  <ion-card style="display: flex; flex-direction: column; align-items: center; justify-content: center;   border: 5px solid #9b2226 !important;
+  border-radius: 10px !important;">
     <img [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 200px; height:200px; margin-top: 20px">
     <ion-label class="label">      
       <div *ngIf="userData" style="font-family: 'Roboto', sans-serif; font-size: 20px; bottom: 30px; margin-top:10px;"> Upload your profile picture</div>
     </ion-label>
   
     <input style="margin-top: 5px; font-family: 'Roboto', sans-serif;" type="file" (change)="onFileSelected($event)" accept="image/*">
-    <br>
-    <br>
-    <ion-button (click)="uploadImage()" style="margin: auto; --background: #9b2226; margin-bottom: 20px !important;  font-family: 'Roboto', sans-serif;">
-      Upload
-    </ion-button>
+
+    <ion-card class="form">
+        <!-- Editable fields -->
+        <ion-item *ngIf="userData.isAdmin !== 'true'">
+          <ion-label position="floating">Contact Number</ion-label>
+          <ion-input [(ngModel)]="userData.contact_no" type="tel"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="userData.isAdmin !== 'true'">
+          <ion-label position="floating">Status</ion-label>
+          <ion-select [(ngModel)]="userData.Status">
+            <ion-select-option value="Alumni">Alumni</ion-select-option>
+            <ion-select-option value="Currently Enrolled">Currently Enrolled</ion-select-option>
+          </ion-select>
+        </ion-item>
+      
+        <ion-item *ngIf="userData.Status !== 'Alumni' && userData.isAdmin !== 'true'">
+          <ion-label position="floating">Year Level</ion-label>
+          <ion-select [(ngModel)]="userData.year_level">
+            <ion-select-option value="Junior High">Junior High</ion-select-option>
+            <ion-select-option value="Senior High">Senior High</ion-select-option>
+          </ion-select>
+        </ion-item>
+      
+        <ion-item *ngIf="userData.Status === 'Currently Enrolled' && userData.year_level === 'Senior High' && userData.isAdmin !== 'true'">
+          <ion-label position="floating">Strand</ion-label>
+          <ion-select [(ngModel)]="userData.strand">
+            <ion-select-option value="STEM">STEM</ion-select-option>
+            <ion-select-option value="HUMSS">HUMSS</ion-select-option>
+            <ion-select-option value="ABM">ABM</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-card>
+    
+
 
   </ion-card>
+
+        
+  <ion-button (click)="updateUserData()" class="ion-button text-center" style="--background: #9b2226; margin: 20px 0; font-family: 'Roboto', sans-serif;">
+    Save Changes
+  </ion-button>
 
 </ion-content>

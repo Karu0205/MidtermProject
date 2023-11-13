@@ -175,6 +175,25 @@ export class SettingsPage implements OnInit {
     });
   }
 
+  updateUserData() {
+    if (this.userId) {
+      const userRef = this.firestore.collection('users').doc(this.userId);
+      userRef.update({
+        contact_no: this.userData.contact_no,
+        year_level: this.userData.year_level,
+        strand: this.userData.strand,
+        Status: this.userData.Status,
+      })
+      .then(() => {
+        console.log('User data updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating user data:', error);
+      });
+      this.uploadImage();
+    }
+  }
+
   updateUserProfile(userId: string, data: any) {
     const userRef = this.firestore.collection('users').doc(userId);
     userRef.update(data)
