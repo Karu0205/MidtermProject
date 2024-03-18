@@ -17,8 +17,12 @@
       <ion-item *ngFor="let option of documentOptions">
         <ion-label>{{ option.label }}</ion-label>
         <ion-checkbox slot="start" [(ngModel)]="option.checked"></ion-checkbox>
-        <ion-input type="number" placeholder="Quantity" [(ngModel)]="option.quantity"></ion-input>
-
+        <ion-input 
+          type="number" 
+          placeholder="Quantity" 
+          [(ngModel)]="option.quantity"
+          [disabled]="!option.checked">
+        </ion-input>
       </ion-item>
     </ion-list>
     

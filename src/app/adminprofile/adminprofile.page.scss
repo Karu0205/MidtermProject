@@ -21,11 +21,9 @@
 ion-header{
   background-color: #9b2226;
 }
-
 .request{
-  border: 2px solid #9b2226 !important;
-  border-radius: 10px !important;
-
+  border: 1px solid rgb(207, 199, 199) !important; /* Set the border width and color */
+  border-radius: 10px !important; /* Optional: Add border radius for rounded corners */
 }
 
 .inner{
@@ -215,12 +213,12 @@ ion-img{
 .pfp{
   margin-bottom: 5%;
 }
-
 .scrollable-container {
-  height: 250px; /* Adjust the height as needed */
+  height: 330px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
-  
+  width: 1100px;
 }
+
 
 .scrollable-container2 {
   height: 175px; /* Adjust the height as needed */
@@ -329,43 +327,5 @@ p{
   padding-left:30px;
 }
 
-ion-text{
-  font-family: 'Roboto', sans-serif;
-}
-
-ion-footer{
-    position:fixed;
-    bottom: 0;
-    text-align: center;
-    --background: #9b2226;
-  }
   
-
-  ion-tab-button {
-    background-color: #4f000b;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  ion-tab-bar{
-    background-color:#9b2226;
-  }
-  
-  ion-tab-button ion-icon {
-    font-size: 24px;
-  }
-  
-  ion-tab-button.ion-selected {
-    color: #333;
-  }
-
 

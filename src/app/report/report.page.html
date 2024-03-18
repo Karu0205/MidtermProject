@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="height: 55px; --background: #9b2226; color: white;">
+    <ion-title>Report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card style="  border: 1px solid rgb(207, 199, 199) !important;">
+    <ion-row style="height: 30px;">
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>
+            <ion-select [(ngModel)]="selectedYear" placeholder="Year">
+              <ion-select-option *ngFor="let year of monthlyReport | keyvalue" [value]="year.key">
+                {{ year.key }}
+              </ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    
+      <ion-col size="6" *ngIf="monthlyReport[selectedYear]">
+        <ion-item>
+          <ion-label>
+            <ion-select [(ngModel)]="selectedMonth" placeholder="Month">
+              <ion-select-option *ngFor="let month of monthlyReport[selectedYear] | keyvalue" [value]="month.key">
+                {{ month.key }}
+              </ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <ion-list style="margin-top: 0px;" *ngFor="let year of monthlyReport | keyvalue">
+      <ion-item *ngIf="year.key === selectedYear">
+        <ion-label>
+          <ion-list *ngFor="let month of year.value | keyvalue">
+            <!-- Display month only if there is data for the selected month -->
+            <ion-item *ngIf="!selectedMonth || month.key === selectedMonth">
+              <ion-label>
+                <h3 style="font-weight: bold;">{{ month.key }}</h3>
+                <ion-list>
+                  <ion-item style="font-size:small;" *ngFor="let keyValuePair of month.value | keyvalue">
+                    {{ keyValuePair.key }}: {{ keyValuePair.value }}
+                  </ion-item>
+                </ion-list>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

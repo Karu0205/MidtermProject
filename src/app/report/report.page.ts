@@ -9,13 +9,14 @@ import { ModalPage } from '../modal/modal.page';
 import { first, map } from 'rxjs/operators';
 import { EmailService } from '../email.service';
 import { IonInput } from '@ionic/angular';
-import { ReportPage } from '../report/report.page';
+
 @Component({
-  selector: 'app-completed',
-  templateUrl: './completed.page.html',
-  styleUrls: ['./completed.page.scss'],
+  selector: 'app-report',
+  templateUrl: './report.page.html',
+  styleUrls: ['./report.page.scss'],
 })
-export class CompletedPage implements OnInit {
+export class ReportPage implements OnInit {
+
 
   copiedText: string = '';
   @ViewChild('textInput', { static: false }) textInput: IonInput;
@@ -95,7 +96,7 @@ export class CompletedPage implements OnInit {
       'Enrollment Form': 0,
       'Certificate of Good Moral': 0,
       'Certificate of Completion': 0,
-      'Certifiacte of Ranking': 0,
+      'Certificate of Ranking': 0,
       'Certificate of English as Medium of Instruction': 0,
     };
   
@@ -136,13 +137,6 @@ export class CompletedPage implements OnInit {
   
     // Save yearly and monthly report for use in the HTML
     this.monthlyReport = yearlyMonthlyReport;
-  }
-
-  async openReport(){
-    const modal = await this.modalCtrl.create({
-      component: ReportPage,
-    });
-    modal.present();
   }
   
 
@@ -203,6 +197,7 @@ export class CompletedPage implements OnInit {
 
 
   searchTerm: string = '';
+  selectedMonth: string;
   filteredRequests: any[]; // A new array to hold the filtered requests
 
 

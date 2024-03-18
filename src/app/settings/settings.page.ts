@@ -186,12 +186,20 @@ export class SettingsPage implements OnInit {
       })
       .then(() => {
         console.log('User data updated successfully');
+        this.showAlert('Success', 'User data updated successfully');
       })
       .catch((error) => {
         console.error('Error updating user data:', error);
+        this.showAlert('Error', 'Error updating user data');
       });
       this.uploadImage();
     }
+  }
+  
+  showAlert(title, message) {
+    // Replace this with your preferred method of showing alerts
+    // For example, using the browser's native alert function:
+    alert(`${title}: ${message}`);
   }
 
   updateUserProfile(userId: string, data: any) {

@@ -175,13 +175,11 @@ export class FormPage {
                   comments: ' ',
                 };
   
-                this.addNotification();
-  
                 //const emailSubject = `There is a new ${this.formData.document_type} request from ${this.formData.email}`;
                 //this.emailService.sendEmail('90.002.snfss@gmail.com', emailSubject, this.formData.email);
                 //this.emailService.sendEmail('90.003.snfss@gmail.com', emailSubject, this.formData.email);
   
-                window.alert('Your request has been sent, kindly await updates and check your emails.');
+                window.alert('A reference code for your request has been sent to you email, kindly await updates and check your emails.');
               } catch (error) {
                 // Request failed to add
                 console.error('Error adding request:', error);

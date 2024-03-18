@@ -162,6 +162,10 @@ const routes: Routes = [
     path: 'account-req',
     loadChildren: () => import('./account-req/account-req.module').then( m => m.AccountReqPageModule)
   },
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+  },
 
 
 

@@ -109,7 +109,7 @@ ion-img{
 }
 
 .scrollable-container2 {
-  height: 320px; /* Adjust the height as needed */
+  height: 360px; /* Adjust the height as needed */
   overflow-y: scroll; /* Enable vertical scrolling */
 }
 .container{
@@ -134,6 +134,12 @@ ion-label{
 
 button{
   margin-bottom: 10px;
+}
+
+.custom-item {
+  --inner-border-width: 0;
+  --border-width: 0;
+  --border-style: none;
 }
 
 .event_head{

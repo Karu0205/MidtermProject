@@ -48,8 +48,8 @@
      
 
 
-      <ion-card class="request" style="  border: 2px solid #9b2226 !important;
-      border-radius: 10px !important;">
+      <ion-card class="request" style="  border: 1px solid rgb(207, 199, 199) !important; /* Set the border width and color */
+      border-radius: 10px !important; /* Optional: Add border radius for rounded corners */">
         <!--<ion-searchbar (ionChange)="filterList($event)"></ion-searchbar>-->
         <ion-header>
         <ion-toolbar style=" margin-bottom:5px; margin-left:10px; text-align:left">
@@ -87,15 +87,46 @@
                   <ion-card>
                     <ion-card-content>
                       <ion-label style="text-align: left !important; height:310px" class="label-container">
-                        <ion-label style="text-align: left !important; color: black; height:70px">Document Type: {{ rq.document_type }}</ion-label><br>
-                        <ion-label style="text-align: left !important;">Status: {{ rq.status }}</ion-label><br>
-                        <ion-label style="text-align: left !important;">Request Date: {{ rq.request_date }}</ion-label><br>
-                        <ion-label style="text-align: left !important;">Payment Status: {{ rq.payment }}</ion-label><br>
-                        <ion-label style="text-align: left !important;">Remarks:</ion-label><br>
-                        <ion-item>
-                          <ion-text style="font-family: 'Roboto', sans-serif; height: 80px; white-space: pre-wrap; font-size:medium; --background: #1111; ">{{ rq.comment }}</ion-text>
-                        </ion-item>
-          
+                        <ion-grid>
+                          <ion-row>
+                            <ion-col size="6">
+                              <ion-card style="  border: 1px solid rgb(207, 199, 199) !important; /* Set the border width and color */
+                              border-radius: 10px !important; /* Optional: Add border radius for rounded corners */">
+                              <!-- Left side of the grid for Document Type, Status, Request Date, and Payment Status -->
+                              <ion-item><ion-label style="text-align: left !important; color: black; font-size:16px; font-weight:bold">Document Type(s):</ion-label><br>
+                              <ion-label style="text-align: left !important; font-size:15px">{{ rq.document_type }}</ion-label><br></ion-item>
+
+                              <ion-item><ion-label style="text-align: left !important; color: black; font-size:16px; font-weight:bold">Status:</ion-label><br>
+                              <ion-label style="text-align: left !important; font-size:15px">{{ rq.status }}</ion-label><br></ion-item>
+
+                              <ion-item><ion-label style="text-align: left !important; color: black; font-size:16px; font-weight:bold">Request Date:</ion-label><br>
+                              <ion-label style="text-align: left !important; font-size:15px">{{ rq.request_date }}</ion-label><br></ion-item>
+
+                              <ion-item>
+                                <ion-label style="text-align: left !important; color: black; font-size:16px; font-weight:bold">Payment Status:</ion-label><br>
+                                <ion-label [ngStyle]="{'color': rq.payment === 'Paid' ? 'green' : 'red', 'text-align': 'left !important', 'font-size': '15px', 'font-weight':'bold'}">{{ rq.payment }}</ion-label><br>
+                              </ion-item>
+                            </ion-card>
+                            </ion-col>
+                        
+                            <ion-col size="6">
+                              <!-- Right side of the grid for Remarks -->
+                              <ion-item>
+                              <ion-label style="text-align: left !important; font-size:16px; color: black; font-size:16px; font-weight:bold">Remarks from Registrar:</ion-label><br>
+                              </ion-item>
+                              <ion-item>
+                                <ion-label style="font-family: 'Roboto', sans-serif; height: 45px; white-space: pre-wrap; font-size:12px;">{{ rq.comment }}</ion-label>
+                              </ion-item>
+
+                              <ion-item>
+                                <ion-label style="text-align: left !important; font-size:16px; color: black; font-size:16px; font-weight:bold">Remarks from Principal:</ion-label><br>
+                                </ion-item>
+                                <ion-item>
+                                  <ion-label style="font-family: 'Roboto', sans-serif; height: 45px; white-space: pre-wrap; font-size:12px;">{{ rq.comments }}</ion-label>
+                                </ion-item>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
                         <!-- Progress Bar with Icon Labels and Text Labels -->
                         <ion-progress-bar style="margin-bottom: 5px; margin-top: 30px;" class="green-progress-bar" value="{{ calculateProgress(rq.status) / 100 }}"></ion-progress-bar>
           

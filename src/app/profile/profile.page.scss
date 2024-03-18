@@ -31,7 +31,10 @@ ion-toolbar{
   --background: #9b2226;
 }
 
-
+ion-item {
+  --border-width: 0 0 0 0; /* set bottom border width to 0 */
+  --border-style: none none none none; /* set bottom border style to none */
+}
 
 img{
   margin-top: 3%;

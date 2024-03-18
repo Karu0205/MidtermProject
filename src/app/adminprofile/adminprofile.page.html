@@ -116,9 +116,9 @@
             <ion-button style="width: 270px;" (click)="  openRegister()">
               <ion-icon name="Person" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
               <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
-                Accounts
+                Create Accounts
               </ion-label>
-              <span class="notification-count" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+              <span style="font-size: 12px; color:yellow" class="notification-count" *ngIf="notificationCount > 0">[{{ notificationCount }}]</span>
             </ion-button>
           </div>
 
@@ -184,15 +184,15 @@
           </ion-header>
         
           <ion-content style="height: 370px;">
-            <ion-card class="inner" style="width: 95%; margin:auto; margin-top: 20px">
-        
+            <ion-card class="inner" style="width: 95%; margin:auto; margin-top: 20px; height:340px;">
                 <ion-grid>
                   <ion-row>
+                    <div class="scrollable-container">
                     <ion-col size="12" *ngFor="let request of requests">
                       <ion-card *ngIf="(userData?.email === '90.001.snfss@gmail.com' && request.status === 'Request forwarded to the principal’s office') || userData?.email !== '90.001.snfss@gmail.com'" (click)="userData?.email === '90.001.snfss@gmail.com' ? openPrincipal(request) : openRequest(request)" style="height: 170px;">
                         <ion-card-content>
                           <ion-label style="text-align: left !important;" class="label-container">
-                            <ion-label style="margin-right:0% !important; text-align: left !important; color: black;"> {{ request.document_type }}</ion-label><br>
+                            <ion-label style="margin-right:0% !important; text-align: left !important; color: black; font-weight:bold"> {{ request.document_type }}</ion-label><br>
                             <ion-label style="text-align: left !important;">From: {{ request.lrn }}</ion-label><br>
                             <ion-label style="text-align: left !important;">Status: {{ request.status }}</ion-label><br>
                             <ion-label style="text-align: left !important;">Request Date: {{ request.request_date }}</ion-label><br>
@@ -229,6 +229,7 @@
                         </ion-card-content>
                       </ion-card>
                     </ion-col>
+                  </div>
                   </ion-row>
                 </ion-grid>
               </ion-card>

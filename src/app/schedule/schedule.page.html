@@ -9,35 +9,31 @@
       <ion-label style="font-family: 'Roboto', sans-serif;">Events</ion-label>
       </ion-toolbar>
 
-      <ion-toolbar style="height: 40px; color: white; text-align:center">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-label style="font-family: 'Roboto', sans-serif;">Event</ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label style="font-family: 'Roboto', sans-serif;">Date (Y-M-D)</ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label style="font-family: 'Roboto', sans-serif;">Details</ion-label>
-            </ion-col>
-  
-          </ion-row>
-        </ion-grid>
-      </ion-toolbar>
     </ion-header>
+<div class="scrollable-container2">
+  <div class="scrollable-content2">
+    <ion-list>
+      <ion-item *ngFor="let event of events">
+        <ion-card style="width:550px;">
+        <ion-label style="font-size: 14px; font-family: 'Roboto', sans-serif; margin-top:20px;">
+          <div style="color: black; font-weight:bold">
+            {{ event.title }} <br>
+          </div>
+          
+          <div>
+            Date: {{ event.startDate }} <br>
+          </div>
 
-        <div class="scrollable-container2">
-        <div class="scrollable-content2">
-        <ion-list>
-          <ion-item style="font-size: 12px;" *ngFor="let event of events">
-          <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.title }}</ion-label>
-          <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.startDate }}</ion-label>
-          <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.description }}</ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
-      </div>
+          <div style="text-align: left; font-size: 14px; margin-top:10px; margin-bottom:10px;  margin-left:20px; color:black">
+            {{ event.description }}
+          </div>
+
+        </ion-label>
+      </ion-card>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
       </ion-card>
 
       <ion-button style="font-family: 'Roboto', sans-serif; margin-top: 10px; --background: #9b2226;" expand="full" (click)="closeModal()">Close</ion-button>

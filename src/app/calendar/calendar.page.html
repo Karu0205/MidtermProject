@@ -24,13 +24,7 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-label style="font-family: 'Roboto', sans-serif;">Event</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-label style="font-family: 'Roboto', sans-serif;">Date(Y-M-D)</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-label style="font-family: 'Roboto', sans-serif;">Details</ion-label>
+                <ion-label style="font-family: 'Roboto', sans-serif;">Events</ion-label>
               </ion-col>
     
             </ion-row>
@@ -38,17 +32,27 @@
         </ion-toolbar>
       </ion-header>
   
-          <div class="scrollable-container2">
-          <div class="scrollable-content2">
+      <div class="scrollable-container2">
+        <div class="scrollable-content2">
           <ion-list>
-            <ion-item style="font-size: 11.5px;" *ngFor="let event of events" (click)="deleteEvent(event.id)">
-            <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.title }}</ion-label>
-            <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.startDate }}</ion-label>
-            <ion-label style="font-family: 'Roboto', sans-serif;">{{ event.description }}</ion-label>
+            <ion-item *ngFor="let event of events"  (click)="deleteEvent(event.id)">
+              <ion-card style="width:550px;">
+              <ion-label style="font-size: 14px; font-family: 'Roboto', sans-serif; margin-top:20px;">
+                <div style="color: black;">
+                  {{ event.title }} <br>
+                 Date: {{ event.startDate }} <br>
+                </div>
+      
+                <div style="text-align: left; font-size: 14px; margin-top:10px; margin-bottom:10px;  margin-left:20px; color:black">
+                  {{ event.description }}
+                </div>
+      
+              </ion-label>
+            </ion-card>
             </ion-item>
           </ion-list>
         </div>
-        </div>
+      </div>
         </ion-card>
   
   </ion-content>

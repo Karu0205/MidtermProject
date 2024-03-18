@@ -504,14 +504,33 @@ strandFilterText: string = '';
   
   
   
-  sortRequests() {
+ // sortRequests() {
     // Sort the requests by request_date in descending order (newest to oldest).
-    this.requests = this.requests.sort((a, b) => {
-      const dateA = new Date(a.request_date).getTime();
-      const dateB = new Date(b.request_date).getTime();
-      return dateB - dateA;
-    });
-  }
+  //  this.requests = this.requests.sort((a, b) => {
+  //    const dateA = new Date(a.request_date).getTime();
+  //    const dateB = new Date(b.request_date).getTime();
+  //   return dateB - dateA;
+ //   });
+ // }
+
+ sortRequests() {
+  this.requests = this.requests.sort((a, b) => {
+    // Sorting based on docu_status
+    if (a.doc_status === 'Signed' && b.doc_status !== 'Signed') {
+      return -1; // "Signed" comes first
+    } else if (a.doc_status !== 'Signed' && b.doc_status === 'Signed') {
+      return 1; // "Signed" comes after others
+    } else if (a.doc_status === 'New' && b.doc_status !== 'New') {
+      return -1; // "New" comes next
+    } else if (a.doc_status !== 'New' && b.doc_status === 'New') {
+      return 1; // "New" comes after others
+    } else {
+      // If docu_status is the same or both are not "New" or "Signed", sort by request_date
+      return new Date(b.request_date).getTime() - new Date(a.request_date).getTime();
+    }
+  });
+}
+
   
  
    loadEvents() {

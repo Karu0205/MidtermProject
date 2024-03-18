@@ -8,7 +8,7 @@
 
 <ion-content [fullscreen]="true">
       
-      <ion-card class="info">
+      <ion-card class="info" style="border-radius: 10px !important;">
         <img (click)="openSettingsModal()" [src]="userProfile?.profilePicture || '/assets/blank.png'" alt="Profile Picture" style="width: 200px; height:200px;">
           <ion-label class="label">      
             <div *ngIf="userData" style="font-family: 'Roboto', sans-serif; font-size: 20px; bottom: 50px; margin-top:10px"> {{ userData.displayName }}</div>
@@ -58,12 +58,12 @@
         <ion-row>
           <ion-col size="6">
             <ion-card style="height: 150px;">
-              <ion-item style="font-size: small; margin-top: 10px; margin-bottom: 10px">
+              <ion-item style="font-size: 12px; margin-top: 10px; margin-bottom: 10px">
                 <div class="numbered-list">
-                  <div class="list-item">You can only send one request at a time for each document type.</div>
-                  <div class="list-item">Kindly double-check information before sending the form.</div>
+                  <div class="list-item">You can only send one request at a time.</div>
+                  <div class="list-item">Kindly prepare payment before claiming request.</div>
                   <div class="list-item">Once request is out, emails will be sent to update you of your request.</div>
-                  <div class="list-item">If you need to update status to Alumni, send an email.</div>
+                  <div class="list-item">Form 137 requests won't be released unless presented with an official statemet from school or organization.</div>
                 </div>
               </ion-item>
               
@@ -71,7 +71,7 @@
           </ion-col>
           <ion-col size="6">
             <ion-card style="height: 150px;">
-              <ion-item style="font-size: small; margin-top: 10px; margin-bottom: 10px;">
+              <ion-item style="font-size: 15px; margin-top: 10px; margin-bottom: 10px;">
                 <div>
                   <div class="item">Office Hours: 7:00 am - 4:00 pm</div>
                   <div class="item">Address: R6X3+HM5, Batangas - Quezon Rd, Rosario, 4228 Batangas
@@ -90,7 +90,7 @@
                   Documents:
                 </ion-text>
               </ion-header>
-              <ion-item style="font-size: small; margin-top: 10px; margin-bottom: 20px">
+              <ion-item style="font-size: 15px; margin-top: 10px; margin-bottom: 20px">
                 <ion-grid>
                   <ion-row>
                     <ion-col size="4">

@@ -115,39 +115,83 @@ export class SignupPage implements OnInit {
         {
           text: 'Reject',
           handler: () => {
-            this.deleteEntry(request);
-          
+            this.presentRejectionPrompt(request);
           }
         }
       ]
     });
-
+  
     await alert.present();
   }
-
-
-  deleteEntry(request) {
-    // Replace 'account_requests' with the actual collection name in your Firebase
+  
+  async presentRejectionPrompt(request) {
+    const alert = await this.alertController.create({
+      header: 'Reject Request',
+      message: 'Please provide a reason for rejection:',
+      inputs: [
+        {
+          name: 'rejectionReason',
+          type: 'text',
+          placeholder: 'Reason for rejection'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Rejection canceled');
+          }
+        },
+        {
+          text: 'Reject',
+          handler: async (data) => {
+            if (data.rejectionReason) {
+              await this.deleteEntry(request, data.rejectionReason, () => {
+                // Callback to fill the form after deletion
+                this.fillForm(request);
+              });
+            } else {
+              console.log('Please provide a reason for rejection');
+            }
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
+  async deleteEntry(request, rejectionReason, callback) {
     const collectionName = 'account_request';
-
-    // Query the collection based on the 'email' field
+  
     const query = this.firestore.collection(collectionName, ref => ref.where('email', '==', request.email));
-    this.emailService.sendEmail2(request.email, 'Your account creation request has been rejected', 'Sto. Nino Formation and Science School');
-
+  
     query.snapshotChanges().subscribe(data => {
       if (data.length > 0) {
-        // Assuming there's only one document with the specified email (or you want to delete all matching documents)
         const docId = data[0].payload.doc.id;
-
+  
         // Delete the document
         this.firestore.collection(collectionName).doc(docId).delete()
           .then(() => {
             console.log('Entry deleted successfully');
-
+  
             // Remove the entry from the client-side array
             const index = this.accountRequests.indexOf(request);
             if (index > -1) {
               this.accountRequests.splice(index, 1);
+            }
+  
+            // Send an email with the rejection reason
+            this.emailService.sendEmail2(
+              request.email,
+              `Your account creation request has been rejected due to the following reason: ${rejectionReason}`,
+              'Sto. Nino Formation and Science School'
+            );
+  
+            // Execute the callback
+            if (callback && typeof callback === 'function') {
+              callback();
             }
           })
           .catch(error => {
@@ -158,6 +202,7 @@ export class SignupPage implements OnInit {
       }
     });
   }
+  
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;

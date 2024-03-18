@@ -14,22 +14,22 @@
 <ion-content class="ion-padding">
 
 
-    <ion-card style="margin:auto; width:420px; float: left; margin-left:50px; margin-top:10px; height:430px;   border: 2px solid #9b2226 !important;
-    border-radius: 10px !important;
+    <ion-card style="margin:auto; width:400px; float: left; margin-left:50px; margin-top:10px; height:430px;   border: 1px solid rgb(207, 199, 199) !important; /* Set the border width and color */
+    border-radius: 10px !important; /* Optional: Add border radius for rounded corners */ margin-right:30px;
    ">
     <ion-card>
 
     <ion-item>
-      <ion-label position="stacked">User Name</ion-label>
+      <ion-label position="stacked" style="font-weight:bold">User Name</ion-label>
       <ion-input [(ngModel)]='displayName'></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Email</ion-label>
+      <ion-label position="stacked" style="font-weight:bold">Email</ion-label>
       <ion-input [(ngModel)]='email'></ion-input>
     </ion-item>
     <br>
     <ion-item>
-      <ion-label position="stacked">Password</ion-label>
+      <ion-label position="stacked" style="font-weight:bold">Password</ion-label>
       <ion-input type="password" [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
       <ion-buttons slot="end">
         <ion-button (click)="generatePassword()" fill="clear" color="primary">Generate</ion-button>
@@ -37,7 +37,7 @@
     </ion-item>
     
     <ion-item>
-      <ion-label position="stacked">Is Admin?</ion-label>
+      <ion-label position="stacked" style="font-weight:bold">Is Admin?</ion-label>
       <ion-select [(ngModel)]="isAdmin">
         <ion-select-option value="true">Yes</ion-select-option>
         <ion-select-option value="false">No</ion-select-option>
@@ -45,12 +45,12 @@
     </ion-item>
     
     <ion-item *ngIf="isAdmin === 'false'">
-      <ion-label position="stacked">LRN</ion-label>
+      <ion-label position="stacked" style="font-weight:bold">LRN</ion-label>
       <ion-input [(ngModel)]='lrn'></ion-input>
     </ion-item>
 
     <ion-item *ngIf="isAdmin === 'false'">
-      <ion-label position="stacked">Student Status</ion-label>
+      <ion-label position="stacked" style="font-weight:bold">Student Status</ion-label>
       <ion-select [(ngModel)]="Status">
         <ion-select-option value="Currently Enrolled">Currently Enrolled</ion-select-option>
         <ion-select-option value="Alumni">Alumni</ion-select-option>
@@ -92,26 +92,31 @@
 
   </ion-card>-->
 
-  <ion-card style="height:420px; width: 300%; float: right; width: calc(100% - 520px); overflow-y: auto;   border: 2px solid #9b2226 !important;
-  border-radius: 10px !important;
-">
-    <ion-toolbar>
-      <ion-title>Requests</ion-title>
-    </ion-toolbar>
+<ion-card style="height: 420px; width: calc(100% - 520px); overflow-y: auto; border-radius: 10px !important;   border: 1px solid rgb(207, 199, 199) !important; /* Set the border width and color */
+border-radius: 10px !important; /* Optional: Add border radius for rounded corners */">
+  <ion-toolbar>
+    <ion-title>Requests</ion-title>
+  </ion-toolbar>
 
-  <ion-card style="height: 300px; float: right; width: 380px" *ngFor="let request of accountRequests" (click)="presentAlert(request)">
-    <ion-card-header>
-      <img *ngIf="request.imageUrl" [src]="request.imageUrl" alt="Selfie with ID" style="width: 155px; height:155px; margin:auto;">
-    </ion-card-header>
-    <ion-card-content>
-      Full Name: {{ request.fullName }}<br>
-      Email: {{ request.email }}<br>
-      LRN: {{ request.lrn }}<br>
-      Enrollment Date: {{ request.enrollmentDate }}<br>
-      Graduation Date: {{ request.graduationDate || 'Not Applicable' }}<br>
-      <!-- Display other details as needed -->
-    </ion-card-content>
-  </ion-card>
+  <ion-row>
+    <ion-col size="6" *ngFor="let request of accountRequests; let i = index" (click)="presentAlert(request)">
+      <ion-card style="height: 300px;   border: 1px solid rgb(207, 199, 199) !important; /* Set the border width and color */
+      border-radius: 10px !important; /* Optional: Add border radius for rounded corners */">
+        <!-- Your card content here -->
+        <ion-card-header>
+          <img *ngIf="request.imageUrl" [src]="request.imageUrl" alt="Selfie with ID" style="width: 155px; height:155px; margin:auto;">
+        </ion-card-header>
+        <ion-card-content style="color: black;">
+          Full Name: {{ request.fullName }}<br>
+          Email: {{ request.email }}<br>
+          LRN: {{ request.lrn }}<br>
+          Enrollment Date: {{ request.enrollmentDate }}<br>
+          Graduation Date: {{ request.graduationDate || 'Not Applicable' }}<br>
+          <!-- Display other details as needed -->
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-card>
 
 
