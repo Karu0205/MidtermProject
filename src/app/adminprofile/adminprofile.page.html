@@ -1,7 +1,7 @@
 
 <ion-header [translucent]="true" class="header-container" style="height: 180px;">
   <div class="header-content">
-    <p>The Home of Christian Leaders <br> Shining Forward to Fullness</p>
+    <p style="font-family: Brush Script MT, Brush Script Std, cursive	;">The Home of Christian Leaders <br> Shining Forward to Fullness</p>
   </div>
   <ion-img src="./assets/whitelogo.png"></ion-img>
 </ion-header>
@@ -13,7 +13,7 @@
           <ion-label class="label">      
             <div *ngIf="userData"  style="font-family: 'Roboto', sans-serif; font-size: 20px; margin-bottom:10px; margin-top:10px"> {{ userData.displayName }}</div>
             <ion-text *ngIf="userData?.email === '90.001.snfss@gmail.com'; else otherText" style="font-family: 'Roboto', sans-serif; font-size: medium; bottom: 40px; margin-top:10px">
-              Storage
+              Principal
             </ion-text>
             
             <ng-template #otherText>
@@ -33,7 +33,7 @@
   <ion-popover trigger="click-trigger" triggerAction="click">
     <ng-template>
       <ion-content style="max-height: 140px; overflow-y: auto;">
-      <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="open137Modal()">
+      <ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="open137Modal()">
         <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
         <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
           Form 137
@@ -41,7 +41,7 @@
       </ion-button>
       
       <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openESCModal()">
+        <ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="openESCModal()">
           <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
           <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
             ESC Certificate
@@ -50,7 +50,7 @@
       </div>
 
       <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openGoodMoralModal()">
+        <ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="openGoodMoralModal()">
           <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
           <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
             Certificate of Goodmoral
@@ -60,7 +60,7 @@
   
 
       <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openCompletionModal()">
+        <ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="openCompletionModal()">
           <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
           <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
             Certificate of Completion
@@ -69,7 +69,7 @@
       </div>
 
       <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openEnrollmentModal()">
+        <ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="openEnrollmentModal()">
           <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
           <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
             Enrollment
@@ -78,7 +78,7 @@
       </div>
 
       <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openRankingModal()">
+        <ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="openRankingModal()">
           <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
           <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
             Ranking
@@ -87,7 +87,7 @@
       </div>
 
       <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-        <ion-button style="width: 240px; --background:white !important; color: #9b2226;" (click)="openCEMIModal()">
+        <ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="openCEMIModal()">
           <ion-icon name="document" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
           <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
             Certificate of English as Medium of Instruction
@@ -103,6 +103,45 @@
   </ion-popover>
   </div>
 
+  <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+    <ion-button style="width: 270px;" id="click">
+      <ion-icon name="person" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>      
+      <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+      Accounts
+    </ion-label>
+    <span style="color: yellow;" class="notification-count" *ngIf="notificationCount > 0">[{{ notificationCount }}]</span>
+    </ion-button>
+<ion-popover trigger="click" triggerAction="click">
+<ng-template>
+<ion-content style="max-height: 140px; overflow-y: auto;">
+<ion-button style="width: 240px; --background:white !important; color: #b93e42;"  (click)=" openRegister()">
+<ion-icon name="person" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+<ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+  Register Account
+</ion-label>
+<span style="color: red;" class="notification-count" *ngIf="notificationCount > 0">[{{ notificationCount }}]</span>
+
+</ion-button>
+
+<div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
+<ion-button style="width: 240px; --background:white !important; color: #b93e42;" (click)="openAccountModal()">
+  <ion-icon name="person" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
+  <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
+    Change Status
+  </ion-label>
+</ion-button>
+</div>
+
+
+
+
+
+</ion-content>
+</ng-template>
+
+</ion-popover>
+</div>
+
 
   <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
     <ion-button style="width: 270px;" (click)="openCompletedModal()">
@@ -112,15 +151,6 @@
       </ion-label>
     </ion-button>
   </div>
-          <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
-            <ion-button style="width: 270px;" (click)="  openRegister()">
-              <ion-icon name="Person" slot="start" style="margin-right: 10px; font-size:large"></ion-icon>
-              <ion-label style="text-align: left; width: 100%; font-size:9px"> <!-- Add width: 100% to make the label take the full width -->
-                Create Accounts
-              </ion-label>
-              <span style="font-size: 12px; color:yellow" class="notification-count" *ngIf="notificationCount > 0">[{{ notificationCount }}]</span>
-            </ion-button>
-          </div>
 
           
           <div style="font-family: 'Roboto', sans-serif; text-align: center; margin: auto;">
@@ -158,19 +188,19 @@
             </ion-col>
 
             <ion-col size="2">
-              <ion-item style="  --background: #9b2226; color:white;">
+              <ion-item style="  --background: #b93e42; color:white;">
                 <ion-label style="font-size: 12px;">Recency</ion-label>
                 <ion-select style="font-size: 12px;" [(ngModel)]="selectedNewFilter" (ionChange)="applyFilters()">
                   <ion-select-option value="">All</ion-select-option>
                   <ion-select-option value="New">New</ion-select-option>
                   <ion-select-option value="Signed">Signed</ion-select-option>
-        
+                  <ion-select-option value="For review">For Review</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-col>
           
             <ion-col size="2">
-              <ion-item style="  --background: #9b2226; color:white;">
+              <ion-item style="  --background: #b93e42; color:white;">
                 <ion-label style="font-size: 12px;">Enrollment</ion-label>
                 <ion-select style="font-size: 12px;" [(ngModel)]="selectedStatusFilter" (ionChange)="applyFilters()">
                   <ion-select-option value="">All</ion-select-option>

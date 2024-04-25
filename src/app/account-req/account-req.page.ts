@@ -119,5 +119,11 @@ export class AccountReqPage implements OnInit {
   async closeModal() {
     await this.modalCrtl.dismiss();
   }
+
+
+  onInput(event: any) {
+    // Remove non-numeric characters using a regular expression
+    this.lrn = event.target.value.replace(/[^0-9]/g, '');
+  }
 }
 

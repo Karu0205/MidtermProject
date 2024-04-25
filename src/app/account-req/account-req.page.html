@@ -22,9 +22,8 @@
 
       <ion-label position="floating">LRN</ion-label>
       <ion-item>
-        <ion-input [(ngModel)]="lrn" required></ion-input>
-      </ion-item>
-      <ion-label>Enrollment Date</ion-label>
+        <ion-input type="text" [(ngModel)]="lrn" (input)="onInput($event)" required></ion-input>
+      </ion-item>      <ion-label>Enrollment Date</ion-label>
       <ion-item>
         <ion-input type="date" [(ngModel)]="enrollmentDate" required></ion-input>
       </ion-item>
@@ -37,7 +36,13 @@
         <input type="file" (change)="handleImageUpload($event)" accept="image/*">
       </ion-item>
 
-      <ion-button style="--background:#9b2226;" expand="full" (click)="submitRequest()">Submit Request</ion-button>
+      <ion-button
+  style="--background:#9b2226;"
+  expand="full"
+  (click)="submitRequest()"
+  [disabled]="!imageFile">Submit Request
+</ion-button>
+
     </ion-card-content>
   </ion-card>
 </ion-content>

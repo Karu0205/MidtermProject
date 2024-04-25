@@ -233,6 +233,63 @@ export class ModalPage implements OnInit {
     await alert.present();
   }
 
+  async updateStatus(newStatus: string) {
+    this.request.status = newStatus;
+
+    try {
+      await this.dataService.updateRequest(this.request);
+      console.log('Database updated successfully!');
+      this.presentToast('Status updated!');
+      
+      // Display a confirmation dialog and send an email when the user confirms
+      const alert = await this.alertCtrl.create({
+        header: 'Confirmation',
+        message: 'Do you want to send an email notification?',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              // Send an email using this.emailService.sendEmail2
+              this.emailService.sendEmail(
+                this.request.email,
+                'Your ' + this.request.document_type + ' request has been updated with this status: ' + this.request.status,
+                'Sto. Nino Formation and Science School'
+              );
+            },
+          },
+        ],
+      });
+
+      if (this.request.status === 'Rejected') {
+        this.emailService.sendEmail(
+          this.request.email,
+          'Your ' + this.request.document_type + ' request has been rejected: ' + this.request.comment,
+          'Sto. Nino Formation and Science School'
+        );
+        await this.dataService.deleteRequest(this.request);
+        // Remove the request from the local array (if needed)
+        this.requests = this.requests.filter(req => req.id !== this.request.id);
+      } 
+
+      await alert.present();
+    } catch (error) {
+      console.error('Error updating request:', error);
+      this.presentToast('Error updating status. Please try again.');
+    }
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
   onStatusSelectChange() {
     // Check if the selected status is "Forwarded"
     if (this.request.status === 'Request forwarded to the principal’s office') {
@@ -254,7 +311,8 @@ export class ModalPage implements OnInit {
     }
   }
 
-  async onStatusChange() {
+  async onStatusChange(newStatus: string) {
+    this.request.status = newStatus;
     if (this.request.status === 'Completed') {
       const alert = await this.alertCtrl.create({
         header: 'Confirmation',

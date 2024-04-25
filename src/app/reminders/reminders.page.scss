@@ -28,7 +28,7 @@
 
 
 ion-toolbar{
-  --background: #9b2226;
+  --background: #b93e42;
 }
 
 
@@ -40,7 +40,7 @@ img{
 }
 
 ion-button{
-  --background: #9b2226;
+  --background: #b93e42;
   --background-hover: #9ce0be;
   --background-activated: #88f4be;
   --background-focused: #88f4be;
@@ -106,7 +106,7 @@ ion-img{
   }
 
 .info {
-  --background: #9b2226;
+  --background: #b93e42;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -224,13 +224,13 @@ button{
 }
 
 .event_head{
-  --background: #9b2226;
+  --background: #b93e42;
   color:white;
   height: 42px;
 }
 
 ion-searchbar{
-  --background: #9b2226;
+  --background: #b93e42;
   background-size: cover;
   color:white;
 }
@@ -288,9 +288,9 @@ ion-label {
 }
 
   ion-header{
-    --background: #9b2226;
+    --background: #b93e42;
     background-size: cover;
-    background-color: #9b2226;
+    background-color: #b93e42;
   }
 
   /* Add this CSS to your style file (e.g., styles.css) */
@@ -320,7 +320,7 @@ ion-label {
     align-items: center;
     justify-content: flex-start; /* Align text to the left */
     height: 50px;
-    background-color: #9b2226; /* Add a background color if needed */
+    background-color: #b93e42; /* Add a background color if needed */
     padding-left: 10px; /* Add left padding to create some spacing from the card edge */
   }
 

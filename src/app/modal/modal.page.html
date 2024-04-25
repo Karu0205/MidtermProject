@@ -49,7 +49,7 @@
 
 
     <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Payment Status:</ion-label>
+      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Payment Status (click to update):</ion-label>
       <ion-select style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size: small; margin-right: 15px; margin-left:48.5% !important" [(ngModel)]="request.payment">
         <ion-select-option value="Paid">
           Paid
@@ -59,37 +59,61 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-
+    <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Request Status:</ion-label>
     <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Status Update:</ion-label>
-      <ion-select style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size: small; margin-right: 15px; margin-left:48.5% !important" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()" (ionChange)="onStatusSelectChange()">
-        <ion-select-option [value]="'Accepted at the Registrar\'s Office by: ' + userData.displayName">
-          Accepted
-        </ion-select-option>
-        <ion-select-option [value]="'Request being handled by: ' + userData.displayName" *ngIf="request.document_type !== 'Form 137'">
-          In progress
-        </ion-select-option>
-        <ion-select-option value="Request forwarded to the principal’s office">
-          Forwarded
-        </ion-select-option>
-        <ion-select-option value="Ready for Pickup at the Registrar's Office">
-          Ready for Pickup
-        </ion-select-option>
-        <ion-select-option value="Completed">Completed</ion-select-option>
-        <ion-select-option value="Rejected">Rejected</ion-select-option>
-      </ion-select>
+
+      <ion-label style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px;">{{ request.status}}</ion-label>
     </ion-item>
+
   </div>
 
-  <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block"(click)="updateRequest()">
-    <ion-icon name="save" slot="stat"></ion-icon>
-    Update
-  </ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; --background: #9b2226;" expand="block" (click)="updateStatus('Accepted at the Registrar\'s Office by: ' + userData.displayName)">
+          <ion-icon name="checkmark" slot="start"></ion-icon>
+          Accept
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; --background: #9b2226;" expand="block" (click)="updateStatus('Request forwarded to the principal’s office')">
+          <ion-icon name="arrow-forward" slot="start"></ion-icon>
+          Forward
+        </ion-button>
+      </ion-col>
+    </ion-row>
   
-  <ion-button style="font-family: 'Roboto', sans-serif; margin-bottom:10px !important; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="closeModal()">
-    <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
-    Return
-  </ion-button>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; --background: #9b2226;" expand="block" (click)="updateStatus('Ready for Pickup at the Registrar\'s Office')">
+          <ion-icon name="hand-left-outline"></ion-icon>
+
+          For Pickup
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; --background: #9b2226;" expand="block" (click)="onStatusChange('Completed')">
+          <ion-icon name="checkmark-done" slot="start"></ion-icon>
+          Complete
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; --background: #9b2226;" expand="block" (click)="updateStatus('Rejected')">
+          <ion-icon name="close" slot="start"></ion-icon>
+          Reject
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; --background: #9b2226;" expand="block" (click)="closeModal()">
+          <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+          Return
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   </ion-card>
   

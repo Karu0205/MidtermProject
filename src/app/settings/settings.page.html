@@ -27,14 +27,6 @@
           <ion-label position="floating">Contact Number</ion-label>
           <ion-input [(ngModel)]="userData.contact_no" type="tel"></ion-input>
         </ion-item>
-
-        <ion-item *ngIf="userData.isAdmin !== 'true'">
-          <ion-label position="floating">Status</ion-label>
-          <ion-select [(ngModel)]="userData.Status">
-            <ion-select-option value="Alumni">Alumni</ion-select-option>
-            <ion-select-option value="Currently Enrolled">Currently Enrolled</ion-select-option>
-          </ion-select>
-        </ion-item>
       
         <ion-item *ngIf="userData.Status !== 'Alumni' && userData.isAdmin !== 'true'">
           <ion-label position="floating">Year Level</ion-label>

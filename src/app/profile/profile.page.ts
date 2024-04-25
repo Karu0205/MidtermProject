@@ -365,7 +365,7 @@ export class ProfilePage implements OnInit {
       return 30;
     } else if (status.includes('Request forwarded to the principal’s office')) {
       return 47;
-    } else if (status.includes('Accepted at the Principal\'s Office by: ')) {
+    } else if (status.includes('Request returned to the registrar for review')) {
       return 63;
     } else if (status.includes('Request is signed by the principal')) {
       return 63;

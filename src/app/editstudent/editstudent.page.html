@@ -12,7 +12,7 @@
 
 <ion-content [fullscreen]="true">
 
-<ion-card style="width:500px; height:350px;margin:auto; margin-top:20px;">
+<ion-card style="width:500px; height:400px;margin:auto; margin-top:20px;">
   <!--<ion-item>
     <ion-label>Enrollment Status</ion-label>
     <ion-select [(ngModel)]="selectedDocumentTypeFilter" (ionChange)="applyFilters()">
@@ -34,12 +34,13 @@
   <div class="scrollable-container">
     <div class="scrollable-content">
       <ion-list class="scrollable-list">
-        <ion-item class="table" *ngFor="let user of filteredAccounts" (click)="openEditModal(user.uid)">
-
-          <img [src]="user.profilePicture|| '/assets/blank.png'" alt="Profile Picture" class="profile-picture">
-          <ion-label style="font-family: 'Roboto', sans-serif; font-size: small" class="center-label">{{ user.displayName }}</ion-label>
-          <ion-label style="font-family: 'Roboto', sans-serif; font-size: small" class="center-label">{{ user.Status }}</ion-label>
-        </ion-item>
+        <ng-container *ngFor="let user of filteredAccounts">
+          <ion-item class="table" (click)="openEditModal(user.uid)" *ngIf="user.isAdmin === 'false'">
+            <img [src]="user.profilePicture || '/assets/blank.png'" alt="Profile Picture" class="profile-picture">
+            <ion-label style="font-family: 'Roboto', sans-serif; font-size: small" class="center-label">{{ user.lrn }}</ion-label>
+            <ion-label style="font-family: 'Roboto', sans-serif; font-size: small" class="center-label">{{ user.Status }}</ion-label>
+          </ion-item>
+        </ng-container>
       </ion-list>
     </div>
   </div>

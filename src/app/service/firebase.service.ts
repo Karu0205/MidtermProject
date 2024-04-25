@@ -18,6 +18,7 @@ export interface Account{
   email: string;
   password: string;
   Status: string;
+  lrn: string;
 }
 
 export interface Request {

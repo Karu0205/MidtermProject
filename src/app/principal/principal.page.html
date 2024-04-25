@@ -45,23 +45,28 @@
       <ion-textarea style="font-family: 'Roboto', sans-serif; white-space: normal; overflow-wrap: break-word; font-size:small;  margin-right: 15px; height:55px" [(ngModel)]="request.comments"></ion-textarea>
     </ion-item>
 
-    <ion-item>
-      <ion-label style="font-family: 'Roboto', sans-serif;" position="stacked">Status Update:</ion-label>
-      <ion-select style="font-family: 'Roboto', sans-serif; margin-left:49% !important; font-size:small" [(ngModel)]="request.status" (ngModelChange)="onStatusChange()">
-        <ion-select-option value="Request is signed by the principal">Request Signed</ion-select-option>
-        <ion-select-option value="Rejected">Rejected</ion-select-option>
-      </ion-select>
-    </ion-item>
   </div>
-
-  <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block"(click)="updateRequest()">
-    <ion-icon name="save" slot="start"></ion-icon>
-    Update
-  </ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:100%; margin:auto;--background: #9b2226;" expand="block" (click)="updateStatus('Request is signed by the principal')">
+          <ion-icon name="checkmark" slot="start"></ion-icon>
+          Signed
+        </ion-button>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; width:100%; margin:auto;--background: #9b2226;" expand="block" (click)="updateStatus2('Request returned to the registrar for review')">
+          <ion-icon name="arrow-forward" slot="start"></ion-icon>
+          Return
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   
   <ion-button style="font-family: 'Roboto', sans-serif; margin-top:10px !important; margin-bottom:10px !important; width:50%; margin:auto;--background: #9b2226;" expand="block" (click)="closeModal()">
-    <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
-    Return
+    <ion-icon name="Home" slot="start"></ion-icon>
+    Home
   </ion-button>
 
 </ion-card>

@@ -31,6 +31,7 @@ import { CompletionPage } from '../completion/completion.page';
 import { EnrollmentPage } from '../enrollment/enrollment.page';
 import { RankingPage } from '../ranking/ranking.page';
 import { CemiPage } from '../cemi/cemi.page';
+import { EditstudentPage } from '../editstudent/editstudent.page';
 
 
 @Component({
@@ -119,12 +120,16 @@ strandFilterText: string = '';
             return -1; // "Signed" comes first
           } else if (a.doc_status !== 'Signed' && b.doc_status === 'Signed') {
             return 1; // "Signed" comes after others
+          } else if (a.doc_status === 'For review' && b.doc_status !== 'For review') {
+            return -1; // "For review" comes after "Signed"
+          } else if (a.doc_status !== 'For review' && b.doc_status === 'For review') {
+            return 1; // "Signed" comes after "For review"
           } else if (a.doc_status === 'New' && b.doc_status !== 'New') {
             return -1; // "New" comes next
           } else if (a.doc_status !== 'New' && b.doc_status === 'New') {
             return 1; // "New" comes after others
           } else {
-            // If docu_status is the same or both are not "New" or "Signed", sort by request_date
+            // If docu_status is the same or both are not "New" or "Signed" or "For review", sort by request_date
             return new Date(b.request_date).getTime() - new Date(a.request_date).getTime();
           }
         });
@@ -552,8 +557,8 @@ strandFilterText: string = '';
       return 30;
     } else if (status.includes('Request forwarded to the principal’s office')) {
       return 47;
-    } else if (status.includes('Accepted at the Principal\'s Office by: ')) {
-      return 63;
+    } else if (status.includes('Request returned to the registrar for review')) {
+      return 30;
     } else if (status.includes('Request is signed by the principal')) {
       return 63;
     } else if (status.includes('Ready for Pickup at the Registrar\'s Office')) {
@@ -613,6 +618,14 @@ strandFilterText: string = '';
 
   openDocu(){
     this.router.navigate(['/admindocu'])
+  }
+
+  async openAccountModal() {
+    const modal = await this.modalCtrl.create({
+      component: EditstudentPage, // Use your form component here
+    });
+
+    return await modal.present();
   }
 
   openRegister(){

@@ -116,11 +116,15 @@ export class EditstudentPage implements OnInit {
   
     // Apply the search bar filter on the copied array
     const searchTermLower = this.searchTerm.toLowerCase();
-    this.filteredAccounts = filteredAccountsCopy.filter((account) =>
-      account.displayName.toLowerCase().includes(searchTermLower) ||
-      account.Status.toLowerCase().includes(searchTermLower)
-    );
+    this.filteredAccounts = filteredAccountsCopy.filter((account) => {
+      // Add null checks here
+      const lrnLower = account.lrn ? account.lrn.toLowerCase() : '';
+      const statusLower = account.Status ? account.Status.toLowerCase() : '';
+  
+      return lrnLower.includes(searchTermLower) || statusLower.includes(searchTermLower);
+    });
   }
+  
 
 
   signup() {
